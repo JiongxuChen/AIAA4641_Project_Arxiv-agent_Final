@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>arXiv Research Agent</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        
+        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        header h1 { font-size: 28px; }
+        
+        .nav { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .nav button { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; transition: all 0.2s; }
+        .nav button.active { background: #667eea; color: white; }
+        .nav button:not(.active) { background: white; color: #333; }
+        .nav button:hover { transform: translateY(-2px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        
+        .card { background: white; border-radius: 10px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .card h2 { font-size: 20px; margin-bottom: 15px; color: #333; }
+        
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 500; color: #555; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #667eea; }
+        
+        .form-group label:has(input[type="checkbox"]) { display: flex !important; align-items: center; gap: 3px; margin-bottom: 0; }
+        .form-group label:has(input[type="checkbox"]) input { width: auto; margin: 0; }
+        
+        .btn { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; transition: all 0.2s; }
+        .btn-primary { background: #667eea; color: white; }
+        .btn-success { background: #10b981; color: white; }
+        .btn-danger { background: #ef4444; color: white; }
+        .btn-secondary { background: #6b7280; color: white; }
+        .btn-sm { padding: 5px 10px; font-size: 12px; }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f9fafb; font-weight: 600; color: #374151; }
+        tr:hover { background: #f9fafb; }
+        
+        .checkbox { width: 18px; height: 18px; cursor: pointer; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .stat-card { background: #f9fafb; padding: 15px; border-radius: 8px; text-align: center; }
+        .stat-card .value { font-size: 32px; font-weight: bold; color: #667eea; }
+        .stat-card .label { color: #6b7280; font-size: 14px; margin-top: 5px; }
+        
+        .tag { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 12px; margin-right: 5px; }
+        .tag-success { background: #d1fae5; color: #065f46; }
+        .tag-pending { background: #fef3c7; color: #92400e; }
+        .tag-error { background: #fee2e2; color: #991b1b; }
+        .tag-pipeline { background: #e0e7ff; color: #3730a3; }
+        .tag-retrieval { background: #fef3c7; color: #92400e; }
+        
+        .loading { text-align: center; padding: 40px; color: #6b7280; }
+        
+        .user-message { background: #e0f2fe; padding: 10px 15px; border-radius: 10px; margin-bottom: 10px; }
+        .assistant-message { background: #f0fdf4; padding: 10px 15px; border-radius: 10px; margin-bottom: 10px; }
+        .error { color: #dc2626; padding: 10px; background: #fee2e2; border-radius: 5px; }
+        
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        .task-config { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .task-config-full { grid-column: 1 / -1; }
+        .tasks-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, 1fr); gap: 20px; align-items: start; }
+        .tasks-layout .card { min-width: 0; margin-bottom: 0; }
+        .task-history-card { grid-column: 1 / -1; width: 100%; }
+        @media (max-width: 900px) {
+            .tasks-layout { grid-template-columns: 1fr; }
+            .task-history-card { grid-column: auto; }
+            .task-config { grid-template-columns: 1fr; }
+        }
+        
+        .paper-list { max-height: 400px; overflow-y: auto; }
+        .paper-item { padding: 12px; border: 1px solid #eee; border-radius: 5px; margin-bottom: 8px; }
+        .paper-item:hover { background: #f9fafb; }
+        .paper-title { font-weight: 600; color: #1f2937; margin-bottom: 5px; }
+        .paper-meta { font-size: 12px; color: #6b7280; }
+        .paper-link { color: #667eea; text-decoration: none; margin-right: 10px; }
+        .paper-link:hover { text-decoration: underline; }
+        
+        .result-section { margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee; }
+        .result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .result-section h3 { font-size: 16px; color: #333; margin-bottom: 10px; }
+        
+        .briefing-content { background: #f9fafb; padding: 15px; border-radius: 5px; white-space: pre-wrap; max-height: 500px; overflow-y: auto; font-size: 14px; line-height: 1.6; }
+        
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; }
+        .modal.active { display: flex; align-items: center; justify-content: center; }
+        .modal-content { background: white; border-radius: 10px; padding: 20px; max-width: 900px; width: 90%; max-height: 90vh; overflow-y: auto; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .modal-close { background: none; border: none; font-size: 24px; cursor: pointer; }
+        
+        .markdown-body { font-size: 14px; line-height: 1.6; }
+        .markdown-body h1 { font-size: 24px; margin: 20px 0 10px; padding-bottom: 8px; border-bottom: 1px solid #eee; }
+        .markdown-body h2 { font-size: 20px; margin: 18px 0 8px; }
+        .markdown-body h3 { font-size: 16px; margin: 15px 0 6px; }
+        .markdown-body p { margin: 10px 0; }
+        .markdown-body ul, .markdown-body ol { margin: 10px 0; padding-left: 25px; }
+        .markdown-body li { margin: 5px 0; }
+        .markdown-body code { background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 13px; }
+        .markdown-body pre { background: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        .markdown-body pre code { background: none; padding: 0; }
+        .markdown-body blockquote { border-left: 4px solid #667eea; margin: 10px 0; padding-left: 15px; color: #666; }
+        .markdown-body table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .markdown-body th, .markdown-body td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .markdown-body th { background: #f5f5f5; }
+        .markdown-body a { color: #667eea; }
+        .markdown-body strong { font-weight: 600; }
+        .markdown-body em { font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>arXiv Research Agent</h1>
+            <p>Manage research papers, schedule tasks, and generate briefings</p>
+        </header>
+        
+        <div class="nav">
+            <button class="active" data-tab="dashboard">Dashboard</button>
+            <button data-tab="tasks">Tasks</button>
+            <button data-tab="papers">Papers Library</button>
+            <button data-tab="followup">Follow-up Query</button>
+        </div>
+        
+        <!-- Dashboard -->
+        <div id="dashboard" class="tab-content active">
+            <div class="card">
+                <h2>Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="value" id="total-papers">0</div>
+                        <div class="label">Total Papers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value" id="total-tasks">0</div>
+                        <div class="label">Total Tasks</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value" id="pipeline-tasks">0</div>
+                        <div class="label">Pipeline Tasks</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Quick Actions</h2>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn btn-primary" onclick="showTab('tasks')">Create Task</button>
+                    <button class="btn btn-success" onclick="showTab('followup')">Follow-up Query</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tasks -->
+        <div id="tasks" class="tab-content">
+            <div class="tasks-layout">
+                <div class="card">
+                    <h2>Create New Task</h2>
+                    <div class="task-config">
+                        <div class="form-group">
+                            <label>Task Type</label>
+                            <select id="task-type" onchange="toggleTaskType()">
+                                <option value="full_pipeline">Full Pipeline (Retrieval + Ranking + Briefing)</option>
+                                <option value="retrieval">Retrieval Only</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Run Mode</label>
+                            <select id="run-mode" onchange="toggleRunMode()">
+                            <option value="immediate">Run Now</option>
+                            <option value="scheduled">Schedule</option>
+                        </select>
+                    </div>
+                    <div class="form-group task-config-full">
+                        <label>Research Query</label>
+                        <input type="text" id="task-query" placeholder="e.g., LLM agents, graph neural networks">
+                    </div>
+                    <div class="form-group">
+                        <label>Days</label>
+                        <input type="number" id="task-days" value="7" min="1" max="180">
+                    </div>
+                    <div class="form-group">
+                        <label>Max Results</label>
+                        <input type="number" id="task-max-results" value="20" min="1" max="200">
+                    </div>
+                    <div class="form-group" id="schedule-time-group" style="display:none;">
+                        <label>Schedule Time (HH:MM)</label>
+                        <input type="text" id="task-schedule-time" placeholder="09:00">
+                    </div>
+                    <div class="form-group" id="recurring-group" style="display:none;">
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" id="is-recurring"> Repeat daily (create new task after each execution)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" id="add-to-library" checked> Add papers to library
+                        </label>
+                    </div>
+                    <div class="form-group task-config-full">
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" id="include-existing"> Include papers already in library
+                        </label>
+                        <small style="color: #666; margin-left: 24px;">If checked, papers already in library will still appear in this task's results</small>
+                    </div>
+                    <div id="llm-settings-container" style="display:none;">
+                        <div class="form-group task-config-full">
+                            <label style="display: flex; align-items: center; gap: 5px;">
+                                <input type="checkbox" id="use-llm" onchange="toggleLLMSettings()"> Use LLM for enhanced briefing (may take longer time)
+                            </label>
+                        </div>
+                        <div class="form-group" id="llm-model-group" style="display:none;">
+                            <label>LLM Model</label>
+                            <input type="text" id="llm-model" placeholder="deepseek-ai/DeepSeek-R1" value="deepseek-ai/DeepSeek-R1">
+                        </div>
+                        <div class="form-group" id="llm-api-key-group" style="display:none;">
+                            <label>API Key (SiliconFlow)</label>
+                            <input type="password" id="llm-api-key" placeholder="Enter your SiliconFlow API key">
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="runTask()">Run Task</button>
+                <div id="task-result" style="margin-top: 20px;"></div>
+                </div>
+                
+                <div class="card">
+                    <h2>Schedule Management</h2>
+                    <div style="margin-bottom: 15px;">
+                        <button class="btn btn-secondary btn-sm" onclick="loadScheduledTasks(); loadTasks();">Refresh</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteSelectedScheduledTasks()">Delete Selected</button>
+                    </div>
+                    <div id="scheduled-tasks-list">
+                        <div class="loading">Loading scheduled tasks...</div>
+                    </div>
+                </div>
+                
+                <div class="card task-history-card">
+                    <h2>Task History</h2>
+                    <div style="margin-bottom: 15px;">
+                        <button class="btn btn-secondary btn-sm" onclick="loadTasks()">Refresh</button>
+                    </div>
+                    <div id="tasks-list">
+                        <div class="loading">Loading tasks...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Papers Library -->
+        <div id="papers" class="tab-content">
+            <div class="card">
+                <h2>Papers Library</h2>
+                <div class="form-group">
+                    <input type="text" id="search-papers" placeholder="Search papers..." oninput="searchPapers()">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <button class="btn btn-danger btn-sm" onclick="deleteSelectedPapers()">Delete Selected</button>
+                    <button class="btn btn-success btn-sm" onclick="startConversationFromLibrary()">Start Conversation with Selected</button>
+                </div>
+                <div id="papers-list" class="paper-list">
+                    <div class="loading">Loading papers...</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Follow-up Query -->
+        <div id="followup" class="tab-content">
+            <div class="card">
+                <h2>Follow-up Query</h2>
+                <div class="form-group">
+                    <label>Select Source</label>
+                    <select id="followup-source" onchange="toggleFollowupSource()">
+                        <option value="">-- Select --</option>
+                        <option value="task">Select Task</option>
+                        <option value="library">Select Papers from Library</option>
+                    </select>
+                </div>
+                
+                <div id="followup-task-section" style="display: none;">
+                    <div class="form-group">
+                        <label>Select a Task</label>
+                        <select id="task-select" onchange="loadTaskPapers()">
+                            <option value="">-- Select Task --</option>
+                        </select>
+                    </div>
+                    <div id="task-query-display"></div>
+                </div>
+                
+                <div id="followup-library-section" style="display: none;">
+                    <div id="selected-library-papers-display" style="display: none; margin-bottom: 15px;">
+                        <div style="background: #f0f9ff; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+                            <strong>Selected Papers:</strong> <span id="selected-papers-count">0</span>
+                            <div id="selected-papers-list" style="max-height: 150px; overflow-y: auto; margin-top: 10px;"></div>
+                        </div>
+                    </div>
+                    <p style="color: #666; margin-bottom: 10px;">Click the button below to go to Papers Library and select papers for conversation.</p>
+                    <button class="btn btn-secondary" onclick="goToLibrarySelectPapers()">Go to Papers Library</button>
+                </div>
+                
+                <div class="form-group">
+                    <label>LLM Model</label>
+                    <input type="text" id="followup-llm-model" placeholder="deepseek-ai/DeepSeek-R1" value="deepseek-ai/DeepSeek-R1">
+                </div>
+                <div class="form-group">
+                    <label>API Key (SiliconFlow)</label>
+                    <input type="password" id="followup-llm-api-key" placeholder="Enter your SiliconFlow API key">
+                </div>
+                <button class="btn btn-success" onclick="startNewConversation()">Start Conversation</button>
+                <button class="btn btn-secondary" onclick="clearConversation()" id="clear-conv-btn" style="display:none;">Clear History</button>
+            </div>
+            
+            <!-- Conversation Area -->
+            <div id="conversation-area" class="card" style="display:none; margin-top: 20px;">
+                <div style="display: flex; gap: 20px;">
+                    <!-- Left: Papers Info -->
+                    <div style="flex: 1; min-width: 300px; border-right: 1px solid #ddd; padding-right: 20px;">
+                        <h3>Papers Info</h3>
+                        <div id="papers-info" style="max-height: 500px; overflow-y: auto;"></div>
+                    </div>
+                    <!-- Right: Chat -->
+                    <div style="flex: 1.5;">
+                        <div id="conversation-info" style="margin-bottom: 15px; padding: 10px; background: #f5f5f5; border-radius: 5px;"></div>
+                        <div id="conversation-history" style="max-height: 400px; overflow-y: auto; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; padding: 15px;"></div>
+                        <div class="form-group">
+                            <label>Your Question</label>
+                            <textarea id="followup-question" rows="2" placeholder="Ask a follow-up question..."></textarea>
+                        </div>
+                        <button class="btn btn-primary" onclick="askFollowupQuestion()">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Task Detail Modal -->
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Task Details</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+    
+    <script>
+        var currentPapers = [];
+        var currentTasks = [];
+        var selectedTaskPapers = [];
+        var selectedTaskQuery = '';
+        
+        document.querySelectorAll('.nav button').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var tabId = this.getAttribute('data-tab');
+                showTab(tabId, this);
+            });
+        });
+        
+        function showTab(tabId, btn) {
+            document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('active'); });
+            document.querySelectorAll('.nav button').forEach(function(b) { b.classList.remove('active'); });
+            document.getElementById(tabId).classList.add('active');
+            if (btn) btn.classList.add('active');
+            
+            if (tabId === 'dashboard') loadDashboard();
+            if (tabId === 'tasks') {
+                loadTasks();
+                loadScheduledTasks();
+                toggleTaskType();
+            }
+            if (tabId === 'papers') loadPapers();
+            if (tabId === 'followup') {
+                loadTaskOptions();
+                checkFollowupFromLibrary();
+            }
+        }
+        
+        function toggleTaskType() {
+            var taskType = document.getElementById('task-type').value;
+            var llmSettings = document.getElementById('llm-settings-container');
+            var llmModelGroup = document.getElementById('llm-model-group');
+            var llmApiKeyGroup = document.getElementById('llm-api-key-group');
+            
+            if (taskType === 'full_pipeline') {
+                llmSettings.style.display = 'block';
+            } else {
+                llmSettings.style.display = 'none';
+                llmModelGroup.style.display = 'none';
+                llmApiKeyGroup.style.display = 'none';
+                document.getElementById('use-llm').checked = false;
+            }
+        }
+        
+        function toggleLLMSettings() {
+            var useLlm = document.getElementById('use-llm').checked;
+            var llmModelGroup = document.getElementById('llm-model-group');
+            var llmApiKeyGroup = document.getElementById('llm-api-key-group');
+            
+            if (useLlm) {
+                llmModelGroup.style.display = 'block';
+                llmApiKeyGroup.style.display = 'block';
+            } else {
+                llmModelGroup.style.display = 'none';
+                llmApiKeyGroup.style.display = 'none';
+            }
+        }
+        
+        function toggleRunMode() {
+            var mode = document.getElementById('run-mode').value;
+            document.getElementById('schedule-time-group').style.display = (mode === 'scheduled') ? 'block' : 'none';
+            document.getElementById('recurring-group').style.display = (mode === 'scheduled') ? 'block' : 'none';
+        }
+        
+        async function loadDashboard() {
+            var papersResp = await fetch('/api/papers');
+            var papers = await papersResp.json();
+            document.getElementById('total-papers').textContent = papers.length;
+            
+            var tasksResp = await fetch('/api/tasks');
+            var tasks = await tasksResp.json();
+            document.getElementById('total-tasks').textContent = tasks.length;
+            
+            var pipelineTasks = tasks.filter(function(t) { return isPipelineTask(t.task_type); });
+            document.getElementById('pipeline-tasks').textContent = pipelineTasks.length;
+        }
+        
+        async function runTask() {
+            var taskType = document.getElementById('task-type').value;
+            var runMode = document.getElementById('run-mode').value;
+            var query = document.getElementById('task-query').value;
+            var days = parseInt(document.getElementById('task-days').value);
+            var maxResults = parseInt(document.getElementById('task-max-results').value);
+            var addToLibrary = document.getElementById('add-to-library').checked;
+            var includeExisting = document.getElementById('include-existing').checked;
+            var scheduleTime = document.getElementById('task-schedule-time').value;
+            var isRecurring = document.getElementById('is-recurring').checked;
+            var useLlm = document.getElementById('use-llm').checked;
+            var llmModel = document.getElementById('llm-model').value;
+            var llmApiKey = document.getElementById('llm-api-key').value;
+            
+            if (!query) { alert('Please enter a query'); return; }
+            if (runMode === 'scheduled' && !scheduleTime) { alert('Please enter schedule time'); return; }
+            if (useLlm && !llmApiKey) { alert('Please enter API key for LLM'); return; }
+            
+            document.getElementById('task-result').innerHTML = '<div class="loading">Running task...</div>';
+            
+            var resp = await fetch('/api/run_task', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    task_type: taskType,
+                    run_mode: runMode,
+                    query: query,
+                    days: days,
+                    max_results: maxResults,
+                    add_to_library: addToLibrary,
+                    include_existing: includeExisting,
+                    schedule_time: scheduleTime,
+                    is_recurring: isRecurring,
+                    use_llm: useLlm,
+                    llm_model: llmModel,
+                    llm_api_key: llmApiKey
+                })
+            });
+            var result = await resp.json();
+            
+            if (result.success) {
+                if (result.scheduled) {
+                    var html = '<div class="paper-item">';
+                    html += '<div class="paper-title">Task Scheduled!</div>';
+                    html += '<div class="paper-meta">Task ID: ' + result.task_id + '</div>';
+                    html += '<div class="paper-meta">Scheduled time: ' + result.schedule_time + '</div>';
+                    html += '</div>';
+                    document.getElementById('task-result').innerHTML = html;
+                    loadScheduledTasks();
+                    loadTasks();
+                } else {
+                    var html = '<div class="paper-item">';
+                    html += '<div class="paper-title">Task Completed!</div>';
+                    html += '<div class="paper-meta">Task ID: ' + result.task_id + '</div>';
+                    html += '<div class="paper-meta">Papers retrieved: ' + result.papers_count + '</div>';
+                    
+                    if (result.briefing_file) {
+                        html += '<div style="margin-top: 10px;">';
+                        html += '<a href="/api/download/' + encodeURIComponent(result.briefing_file) + '" class="btn btn-primary btn-sm" target="_blank">Download Briefing</a> ';
+                        html += '<button class="btn btn-secondary btn-sm" onclick="viewTask(\'' + result.task_id + '\')">View Details</button>';
+                        html += '</div>';
+                    }
+                    
+                    html += '</div>';
+                    document.getElementById('task-result').innerHTML = html;
+                    loadTasks();
+                    loadDashboard();
+                }
+            } else {
+                document.getElementById('task-result').innerHTML = '<p style="color: red;">Error: ' + result.error + '</p>';
+            }
+        }
+        
+        async function loadTasks() {
+            var resp = await fetch('/api/tasks');
+            currentTasks = await resp.json();
+            renderTasks(currentTasks);
+        }
+        
+        async function loadScheduledTasks() {
+            var resp = await fetch('/api/tasks');
+            var tasks = await resp.json();
+            var scheduledTasks = tasks.filter(function(t) { 
+                return t.schedule_time && t.schedule_time !== ''; 
+            });
+            renderScheduledTasks(scheduledTasks);
+        }
+        
+        function isPipelineTask(taskType) {
+            return taskType === 'full_pipeline' || taskType === 'pipeline';
+        }
+        
+        function getTaskTypeLabel(taskType) {
+            return isPipelineTask(taskType) ? 'Pipeline' : 'Retrieval';
+        }
+        
+        function getTaskTypeTag(taskType) {
+            return isPipelineTask(taskType) ? 'tag-pipeline' : 'tag-retrieval';
+        }
+        
+        function getStatusTag(status) {
+            if (status === 'success') return 'tag-success';
+            if (status === 'pending' || status === 'running') return 'tag-pending';
+            return 'tag-error';
+        }
+        
+        function renderStatus(status) {
+            var label = status || '-';
+            return '<span class="tag ' + getStatusTag(status) + '">' + escapeHtml(label) + '</span>';
+        }
+        
+        function getTaskTime(t) {
+            if (t.schedule_time) {
+                return (t.schedule_date ? t.schedule_date + ' ' : '') + t.schedule_time;
+            }
+            if (t.created_at) {
+                return t.created_at.substring(0, 16).replace('T', ' ');
+            }
+            return '-';
+        }
+        
+        function getTaskSortValue(t) {
+            if (t.schedule_date || t.schedule_time) {
+                return (t.schedule_date || '') + 'T' + (t.schedule_time || '00:00') + '|' + (t.created_at || '');
+            }
+            return t.created_at || '';
+        }
+        
+        function renderScheduledTasks(tasks) {
+            if (tasks.length === 0) {
+                document.getElementById('scheduled-tasks-list').innerHTML = '<p style="color: #6b7280;">No scheduled tasks</p>';
+                return;
+            }
+            
+            var html = '<div style="overflow: auto; max-height: 400px;">';
+            html += '<table><thead><tr><th style="width: 30px;"></th><th><input type="checkbox" onchange="toggleAllScheduledTasks(this)"></th><th>Time</th><th>Query</th><th>Type</th><th>Days</th><th>Max Results</th></tr></thead><tbody>';
+            
+            var scheduleGroups = {};
+            tasks.forEach(function(t) {
+                var key = (t.query || '') + '|' + (t.schedule_time || '') + '|' + (t.task_type || '') + '|' + (t.days || '');
+                if (!scheduleGroups[key]) {
+                    scheduleGroups[key] = {
+                        query: t.query,
+                        schedule_time: t.schedule_time,
+                        task_type: t.task_type,
+                        days: t.days,
+                        max_results: t.max_results,
+                        tasks: []
+                    };
+                }
+                scheduleGroups[key].tasks.push(t);
+            });
+            
+            var activeScheduleKeys = Object.keys(scheduleGroups).filter(function(key) {
+                return scheduleGroups[key].tasks.some(function(t) { return t.status === 'pending'; });
+            });
+            
+            if (activeScheduleKeys.length === 0) {
+                document.getElementById('scheduled-tasks-list').innerHTML = '<p style="color: #6b7280;">No scheduled tasks</p>';
+                return;
+            }
+            
+            var idx = 0;
+            activeScheduleKeys.forEach(function(key) {
+                var group = scheduleGroups[key];
+                group.tasks.sort(function(a, b) {
+                    return getTaskSortValue(b).localeCompare(getTaskSortValue(a));
+                });
+                var representativeTask = group.tasks.find(function(t) { return t.status === 'pending'; }) || group.tasks[0];
+                var pendingTaskIds = group.tasks
+                    .filter(function(t) { return t.status === 'pending'; })
+                    .map(function(t) { return t.task_id; });
+                var typeLabel = getTaskTypeLabel(group.task_type);
+                var deleteCell = pendingTaskIds.length > 0
+                    ? '<input type="checkbox" class="scheduled-task-checkbox" data-task-ids="' + pendingTaskIds.join(',') + '">'
+                    : '<input type="checkbox" class="scheduled-task-checkbox" disabled title="No pending task to delete">';
+                
+                html += '<tr>' +
+                    '<td style="cursor: pointer; color: #667eea; font-weight: bold;" onclick="toggleScheduleTasks(' + idx + ')"><span id="schedule-icon-' + idx + '">&#9658;</span></td>' +
+                    '<td>' + deleteCell + '</td>' +
+                    '<td>' + escapeHtml(group.schedule_time || '-') + '</td>' +
+                    '<td>' + escapeHtml(group.query || '-') + '</td>' +
+                    '<td>' + typeLabel + '</td>' +
+                    '<td>' + (representativeTask.days || '-') + '</td>' +
+                    '<td>' + (representativeTask.max_results || '-') + '</td>' +
+                '</tr>';
+                
+                html += '<tr id="schedule-tasks-' + idx + '" style="display: none;">' +
+                    '<td colspan="7" style="background: #f9fafb; padding: 10px;">' +
+                    '<div style="font-weight: 500; margin-bottom: 8px;">Related Tasks (' + group.tasks.length + '):</div>' +
+                    '<table style="width: 100%; font-size: 12px;"><thead><tr><th style="width: 70px;">Action</th><th>Task ID</th><th>Time</th><th>Status</th></tr></thead><tbody>';
+                
+                group.tasks.forEach(function(t) {
+                    html += '<tr>' +
+                        '<td><button class="btn btn-secondary btn-sm" onclick="viewTask(\'' + t.task_id + '\')">View</button></td>' +
+                        '<td>' + escapeHtml(t.task_id || '-') + '</td>' +
+                        '<td>' + escapeHtml(getTaskTime(t)) + '</td>' +
+                        '<td>' + renderStatus(t.status) + '</td>' +
+                    '</tr>';
+                });
+                
+                html += '</tbody></table></td></tr>';
+                idx++;
+            });
+            
+            html += '</tbody></table>';
+            html += '</div>';
+            document.getElementById('scheduled-tasks-list').innerHTML = html;
+        }
+        
+        function toggleScheduleTasks(idx) {
+            var row = document.getElementById('schedule-tasks-' + idx);
+            var icon = document.getElementById('schedule-icon-' + idx);
+            if (row.style.display === 'none') {
+                row.style.display = 'table-row';
+                if (icon) icon.innerHTML = '&#9660;';
+            } else {
+                row.style.display = 'none';
+                if (icon) icon.innerHTML = '&#9658;';
+            }
+        }
+        
+        function toggleAllScheduledTasks(checkbox) {
+            var checkboxes = document.querySelectorAll('.scheduled-task-checkbox:not(:disabled)');
+            checkboxes.forEach(function(cb) { cb.checked = checkbox.checked; });
+        }
+        
+        async function deleteSelectedScheduledTasks() {
+            var checkboxes = document.querySelectorAll('.scheduled-task-checkbox:checked');
+            var taskIds = [];
+            Array.from(checkboxes).forEach(function(cb) {
+                var ids = (cb.dataset.taskIds || cb.value || '').split(',');
+                ids.forEach(function(id) {
+                    if (id && taskIds.indexOf(id) === -1) taskIds.push(id);
+                });
+            });
+            if (taskIds.length === 0) { alert('Please select tasks to delete'); return; }
+            if (!confirm('Delete ' + taskIds.length + ' scheduled task(s)? This will also delete corresponding pending tasks in history.')) return;
+            
+            var resp = await fetch('/api/delete_scheduled_tasks', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({task_ids: taskIds})
+            });
+            var result = await resp.json();
+            if (result.success) {
+                loadScheduledTasks();
+                loadTasks();
+            } else {
+                alert('Error: ' + result.error);
+            }
+        }
+        
+        function renderTasks(tasks) {
+            if (tasks.length === 0) {
+                document.getElementById('tasks-list').innerHTML = '<p style="color: #6b7280;">No tasks found</p>';
+                return;
+            }
+            
+            var scheduledTasks = tasks.filter(function(t) { return t.schedule_time && t.schedule_time !== ''; });
+            var runNowTasks = tasks.filter(function(t) { return !t.schedule_time || t.schedule_time === ''; });
+            
+            var html = '<div style="display: flex; gap: 20px;">';
+            
+            html += '<div style="flex: 1; min-width: 0;">';
+            html += '<h3 style="margin-bottom: 10px;">Scheduled Tasks (' + scheduledTasks.length + ')</h3>';
+            if (scheduledTasks.length === 0) {
+                html += '<p style="color: #6b7280;">No scheduled tasks</p>';
+            } else {
+                html += '<div style="overflow: auto; max-height: 400px;">';
+                html += '<table><thead><tr><th>Actions</th><th>Task ID</th><th>Type</th><th>Query</th><th>Time</th><th>Status</th></tr></thead><tbody>';
+                scheduledTasks.forEach(function(t) {
+                    var typeTag = getTaskTypeTag(t.task_type);
+                    var typeLabel = getTaskTypeLabel(t.task_type);
+                    var scheduleDisplay = getTaskTime(t);
+                    html += '<tr>' +
+                        '<td><button class="btn btn-secondary btn-sm" onclick="viewTask(\'' + t.task_id + '\')">View</button></td>' +
+                        '<td>' + t.task_id + '</td>' +
+                        '<td><span class="tag ' + typeTag + '">' + typeLabel + '</span></td>' +
+                        '<td>' + t.query + '</td>' +
+                        '<td>' + scheduleDisplay + '</td>' +
+                        '<td>' + renderStatus(t.status) + '</td>' +
+                    '</tr>';
+                });
+                html += '</tbody></table>';
+                html += '</div>';
+            }
+            html += '</div>';
+            
+            html += '<div style="flex: 1; min-width: 0;">';
+            html += '<h3 style="margin-bottom: 10px;">Run Now Tasks (' + runNowTasks.length + ')</h3>';
+            if (runNowTasks.length === 0) {
+                html += '<p style="color: #6b7280;">No run now tasks</p>';
+            } else {
+                html += '<div style="overflow: auto; max-height: 400px;">';
+                html += '<table><thead><tr><th>Actions</th><th>Task ID</th><th>Type</th><th>Query</th><th>Parameters</th><th>Status</th><th>Created</th></tr></thead><tbody>';
+                runNowTasks.forEach(function(t) {
+                    var typeTag = getTaskTypeTag(t.task_type);
+                    var typeLabel = getTaskTypeLabel(t.task_type);
+                    var params = t.days + ' days, ' + t.max_results + ' results';
+                    html += '<tr>' +
+                        '<td><button class="btn btn-secondary btn-sm" onclick="viewTask(\'' + t.task_id + '\')">View</button></td>' +
+                        '<td>' + t.task_id + '</td>' +
+                        '<td><span class="tag ' + typeTag + '">' + typeLabel + '</span></td>' +
+                        '<td>' + t.query + '</td>' +
+                        '<td>' + params + '</td>' +
+                        '<td>' + renderStatus(t.status) + '</td>' +
+                        '<td>' + new Date(t.created_at).toLocaleString() + '</td>' +
+                    '</tr>';
+                });
+                html += '</tbody></table>';
+                html += '</div>';
+            }
+            html += '</div>';
+            
+            html += '</div>';
+            document.getElementById('tasks-list').innerHTML = html;
+        }
+        
+        async function viewTask(taskId) {
+            var resp = await fetch('/api/task/' + taskId);
+            var task = await resp.json();
+            if (!task || task.error) return;
+            
+            var modal = document.getElementById('task-modal');
+            var modalTitle = document.getElementById('modal-title');
+            var modalBody = document.getElementById('modal-body');
+            
+            modalTitle.textContent = 'Task: ' + task.task_id;
+            
+            var papers = task.retrieval_papers || [];
+            var html = '<div style="margin-bottom: 15px;">';
+            html += '<p><strong>Query:</strong> ' + (task.query || '-') + '</p>';
+            html += '<p><strong>Type:</strong> ' + (task.task_type || '-') + '</p>';
+            html += '<p><strong>Status:</strong> ' + (task.status || '-') + '</p>';
+            html += '<p><strong>Days:</strong> ' + (task.days || '-') + ' | <strong>Max Results:</strong> ' + (task.max_results || '-') + '</p>';
+            html += '<p><strong>Papers Retrieved:</strong> ' + papers.length + '</p>';
+            html += '</div>';
+            
+            if (task.briefing_file) {
+                html += '<div style="margin-bottom: 15px;">';
+                html += '<a href="/api/download/' + encodeURIComponent(task.briefing_file) + '" class="btn btn-primary btn-sm" target="_blank">Download Briefing File</a>';
+                if (task.ranking_file) {
+                    html += ' <a href="/api/download/' + encodeURIComponent(task.ranking_file) + '" class="btn btn-secondary btn-sm" target="_blank">Download Ranking File</a>';
+                }
+                if (task.retrieval_file) {
+                    html += ' <a href="/api/download/' + encodeURIComponent(task.retrieval_file) + '" class="btn btn-secondary btn-sm" target="_blank">Download Retrieval File</a>';
+                }
+                html += '</div>';
+            }
+            
+            html += '<div class="result-section"><h3>Retrieved Papers (' + papers.length + ')</h3></div>';
+            
+            if (papers.length > 0) {
+                papers.forEach(function(p) {
+                    var pdfUrl = p.pdf_url || '#';
+                    var absUrl = p.abs_url || '#';
+                    var authors = Array.isArray(p.authors) ? p.authors.join(', ') : (p.authors || '');
+                    var abstract = p.abstract || '';
+                    
+                    html += '<div class="paper-item">';
+                    html += '<div class="paper-title">' + (p.title || 'Untitled') + '</div>';
+                    html += '<div class="paper-meta"><strong>Authors:</strong> ' + authors + '</div>';
+                    html += '<div class="paper-meta"><strong>Published:</strong> ' + (p.published || '-') + '</div>';
+                    html += '<div class="paper-meta"><strong>Abstract:</strong> ' + abstract + '</div>';
+                    html += '<div class="paper-meta">';
+                    html += '<a href="' + pdfUrl + '" target="_blank" class="paper-link">PDF</a>';
+                    html += '<a href="' + absUrl + '" target="_blank" class="paper-link">arXiv</a>';
+                    html += '</div>';
+                    html += '</div>';
+                });
+            } else {
+                html += '<p>No papers retrieved</p>';
+            }
+            
+            if (task.briefing_content) {
+                html += '<div class="result-section"><h3>Briefing Content</h3></div>';
+                html += '<div class="markdown-body">' + marked.parse(task.briefing_content) + '</div>';
+            }
+            
+            modalBody.innerHTML = html;
+            modal.classList.add('active');
+        }
+        
+        function closeModal() {
+            document.getElementById('task-modal').classList.remove('active');
+        }
+        
+        async function loadPapers() {
+            var resp = await fetch('/api/papers');
+            currentPapers = await resp.json();
+            renderPapers(currentPapers);
+        }
+        
+        function renderPapers(papers) {
+            if (papers.length === 0) {
+                document.getElementById('papers-list').innerHTML = '<p style="color: #6b7280;">No papers found</p>';
+                return;
+            }
+            var html = '';
+            papers.forEach(function(p) {
+                var pdfUrl = p.pdf_url || '#';
+                var absUrl = p.abs_url || '#';
+                var authors = Array.isArray(p.authors) ? p.authors.join(', ') : (p.authors || '');
+                var abstract = p.abstract || '';
+                
+                html += '<div class="paper-item">' +
+                    '<input type="checkbox" class="checkbox" data-id="' + (p.paper_id || p.title) + '">' +
+                    '<div style="display:inline-block; margin-left:10px; vertical-align:top; width:calc(100% - 30px);">' +
+                        '<div class="paper-title">' + (p.title || 'Untitled') + '</div>' +
+                        '<div class="paper-meta"><strong>Authors:</strong> ' + authors + '</div>' +
+                        '<div class="paper-meta"><strong>Published:</strong> ' + (p.published || '-') + '</div>' +
+                        '<div class="paper-meta"><strong>Query:</strong> ' + (p.source_query || '-') + '</div>' +
+                        '<div class="paper-meta"><strong>Abstract:</strong> ' + abstract + '</div>' +
+                        '<div class="paper-meta">' +
+                            '<a href="' + pdfUrl + '" target="_blank" class="paper-link">PDF</a>' +
+                            '<a href="' + absUrl + '" target="_blank" class="paper-link">arXiv</a>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+            });
+            document.getElementById('papers-list').innerHTML = html;
+        }
+        
+        function searchPapers() {
+            var query = document.getElementById('search-papers').value.toLowerCase();
+            if (!query) {
+                renderPapers(currentPapers);
+                return;
+            }
+            var filtered = currentPapers.filter(function(p) { 
+                return (p.title || '').toLowerCase().includes(query) || 
+                       (p.source_query || '').toLowerCase().includes(query);
+            });
+            renderPapers(filtered);
+        }
+        
+        async function deleteSelectedPapers() {
+            var checkboxes = document.querySelectorAll('#papers-list .checkbox:checked');
+            var ids = Array.from(checkboxes).map(function(c) { return c.dataset.id; });
+            if (ids.length === 0) { alert('Please select papers to delete'); return; }
+            if (!confirm('Delete ' + ids.length + ' papers?')) return;
+            
+            await fetch('/api/papers/delete', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({paper_ids: ids})
+            });
+            loadPapers();
+        }
+        
+        async function startConversationFromLibrary() {
+            var checkboxes = document.querySelectorAll('#papers-list .checkbox:checked');
+            var selectedPapers = [];
+            checkboxes.forEach(function(c) {
+                var paperId = c.dataset.id;
+                var titleEl = c.closest('.paper-item, tr').querySelector('.paper-title, td');
+                var title = titleEl ? titleEl.textContent.trim() : paperId;
+                selectedPapers.push({ paper_id: paperId, title: title });
+            });
+            
+            if (selectedPapers.length === 0) { alert('Please select papers to chat with'); return; }
+            
+            sessionStorage.setItem('selected_library_papers', JSON.stringify(selectedPapers));
+            
+            showTab('followup');
+            document.getElementById('followup-source').value = 'library';
+            toggleFollowupSource();
+            document.getElementById('followup-llm-model').focus();
+        }
+        
+        async function loadTaskOptions() {
+            var resp = await fetch('/api/tasks');
+            currentTasks = await resp.json();
+            
+            var select = document.getElementById('task-select');
+            select.innerHTML = '<option value="">-- Select Task --</option>';
+            
+            currentTasks.forEach(function(t) {
+                if (t.status === 'success' && t.retrieval_papers && t.retrieval_papers.length > 0) {
+                    var label = t.task_id + ' - ' + t.query + ' (' + t.retrieval_papers.length + ' papers)';
+                    select.innerHTML += '<option value="' + t.task_id + '">' + label + '</option>';
+                }
+            });
+        }
+        
+        async function loadTaskPapers() {
+            var taskId = document.getElementById('task-select').value;
+            if (!taskId) {
+                selectedTaskPapers = [];
+                selectedTaskQuery = '';
+                document.getElementById('task-query-display').innerHTML = '';
+                return;
+            }
+            
+            var resp = await fetch('/api/task/' + taskId);
+            var task = await resp.json();
+            
+            if (task) {
+                selectedTaskPapers = task.retrieval_papers || [];
+                selectedTaskQuery = task.query || '';
+                
+                var queryDisplay = '<div style="background: #f0f9ff; padding: 10px; border-radius: 5px; margin-top: 10px;">';
+                queryDisplay += '<strong>Query:</strong> ' + selectedTaskQuery + '<br>';
+                queryDisplay += '<strong>Papers:</strong> ' + selectedTaskPapers.length;
+                queryDisplay += '</div>';
+                document.getElementById('task-query-display').innerHTML = queryDisplay;
+            }
+        }
+        
+        var currentSessionId = null;
+        var selectedLibraryPapers = [];
+        
+        function toggleFollowupSource() {
+            var source = document.getElementById('followup-source').value;
+            if (source === 'task') {
+                document.getElementById('followup-task-section').style.display = 'block';
+                document.getElementById('followup-library-section').style.display = 'none';
+            } else if (source === 'library') {
+                document.getElementById('followup-task-section').style.display = 'none';
+                document.getElementById('followup-library-section').style.display = 'block';
+                updateSelectedPapersDisplay();
+            } else {
+                document.getElementById('followup-task-section').style.display = 'none';
+                document.getElementById('followup-library-section').style.display = 'none';
+            }
+        }
+        
+        function updateSelectedPapersDisplay() {
+            var display = document.getElementById('selected-library-papers-display');
+            var countSpan = document.getElementById('selected-papers-count');
+            var listDiv = document.getElementById('selected-papers-list');
+            
+            if (selectedLibraryPapers.length > 0) {
+                display.style.display = 'block';
+                countSpan.textContent = selectedLibraryPapers.length;
+                listDiv.innerHTML = '<ul style="margin: 5px 0; padding-left: 20px;">' + 
+                    selectedLibraryPapers.map(function(p) { 
+                        return '<li>' + escapeHtml(p.title || p.paper_id || 'Unknown') + '</li>'; 
+                    }).join('') + '</ul>';
+            } else {
+                display.style.display = 'none';
+            }
+        }
+        
+        function goToLibrarySelectPapers() {
+            showTab('papers');
+            sessionStorage.setItem('followup_from_library', 'true');
+        }
+        
+        function checkFollowupFromLibrary() {
+            if (sessionStorage.getItem('followup_from_library') === 'true') {
+                sessionStorage.removeItem('followup_from_library');
+                document.getElementById('followup-source').value = 'library';
+                toggleFollowupSource();
+            }
+            
+            var savedPapers = sessionStorage.getItem('selected_library_papers');
+            if (savedPapers) {
+                try {
+                    selectedLibraryPapers = JSON.parse(savedPapers);
+                    sessionStorage.removeItem('selected_library_papers');
+                    if (document.getElementById('followup-source').value === 'library') {
+                        updateSelectedPapersDisplay();
+                    }
+                } catch(e) {
+                    selectedLibraryPapers = [];
+                }
+            }
+        }
+        
+        async function startNewConversation() {
+            var source = document.getElementById('followup-source').value;
+            var llmModel = document.getElementById('followup-llm-model').value;
+            var llmApiKey = document.getElementById('followup-llm-api-key').value;
+            
+            if (!llmApiKey) { alert('Please enter API key for LLM'); return; }
+            
+            if (source === 'task') {
+                var taskId = document.getElementById('task-select').value;
+                if (!taskId) { alert('Please select a task first'); return; }
+                
+                var resp = await fetch('/api/followup/create_session', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        task_id: taskId,
+                        query: selectedTaskQuery,
+                        use_llm: true,
+                        llm_model: llmModel,
+                        llm_api_key: llmApiKey
+                    })
+                });
+                
+                if (!resp.ok) {
+                    var err = await resp.json();
+                    alert('Error: ' + err.error);
+                    return;
+                }
+                
+                var result = await resp.json();
+                currentSessionId = result.session_id;
+                
+                document.getElementById('conversation-area').style.display = 'block';
+                document.getElementById('clear-conv-btn').style.display = 'inline-block';
+                
+                document.getElementById('conversation-info').innerHTML = 
+                    '<strong>Conversation started</strong><br>' +
+                    'Topic: ' + result.query + '<br>' +
+                    'Papers: ' + result.paper_count + '<br>' +
+                    'Mode: ' + (result.use_llm ? 'LLM (Multi-turn)' : 'Rule-based');
+                
+                renderPapersInfo(result.papers || selectedTaskPapers);
+                document.getElementById('conversation-history').innerHTML = '<div style="color: #666; text-align: center;">Conversation started. Ask your first question!</div>';
+                document.getElementById('followup-question').value = '';
+            } else {
+                if (selectedLibraryPapers.length === 0) { alert('Please select papers from library first'); return; }
+                
+                var paperIds = selectedLibraryPapers.map(function(p) { return p.paper_id; });
+                
+                var resp = await fetch('/api/followup/create_session_from_library', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        paper_ids: paperIds,
+                        llm_model: llmModel,
+                        llm_api_key: llmApiKey
+                    })
+                });
+                
+                if (!resp.ok) {
+                    var err = await resp.json();
+                    alert('Error: ' + err.error);
+                    return;
+                }
+                
+                var result = await resp.json();
+                currentSessionId = result.session_id;
+                
+                document.getElementById('conversation-area').style.display = 'block';
+                document.getElementById('clear-conv-btn').style.display = 'inline-block';
+                
+                document.getElementById('conversation-info').innerHTML = 
+                    '<strong>Conversation started (from Library)</strong><br>' +
+                    'Papers: ' + result.paper_count + '<br>' +
+                    'Mode: LLM (Multi-turn)';
+                
+                renderPapersInfo(result.papers || selectedLibraryPapers);
+                document.getElementById('conversation-history').innerHTML = '<div style="color: #666; text-align: center;">Conversation started. Ask your first question!</div>';
+                document.getElementById('followup-question').value = '';
+            }
+        }
+        
+        async function askFollowupQuestion() {
+            if (!currentSessionId) { alert('Please start a new conversation first'); return; }
+            
+            var question = document.getElementById('followup-question').value.trim();
+            if (!question) { alert('Please enter a question'); return; }
+            
+            var historyDiv = document.getElementById('conversation-history');
+            historyDiv.innerHTML += '<div class="user-message"><strong>You:</strong> ' + escapeHtml(question) + '</div>';
+            historyDiv.innerHTML += '<div class="loading">Assistant is thinking...</div>';
+            historyDiv.scrollTop = historyDiv.scrollHeight;
+            
+            document.getElementById('followup-question').value = '';
+            
+            var resp = await fetch('/api/followup/ask', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    session_id: currentSessionId,
+                    question: question
+                })
+            });
+            
+            if (!resp.ok) {
+                var err = await resp.json();
+                historyDiv.innerHTML = historyDiv.innerHTML.replace('<div class="loading">Assistant is thinking...</div>', 
+                    '<div class="error">Error: ' + escapeHtml(err.error) + '</div>');
+                return;
+            }
+            
+            var result = await resp.json();
+            historyDiv.innerHTML = historyDiv.innerHTML.replace('<div class="loading">Assistant is thinking...</div>', 
+                '<div class="assistant-message"><strong>Assistant:</strong> ' + marked.parse(result.answer) + '</div>');
+            historyDiv.scrollTop = historyDiv.scrollHeight;
+        }
+        
+        async function clearConversation() {
+            if (!currentSessionId) return;
+            
+            if (!confirm('Clear conversation history?')) return;
+            
+            var resp = await fetch('/api/followup/clear_session', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ session_id: currentSessionId })
+            });
+            
+            if (resp.ok) {
+                document.getElementById('conversation-history').innerHTML = 
+                    '<div style="color: #666; text-align: center;">Conversation history cleared. Ask a new question!</div>';
+            }
+        }
+        
+        function renderPapersInfo(papers) {
+            if (!papers || papers.length === 0) {
+                document.getElementById('papers-info').innerHTML = '<p>No papers available</p>';
+                return;
+            }
+            
+            var html = '';
+            papers.forEach(function(p, idx) {
+                var title = p.title || 'Untitled';
+                var authors = Array.isArray(p.authors) ? p.authors.join(', ') : (p.authors || '');
+                var abstract = p.abstract || '';
+                var query = p.source_query || p.query || '';
+                var pdfUrl = p.pdf_url || '';
+                var absUrl = p.abs_url || '';
+                
+                html += '<div style="margin-bottom: 15px; padding: 10px; background: #f9f9f9; border-radius: 5px;">';
+                html += '<div style="font-weight: bold; margin-bottom: 5px;">Paper ' + (idx + 1) + ': ' + escapeHtml(title) + '</div>';
+                
+                if (query) {
+                    html += '<div style="font-size: 12px; color: #666; margin-bottom: 5px;"><strong>Query:</strong> ' + escapeHtml(query) + '</div>';
+                }
+                
+                if (authors) {
+                    html += '<div style="font-size: 12px; color: #666; margin-bottom: 5px;"><strong>Authors:</strong> ' + escapeHtml(authors) + '</div>';
+                }
+                
+                if (abstract) {
+                    html += '<div style="font-size: 12px; margin-bottom: 5px;"><strong>Abstract:</strong> ' + escapeHtml(abstract) + '</div>';
+                }
+                
+                html += '<div style="font-size: 12px;">';
+                if (absUrl) {
+                    html += '<a href="' + absUrl + '" target="_blank" style="margin-right: 10px;">arXiv</a>';
+                }
+                if (pdfUrl) {
+                    html += '<a href="' + pdfUrl + '" target="_blank">PDF</a>';
+                }
+                html += '</div>';
+                
+                html += '</div>';
+            });
+            
+            document.getElementById('papers-info').innerHTML = html;
+        }
+        
+        function escapeHtml(text) {
+            if (!text) return '';
+            var div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        document.getElementById('followup-question').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                askFollowupQuestion();
+            }
+        });
+        
+        loadDashboard();
+    </script>
+</body>
+</html>

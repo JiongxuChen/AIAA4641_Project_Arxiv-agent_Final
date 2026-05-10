@@ -1,0 +1,15 @@
+{
+  "queries": ["LLM agents", "graph neural networks"],
+  "days": 7,
+  "max_results": 20,
+  "top_k": 10,
+  "task_type": "full_pipeline",
+  "schedule_time": ["09:00"],
+  "add_to_library": true,
+  "include_existing": false,
+  "use_llm": false,
+  "llm_model": "deepseek-ai/DeepSeek-R1",
+  "output_dir": "briefings",
+  "min_clusters": 2,
+  "max_clusters": 4
+}
