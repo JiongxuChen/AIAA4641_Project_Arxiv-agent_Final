@@ -1,0 +1,54 @@
+[
+  {
+    "paper_id": "arxiv_2605.06164",
+    "title": "Modeling Dependency-Propagated Ecosystem Impact of Changes in Maintenance Activities: Evaluating Support Strategies in the PyPI Network",
+    "authors": [
+      "Alexandros Tsakpinis",
+      "Emil Schwenger",
+      "Alexander Pretschner"
+    ],
+    "abstract": "Background: Open source software ecosystems exhibit dense dependency networks in which maintenance degradation of structurally central packages can propagate widely. Despite increasing attention to open source sustainability, existing support mechanisms lack an explicit, dependencyaware notion of ecosystem-level impact to guide support decisions. Aims: In this paper, we introduce a dependency-aware model of ecosystem impact that captures how changes in maintenance activities propagate through the Python Package Index (PyPI) ecosystem and affect its overall state. Based on this model, we prioritize packages for ecosystem support using our dependency-propagated notion of ecosystem impact. Method: Applying this framework to a snapshot of 718,750 PyPI packages and over 2 million dependencies, we compare our impact-driven support strategy with existing support mechanisms (Tidelift, Ecosyste.ms, and GitHub Sponsors) and with PageRank as a baseline measure of structural importance. Results: Our results show that a large share of the modeled ecosystem impact (approximately 80%) can be attributed to just 0.1% of all PyPI packages when prioritized based on dependency-propagated impact. In contrast, externally defined support sets vary substantially in their alignment with ecosystem impact. We further analyze maintainer reach and metadata accessibility, revealing that ecosystem impact, social footprint, and operational feasibility represent distinct but complementary dimensions of ecosystem support. Conclusions: Dependencyaware ecosystem impact modeling provides a transparent and systematic basis for prioritizing support in large-scale software ecosystems. Our findings suggest that effective support strategies, driven by ecosystem stewards, funding bodies, and organizations operating support programs, should complement existing allocation logic with impact-informed decision making.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.SE"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06164v1",
+    "abs_url": "https://arxiv.org/abs/2605.06164v1"
+  },
+  {
+    "paper_id": "arxiv_2605.05752",
+    "title": "Generative AI-Based Monte Carlo Simulation for Method Evaluation Using Synthetic Multilevel Data",
+    "authors": [
+      "Youmi Suk",
+      "Chenguang Pan",
+      "Weixuan Xiao"
+    ],
+    "abstract": "The role of AI-generated synthetic data has recently been expanded to support realistic Monte Carlo simulations. However, guidance is limited on generating data with multilevel structures and designing simulations based on such data. This study proposes a general framework for AI-based simulation studies to evaluate the predictive performance and parameter recovery of quantitative methods, specifically using multilevel data commonly observed in the social sciences. Our proposed six-stage workflow consists of (i) specifying a method and real data, (ii) training Generative AI with real data, (iii) assessing synthetic data quality, (iv) designing and conducting simulations, (v) evaluating method performance, and (vi) checking robustness. To enhance fidelity in multilevel data generation, we also introduce targeted modifications to diffusion models and Generative Adversarial Networks (GANs). Furthermore, we develop a systematic quality evaluation framework that assesses both within-table and between-table fidelity, and discuss how AI-based simulation designs should differ depending on whether the simulation's objective is predictive performance or parameter recovery. Finally, using empirical multilevel data and multilevel modeling methods, we demonstrate the utility of the proposed AI-based simulation framework. This approach leads to more accurate and honest evaluations of quantitative methods in the real world, unlike traditional simulation studies based on arbitrary simulated scenarios.",
+    "published": "2026-05-07",
+    "categories": [
+      "stat.ME",
+      "stat.AP"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.05752v1",
+    "abs_url": "https://arxiv.org/abs/2605.05752v1"
+  },
+  {
+    "paper_id": "arxiv_2605.04887",
+    "title": "Sentiment Analysis and Customer Satisfaction Prediction on E-Commerce Platforms Based on YouTube Comments Using the XGBoost Algorithm",
+    "authors": [
+      "Ridho Benedictus Togi Manik",
+      "Muhammad Aqil Ramadhan",
+      "Ihsan Maulana Yusuf",
+      "Luluk Muthoharoh",
+      "Ardika Satria",
+      "Martin Clinton Tosima Manullang"
+    ],
+    "abstract": "The exponential expansion of digital commerce in Indonesia has significantly shifted consumer interactions toward video-centric social networks, particularly YouTube. Consequently, the sheer volume of unstructured, multi-contextual comments poses a tremendous challenge for manual sentiment tracking. This study investigates and constructs a predictive model for customer satisfaction leveraging the Extreme Gradient Boosting (XGBoost) architecture coupled with Term Frequency-Inverse Document Frequency (TF-IDF) vectorization. By utilizing a secondary dataset of YouTube comments retrieved from e-commerce review videos, the raw text underwent rigorous preprocessing to generate normalized numerical features. The experimental results demonstrate that the PyCaret-optimized machine learning framework delivers superior classification resilience. Beyond standard performance metrics, lexical evaluations and feature-importance mapping uncover a notable phenomenon: e-commerce discourse is heavily infiltrated by socio-political terminologies, which ultimately influence the polarity of audience satisfaction.",
+    "published": "2026-05-06",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.04887v1",
+    "abs_url": "https://arxiv.org/abs/2605.04887v1"
+  }
+]

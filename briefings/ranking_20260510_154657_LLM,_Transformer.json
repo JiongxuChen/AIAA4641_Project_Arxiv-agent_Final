@@ -1,0 +1,113 @@
+[
+  {
+    "paper_id": "arxiv_2605.06216",
+    "title": "TIDE: Every Layer Knows the Token Beneath the Context",
+    "authors": [
+      "Ajay Jaiswal",
+      "Lauren Hannah",
+      "Han-Byul Kim",
+      "Duc Hoang",
+      "Mehrdad Farajtabar",
+      "Minsik Cho"
+    ],
+    "abstract": "We revisit a universally accepted but under-examined design choice in every modern LLM: a token index is looked up once at the input embedding layer and then permanently discarded. This single-injection assumption induces two structural failures: (i) the Rare Token Problem, where a Zipf-type distribution of vocabulary causes rare-token embeddings are chronically under-trained due to receiving a fraction of the cumulative gradient signal compared to common tokens; and (ii) the Contextual Collapse Problem, where limited parameters models map distributionally similar tokens to indistinguishable hidden states. As an attempt to address both, we propose TIDE, which augments the standard transformer with EmbeddingMemory: an ensemble of K independent MemoryBlocks that map token indices to context-free semantic vectors, computed once and injected into every layer through a depth-conditioned softmax router with a learnable null bank. We theoretically and empirically establish the benefits of TIDE in addressing the issues associated with single-token identity injection as well as improve performance across multiple language modeling and downstream tasks.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06216v1",
+    "abs_url": "https://arxiv.org/abs/2605.06216v1",
+    "added_at": "2026-05-10T15:46:59.943622",
+    "source_query": "LLM, Transformer",
+    "source_type": "retrieval",
+    "relevance_score": 0.2251,
+    "rank": 1,
+    "cluster": "experts inference token"
+  },
+  {
+    "paper_id": "arxiv_2605.06554",
+    "title": "Long Context Pre-Training with Lighthouse Attention",
+    "authors": [
+      "Bowen Peng",
+      "Subho Ghosh",
+      "Jeffrey Quesnelle"
+    ],
+    "abstract": "Training causal transformers at extreme sequence lengths is bottlenecked by the quadratic time and memory of scaled dot-product attention (SDPA). In this work, we propose Lighthouse Attention, a training-only symmetrical selection-based hierarchical attention algorithm that wraps around ordinary SDPA and can be easily removed towards the end of the training. Our hierarchical selection is also gradient-free, which exempts us from dealing with a complicated and potentially inefficient backward pass kernel. Our contribution is three-fold: (i) A subquadratic hierarchical pre- and post-processing step that does adaptive compression and decompression of the sequence. (ii) A symmetrical compression strategy that pools queries, keys and values at the same time, while preserving left-to-right causality, which greatly improves parallelism. (iii) A two stage training approach which we pre-train for the majority of the time with Lighthouse Attention and recover a full attention model at the end with a short training. We run preliminary small scale LLM pre-training experiments that show the effectiveness of our method compared to full attention training with all other settings matched, where we achieve a faster total training time and lower final loss after the recovery phase. Full code is available at: https://github.com/ighoshsubho/lighthouse-attention",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06554v1",
+    "abs_url": "https://arxiv.org/abs/2605.06554v1",
+    "relevance_score": 0.1141,
+    "rank": 2,
+    "cluster": "training attention lighthouse"
+  },
+  {
+    "paper_id": "arxiv_2605.06206",
+    "title": "Federation of Experts: Communication Efficient Distributed Inference for Large Language Models",
+    "authors": [
+      "Muhammad Shahir Abdurrahman",
+      "Chun Deng",
+      "Azalia Mirhoseini",
+      "Philip Levis"
+    ],
+    "abstract": "Mixture of experts has emerged as the primary mechanism for making Large Language Models (LLMs) computationally efficient. However, in distributed settings, communicating token embeddings between experts is a significant bottleneck.\n  We present the novel Federation of Experts (FoE) architecture. FoE restructures the MoE block of a transformer layer into multiple MoE clusters. Each cluster is responsible for only one of the KV heads and expert parallelism is applied between those experts. Between clusters, a sum synchronizes the post-attention residuals, which then drives routing and dispatch for the next MoE block. In a single-node setting, FoE completely eliminates all-to-all communication as all experts within a group are contained on the same GPU. In multi-node settings, FoE confines all-to-all communication to the intra-node fabric, thus significantly reducing communication overhead.\n  An implementation of FoE finds that on LongBench, FoE significantly improves inference throughput and latency in both single-node and multi-node settings, reducing the end-to-end forward-pass latency by up to 5.2x, TTFT by 3.62x, and TBT by 1.95x. It does so while achieving comparable generation quality to a mixture of experts model of the same size and training configuration.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06206v1",
+    "abs_url": "https://arxiv.org/abs/2605.06206v1",
+    "added_at": "2026-05-10T15:46:59.943622",
+    "source_query": "LLM, Transformer",
+    "source_type": "retrieval",
+    "relevance_score": 0.114,
+    "rank": 3,
+    "cluster": "experts inference token"
+  },
+  {
+    "paper_id": "arxiv_2605.06485",
+    "title": "Litespark Inference on Consumer CPUs: Custom SIMD Kernels for Ternary Neural Networks",
+    "authors": [
+      "Nii Osae Osae Dade",
+      "Tony Morri",
+      "Moinul Hossain Rahat",
+      "Sayandip Pal"
+    ],
+    "abstract": "Large language models (LLMs) have transformed artificial intelligence, but their computational requirements remain prohibitive for most users. Standard inference demands expensive datacenter GPUs or cloud API access, leaving over one billion personal computers underutilized for AI workloads. Ternary models offer a path forward: their weights are constrained to {-1, 0, +1}, theoretically eliminating the need for floating-point multiplication. However, existing frameworks fail to exploit this structure, treating ternary models as dense floating-point networks. We address this gap with custom SIMD kernels that replace matrix multiplication with simple addition and subtraction operations, targeting the integer dot product instructions available on modern CPUs. Our implementation, Litespark-Inference, is pip-installable and integrates directly with Hugging-Face, achieving 9.2x faster time-to-first-token, 52x higher throughput, and 14x memory reduction compared to standard PyTorch inference on Apple Silicon, with similar speedups on Intel and AMD processors.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.CL",
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06485v1",
+    "abs_url": "https://arxiv.org/abs/2605.06485v1",
+    "relevance_score": 0.0,
+    "rank": 4,
+    "cluster": "experts inference token"
+  },
+  {
+    "paper_id": "arxiv_2605.06610",
+    "title": "SoftSAE: Dynamic Top-K Selection for Adaptive Sparse Autoencoders",
+    "authors": [
+      "Jakub Stępień",
+      "Marcin Mazur",
+      "Jacek Tabor",
+      "Przemysław Spurek"
+    ],
+    "abstract": "Sparse Autoencoders (SAEs) have become an important tool in mechanistic interpretability, helping to analyze internal representations in both Large Language Models (LLMs) and Vision Transformers (ViTs). By decomposing polysemantic activations into sparse sets of monosemantic features, SAEs aim to translate neural network computations into human-understandable concepts. However, common architectures such as TopK SAEs rely on a fixed sparsity level. They enforce the same number of active features (K) across all inputs, ignoring the varying complexity of real-world data. Natural data often lies on manifolds with varying local intrinsic dimensionality, meaning the number of relevant factors can change significantly across samples. This suggests that a fixed sparsity level is not optimal. Simple inputs may require only a few features, while more complex ones need more expressive representations. Using a constant K can therefore introduce noise in simple cases or miss important structure in more complex ones. To address this issue, we propose SoftSAE, a sparse autoencoder with a Dynamic Top-K selection mechanism. Our method uses a differentiable Soft Top-K operator to learn an input-dependent sparsity level k. This allows the model to adjust the number of active features based on the complexity of each input. As a result, the representation better matches the structure of the data, and the explanation length reflects the amount of information in the input. Experimental results confirm that SoftSAE not only finds meaningful features, but also selects the right number of features for each concept. The source code is available at: https://anonymous.4open.science/r/SoftSAE-8F71/.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.LG",
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06610v1",
+    "abs_url": "https://arxiv.org/abs/2605.06610v1",
+    "relevance_score": 0.0,
+    "rank": 5,
+    "cluster": "training attention lighthouse"
+  }
+]

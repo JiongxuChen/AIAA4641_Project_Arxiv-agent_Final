@@ -1,0 +1,184 @@
+[
+  {
+    "paper_id": "arxiv_2605.06382",
+    "title": "Rethinking Vacuity for OOD Detection in Evidential Deep Learning",
+    "authors": [
+      "Claire McNamara"
+    ],
+    "abstract": "Vacuity, or Uncertainty Mass (UM), is commonly used as a metric to evaluate Out-of-Distribution (OOD) detection in Evidential Deep Learning (EDL). It generally involves dividing the number of classes ($K$) by the total strength of belief ($S$) of the model's predictions, where $S$ is derived from summing the Dirichlet parameters. As such, UM is sensitive to the cardinality of $K$. In particular, it is unlikely in practice that there is a linear relationship between $K$ and $S$ as $K$ and $S$ increase due to the nature of EDL (suppressing incorrectly assigned evidence). As a result, when comparing In Distribution (ID) and OOD results, it is important that $K_{\\mathrm{ID}}$ and $K_{\\mathrm{OOD}}$ are equal; something that is not always ensured in practice. We provide an empirical demonstration of how results for AUROC and AUPR can substantially differ when class cardinality between ID and OOD differs by 1, with AUROC differing by as much as 0.318 and AUPR by 0.613 for standard EDL, and AUROC by 0.360 and AUPR by 0.683 for IB-EDL. More concretely, our findings isolate an evaluation artefact: when K differs between ID and OOD, AUROC/AUPR can be artificially inflated without any change in model predictions. We further discuss the evaluation of EDL over causal language models using Multiple-Choice Question-Answer (MCQA) datasets and argue for clearer definitions of ID and OOD in this context. Our primary contribution is an empirical and theoretical demonstration that vacuity-based OOD detection in EDL-fine-tuned LLMs is highly sensitive to uncontrolled differences in evaluated class cardinality.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06382v1",
+    "abs_url": "https://arxiv.org/abs/2605.06382v1"
+  },
+  {
+    "paper_id": "arxiv_2605.06197",
+    "title": "Bridging visual saliency and large language models for explainable deep learning in medical imaging",
+    "authors": [
+      "Paul Valery Nguezet",
+      "Elie Tagne Fute",
+      "Yusuf Brima",
+      "Benoit Martin Azanguezet",
+      "Marcellin Atemkeng"
+    ],
+    "abstract": "The opaque nature of deep learning models remains a significant barrier to their clinical adoption in medical imaging. This paper presents a multimodal explainability framework that bridges the gap between convolutional neural network (CNN) predictions and clinically actionable insights for brain tumor classification, leveraging large language models (LLMs) to deliver human-interpretable diagnostic narratives. The proposed framework operates through three coupled stages. First, nine CNN architectures are extended with a dual-output hybrid formulation that simultaneously optimises a classification head and a segmentation head, enabling spatially richer feature learning. Second, visual saliency attribution methods, namely Grad-CAM, Grad-CAM++, and ScoreCAM, are applied to generate class-discriminative heatmaps, which are subsequently refined into binary tumor masks via an adaptive percentile thresholding pipeline. Third, the resulting masks are mapped onto the Harvard-Oxford cortical atlas to translate pixel-level evidence into named neuroanatomical structures, and the extracted findings are encoded into a structured JSON file that conditions three LLMs (Grok3, Mistral, and LLaMA) to generate coherent, radiological-style diagnostic reports. Evaluated on a dataset of 4,834 contrast-enhanced T1-weighted brain MRI images spanning three tumor classes, InceptionResNetV2 achieved the highest classification performance and Grad-CAM++ yielded the best segmentation overlap. Among the language models, Grok3 led in lexical diversity and coherence, while LLaMA achieved the highest readability score. By integrating visual, anatomical, and linguistic modalities into a unified pipeline, the framework produces explanations that are technically grounded and meaningfully interpretable, advancing the transparency and clinical accountability of artificial intelligence assisted brain tumor diagnosis.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.CV",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06197v1",
+    "abs_url": "https://arxiv.org/abs/2605.06197v1"
+  },
+  {
+    "paper_id": "arxiv_2605.05731",
+    "title": "Knee Osteoarthritis Severity Grading Using Optimized Deep Learning and LLM-Driven Intelligent AI on Computationally Limited Systems",
+    "authors": [
+      "Dayam Nadeem",
+      " Neha",
+      "Safdar Mustafa",
+      "Adnan Alvi",
+      "Mohd Hussain"
+    ],
+    "abstract": "Knee osteoarthritis (KOA) is among the musculoskeletal disorders that considerably restrict joint mobility, cause severe chronic pain and impact negatively on quality life. It is one of the persistent health issues worldwide. Generally, subjectivity and inter-observer variability undermine conventional practices and evaluation process that are adopted to address such health issues. Hence precise and timely diagnosis would be one of the effective ways for the assessment of its severity. This paper proposes an automated diagnostic approach for severity grading of KOA by blending a deep learning convolutional neural network (CNN) with a device-based inference platform powered by TensorFlow Lite. It proposes a model based on the ResNet-18 convolutional neural network. The designed model is trained on publicly available database. Through a transfer learning approach obtained knee images are first classified into five Kellgren-Lawrence (KL) grades. Further the developed model is optimised. During the training of the model test accuracy of 94.48% with stable convergence has been achieved. Subsequently the optimised model transformed into a lightweight TensorFlow Lite format, facilitating seamless deployment on resource-constrained devices. The designed model is capable enough to operate in the environment having no continuous internet connectivity. Also, an auxiliary Large Language Model (Gemini-2.0-flash) is applied to generate structured interpretive findings like potential symptoms, risk factors, and preventive majors etc. The LLM component functions as interface without influencing the classification process. The proposed model articulates the feasibility of an on-device, interpretable decision-support tools for early diagnosis and improve accessibility to Artificial Intelligence (AI)-assisted knee screening tool.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.05731v1",
+    "abs_url": "https://arxiv.org/abs/2605.05731v1"
+  },
+  {
+    "paper_id": "arxiv_2605.05499",
+    "title": "FoodCHA: Multi-Modal LLM Agent for Fine-Grained Food Analysis",
+    "authors": [
+      "Woojin Lee",
+      "Pranav Mekkoth",
+      "Ye Tian",
+      "Onat Gungor",
+      "Tajana Rosing"
+    ],
+    "abstract": "The widespread adoption of camera-equipped mobile devices and wearables has enabled convenient capture of meal images, making food recognition a key component for real time dietary monitoring. However, real-world food images present challenges due to high intra-class similarity and the frequent presence of multiple food items within a single image. While deep learning models achieve strong performance in coarse grained classification, they often struggle to capture fine-grained attributes such as cooking style. Moreover, open-ended generation in modern vision-language models can produce non-canonical labels, limiting their practical deployment. We propose FoodCHA, a multimodal agentic framework that reformulates food recognition as a hierarchical decision-making process. By progressively anchoring predictions, FoodCHA guides subcategory identification using high-level categories and guides cooking style recognition using subcategories, improving semantic consistency and attribute-level discrimination. To ensure practical deployability, FoodCHA utilizes the compact Moondream-2B vision language model, which provides strong reasoning capability while maintaining lower computational and memory overhead. Experiments on FoodNExTDB show that FoodCHA outperforms Food-Llama-3.2-11B by 13.8% and 38.2% in category and subcategory recognition precision, respectively, and achieves a striking 153.2% improvement in cooking style classification precision.",
+    "published": "2026-05-06",
+    "categories": [
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.05499v1",
+    "abs_url": "https://arxiv.org/abs/2605.05499v1"
+  },
+  {
+    "paper_id": "arxiv_2605.05023",
+    "title": "CuBridge: An LLM-Based Framework for Understanding and Reconstructing High-Performance Attention Kernels",
+    "authors": [
+      "Xing Ma",
+      "Yangjie Zhou",
+      "Wu Sun",
+      "Zihan Liu",
+      "Jingwen Leng",
+      "Yun Lin",
+      "Shixuan Sun",
+      "Minyi Guo",
+      "Jin Song Dong"
+    ],
+    "abstract": "Efficient CUDA implementations of attention mechanisms are critical to modern deep learning systems, yet supporting diverse and evolving attention variants remains challenging. Existing frameworks and compilers trade performance for flexibility, while expert-written kernels achieve high efficiency but are difficult to adapt. Recent work explores large language models (LLMs) for GPU kernel generation, but prior studies report unstable correctness and significant performance gaps for complex operators such as attention.\n  We present CuBridge, an LLM-based framework that adapts expert-written attention kernels through a structured lift-transfer-lower workflow. CuBridge starts from expert-written CUDA attention kernels and lifts them into an executable intermediate representation that makes execution orchestration explicit while abstracting low-level CUDA syntax. Given a user-provided PyTorch specification, CuBridge generates and verifies a target IR program, then reconstructs optimized CUDA code via reference-guided lowering. Across diverse attention variants and GPU platforms, CuBridge consistently produces correct kernels and substantially outperforms general frameworks, compiler-based approaches, and prior LLM-based methods.",
+    "published": "2026-05-06",
+    "categories": [
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.05023v1",
+    "abs_url": "https://arxiv.org/abs/2605.05023v1"
+  },
+  {
+    "paper_id": "arxiv_2605.04608",
+    "title": "SensingAgents: A Multi-Agent Collaborative Framework for Robust IMU Activity Recognition",
+    "authors": [
+      "Naiyu Zheng",
+      "Tianlong Yu",
+      "Haochen Yin",
+      "Xiaoyi Fan",
+      "Xiping Hu",
+      "Zhimeng Yin"
+    ],
+    "abstract": "Human Activity Recognition (HAR) using Inertial Measurement Unit (IMU) sensors is a cornerstone of mobile health, smart environments, and human-computer interaction. However, current deep learning-based HAR models often struggle with heavy reliance on labeled data, position-specific ambiguity, and a lack of transparent reasoning. Inspired by the advanced agents framework, which emulates a collaborative agent using Large Language Models (LLMs), we propose SensingAgents, a novel multi-agent system for robust IMU activity recognition. SensingAgents organizes LLM-powered agents into specialized roles: a group of Analyst Agents for position-specific sensor analysis (arm, wrist, belt, pocket), a pair of Advocate Agents that resolves sensor conflicts through dynamic and static dialectical debates, and a Decision Agent that ensures reliability under sensor drift or failure. Evaluation on the Shoaib dataset demonstrates that SensingAgents significantly outperforms state-of-the-art single-agent and multi-agent LLM models, achieving an accuracy of 79.5% in a zero setting--29% higher than existing agent models and 9.4% higher than deep learning baselines--particularly in complex scenarios where multi-sensor data is conflicting or noisy. Our work highlights the potential of multi-agent collaborative reasoning for advancing the robustness and interpretability of ubiquitous sensing systems.",
+    "published": "2026-05-06",
+    "categories": [
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.04608v1",
+    "abs_url": "https://arxiv.org/abs/2605.04608v1"
+  },
+  {
+    "paper_id": "arxiv_2605.04489",
+    "title": "A Hybrid Method for Low-Resource Named Entity Recognition",
+    "authors": [
+      "Do Minh Duc",
+      "Quan Xuan Truong",
+      "Viet Tran Hong",
+      "Le Hoang Anh",
+      "Mac Thi Minh Tra",
+      "Nguyen Van Thuy",
+      "Le Hai Ha",
+      "Vinh Nguyen Van"
+    ],
+    "abstract": "Named Entity Recognition (NER) is a critical component of Natural Language Processing with diverse applications in information extraction and conversational AI. However, NER in specific domains for low-resource languages faces challenges such as limited annotated data and heterogeneous label sets. This study addresses these issues by proposing a hybrid neurosymbolic framework that integrates rule-based processing with deep learning models for Vietnamese NER. The core idea involves a two-stage pipeline: first, a rule-based component reduces label complexity by grouping relational and special categories; second, pre-trained language models are fine-tuned for high-precision extraction. A post-processing module is then utilized to restore fine-grained labels, preserving expressiveness for application-level usability. To mitigate data scarcity, a scalable data augmentation strategy leveraging Large Language Models (LLMs) is introduced to expand the label set without full re-annotation, which is a significant novelty of this work. The effectiveness of this method was evaluated across five specific-domain datasets, including logistics, wildlife, and healthcare. Experimental results demonstrate substantial improvements over strong RoBERTa-based baselines. Specifically, the proposed system achieved F1 scores of 90 percent in Customer Service, up from 83 percent; 84 percent in GAM, up from 73 percent; 83 percent in AI Fluent, up from 80 percent; 94 percent in PhoNER_Covid19, up from 91 percent; and 60 percent in Rare Wildlife, up from 36 percent. These findings confirm that the hybrid approach effectively captures the linguistic complexity of Vietnamese and contextual nuances in specialized domains, offering a robust contribution to low-resource NER research.",
+    "published": "2026-05-06",
+    "categories": [
+      "cs.CE",
+      "cs.AI",
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.04489v1",
+    "abs_url": "https://arxiv.org/abs/2605.04489v1"
+  },
+  {
+    "paper_id": "arxiv_2605.04243",
+    "title": "Temporal Reasoning Is Not the Bottleneck: A Probabilistic Inconsistency Framework for Neuro-Symbolic QA",
+    "authors": [
+      "Tran Quang Liem"
+    ],
+    "abstract": "Despite significant advances, large language models (LLMs) continue to exhibit brittle performance on complex temporal reasoning tasks. This failure mode is widely attributed to inherent deficits in autoregressive logical deduction. In this paper, we challenge this prevailing narrative, demonstrating that temporal reasoning is not the fundamental bottleneck; rather, the locus of failure lies in unstructured text-to-event representation. We introduce a novel neuro-symbolic question-answering framework governed by a Probabilistic Inconsistency Signal (PIS) that explicitly isolates perceptual errors from reasoning failures. By lifting unstructured text into explicit event graphs and interval constraints, our architecture strictly decouples semantic extraction from a symbolic reasoning engine. To robustly detect structural breaks, the PIS elegantly unifies symbolic credal intervals with epistemic neural uncertainty extracted via Evidential Deep Learning on LLM hidden states. Empirical evaluations reveal a striking paradigm shift: when provided with correct structural representations, our system's explicit proof traces achieve perfect 1.0 accuracy (4000/4000) and strictly zero false positives/negatives on temporal arithmetic benchmarks. On broader, noise-injected QA settings, the framework maintains a competitive 75.1\\% accuracy while enabling deterministic, step-level failure localization. Ultimately, by isolating the representation bottleneck from the reasoning substrate, this work reframes temporal QA from an algorithmic reasoning challenge to a structural alignment problem, charting a verifiable path forward for reliable neuro-symbolic AI.",
+    "published": "2026-05-05",
+    "categories": [
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.04243v1",
+    "abs_url": "https://arxiv.org/abs/2605.04243v1"
+  },
+  {
+    "paper_id": "arxiv_2605.03790",
+    "title": "Enhancing Visual Question Answering with Multimodal LLMs via Chain-of-Question Guided Retrieval-Augmented Generation",
+    "authors": [
+      "Quanxing Xu",
+      "Ling Zhou",
+      "Xian Zhong",
+      "Xiaohua Huang",
+      "Rubing Huang",
+      "Chia-Wen Lin"
+    ],
+    "abstract": "With advances in multimodal research and deep learning, Multimodal Large Language Models (MLLMs) have emerged as a powerful paradigm for a wide range of multimodal tasks. As a core problem in vision-language research, Visual Question Answering (VQA) has increasingly employed MLLMs to improve performance, particularly in open-domain settings where external knowledge is essential. In this work, we aim to further enhance retrieval-based VQA by more effectively integrating MLLMs with structured reasoning and knowledge acquisition. We introduce a logical prompting strategy that fuses Chain-of-Thought (CoT) reasoning with Visual Question Decomposition (VQD), termed CoVQD, to guide retrieval toward more accurate and relevant knowledge for MLLM inference. Building on this idea, we propose a new framework, CoVQD-guided RAG (CgRAG), which enables MLLMs to access more comprehensive and coherent external knowledge while benefiting from structured visual-text reasoning guidance, thereby improving generalization and reliability in complex cross-domain VQA scenarios. Extensive experiments on E-VQA, InfoSeek, and OKVQA benchmarks demonstrate the effectiveness of the proposed method.",
+    "published": "2026-05-05",
+    "categories": [
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.03790v1",
+    "abs_url": "https://arxiv.org/abs/2605.03790v1"
+  },
+  {
+    "paper_id": "arxiv_2605.03450",
+    "title": "Retrieving Floods without Floodlights: Topic Models as Binary Classifiers for Extreme Climate Events in German News",
+    "authors": [
+      "Brielen Madureira",
+      "Mariana Madruga de Brito",
+      "Andreas Niekler"
+    ],
+    "abstract": "In studies of media coverage of extreme climate events, NLP methods have become indispensable for identifying relevant texts in large news databases. Still, enough annotated data to train accurate deep learning-based classifiers from scratch is often not available. Topic Models have the advantage of being both unsupervised and interpretable, but are typically used only for exploratory analysis or data characterisation. In this study, we investigate how to employ Topic Models as binary classifiers for refining the retrieval of relevant news about seven types of extreme climate events in the German media. Our method relies on the posterior distributions estimated by Topic Models to select relevant documents, without modifying their training procedure. Using an annotated sample to guide the evaluation, we show that the probabilities assigned to keywords used to query news databases can also be informative for selecting relevant topics and improve sample precision. We compare our results to a fine-tuned text embedding classifier and an open-weight LLM, discussing observed trade-offs, e.g. the LLM's lowest precision. Moreover, we show that results are hazard-dependent, which speaks against considering climate events as a single category in NLP tasks.",
+    "published": "2026-05-05",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.03450v1",
+    "abs_url": "https://arxiv.org/abs/2605.03450v1"
+  }
+]

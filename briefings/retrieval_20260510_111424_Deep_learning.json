@@ -1,0 +1,90 @@
+[
+  {
+    "paper_id": "arxiv_2605.06641",
+    "title": "GlazyBench: A Benchmark for Ceramic Glaze Property Prediction and Image Generation",
+    "authors": [
+      "Ziyu Zhai",
+      "Siyou Li",
+      "Juexi Shao",
+      "Juntao Yu"
+    ],
+    "abstract": "Developing ceramic glazes is a costly, time-consuming process of trial and error due to complex chemistry, placing a significant burden on independent artists. While recent advances in multimodal AI offer a modern solution, the field lacks the large-scale datasets required to train these models. We propose GlazyBench, the first dataset for AI-assisted glaze design. Comprising 23,148 real glaze formulations, GlazyBench supports two primary tasks: predicting post-firing surface properties, such as color and transparency, from raw materials, and generating accurate visual representations of the glaze based on these properties. We establish comprehensive baselines for property prediction using traditional machine learning and large language models, alongside image generation benchmarks using deep generative and large multimodal models. Our experiments demonstrate promising yet challenging results. GlazyBench pioneers a new research direction in AI-assisted material design, providing a standardized benchmark for systematic evaluation.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.AI",
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06641v1",
+    "abs_url": "https://arxiv.org/abs/2605.06641v1"
+  },
+  {
+    "paper_id": "arxiv_2605.06599",
+    "title": "Weight-Decay Turns Transformer Loss Landscapes Villani: Functional-Analytic Foundations for Optimization and Generalization",
+    "authors": [
+      "Abhijit Das",
+      "Sayantan Dutta"
+    ],
+    "abstract": "Weight decay is widely used as a regularizer in large language models, yet its precise role in shaping Transformer loss landscapes remains theoretically underexplored. This paper provides the first rigorous functional-analytic characterization of the standard Transformer objective--cross-entropy loss with $L^2$ regularization--by proving it satisfies Villani's criteria for coercive energy functions. Specifically, we show that the regularized loss $\\mathcal{F}$ is infinitely differentiable, grows at least quadratically, has Gaussian-integrable tails, and satisfies the differential growth condition $-Δ\\mathcal{F} + \\tfrac{1}{s}\\|\\nabla\\mathcal{F}\\|^{2} \\to \\infty$ as $\\|θ\\| \\to \\infty$ for all $s>0$. From this structure, we derive explicit log-Sobolev and Poincaré constants $C_{\\mathrm{LS}} \\leq λ^{-1} + d/λ^{2}$, linking the regularization strength $λ$ and model dimension $d$ to finite-time convergence guarantees for noisy stochastic gradient descent and PAC-Bayesian generalization bounds that tighten with increasing $λ$. To validate our theory, we introduce a scalable Villani diagnostic $Ψ_s(θ) = -Δ\\mathcal{F} + s^{-1}\\|\\nabla \\mathcal{F}\\|^2$ and estimate it efficiently using Hutchinson trace probes in models with over 100M parameters. Experiments on GPT-Neo-125M across Penn Treebank and WikiText-103 confirm the predicted quadratic growth of $Ψ_s$, spectral inflation of the Hessian, and exponential convergence behavior consistent with our log-Sobolev analysis. These results demonstrate that weight decay not only improves generalization empirically but also establishes the mathematical conditions required for fast Langevin mixing and theoretically grounded curvature-aware optimization in deep learning.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.LG",
+      "eess.AS"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06599v1",
+    "abs_url": "https://arxiv.org/abs/2605.06599v1"
+  },
+  {
+    "paper_id": "arxiv_2605.06575",
+    "title": "Directional Consistency as a Complementary Optimization Signal: The GONO Framework",
+    "authors": [
+      "Victor Daniel Gera"
+    ],
+    "abstract": "We identify and formalize an underexplored phenomenon in deep learning optimization: directional alignment and loss convergence can be decoupled. An optimizer can exhibit near-perfect directional consistency (cc_t -> 1, measured via consecutive gradient cosine similarity) while the loss remains high or decreases slowly. This observation reveals that existing optimizers such as Adam, SGD, and RMSprop lack explicit mechanisms to exploit temporal consistency in gradient directions, relying instead on magnitude-based signals that fail to distinguish plateaus, saddle points, and genuine convergence. Motivated by this, we introduce GONO (Gradient-Oriented Norm-Adaptive Optimizer), which adapts Adam's momentum coefficient beta_1 based on cc_t: amplifying momentum under directional consistency and suppressing it during oscillation. We prove GONO matches Adam's O(1/sqrt(T)) convergence rate and reduces exactly to Adam when the signal is uninformative. Empirically, cc_t achieves oscillation detection with F1=1.00 (vs. 0.45 for gradient norm), and GONO remains competitive with AdamW on MNIST (98.15%), CIFAR-10 (43.14%), and ResNet-18 (75.44%), establishing directional alignment as a theoretically grounded, practically actionable optimization signal. Code: https://github.com/victordaniel/gono-optimizer",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.LG",
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06575v1",
+    "abs_url": "https://arxiv.org/abs/2605.06575v1"
+  },
+  {
+    "paper_id": "arxiv_2605.06536",
+    "title": "Delay-Robust Deep Reinforcement Learning for Ranging-Free Channel Access under Mobility in Underwater Acoustic Networks",
+    "authors": [
+      "Huaisheng Ye",
+      "Xiaowen Ye",
+      "Liqun Fu"
+    ],
+    "abstract": "Long propagation delays in underwater acoustic networks (UWANs) cause spatio-temporal uncertainty, constraining channel utilization in medium access control (MAC) protocols. Node mobility within autonomous underwater vehicle scenarios exacerbates these challenges by introducing dynamic propagation delays and varying spatial topologies. We present MobiU-MAC, a deep reinforcement learning (DRL)-based MAC protocol for mobile node access in UWANs that maximizes throughput via autonomous learning. MobiU-MAC incorporates CHILL-STER, a novel DRL algorithm optimized for UWANs that is both ranging-free and delay-robust. CHILL-STER employs a credit horizon-limited $λ$-return (CHILL-Return) mechanism to achieve stable learning under asynchronous delayed rewards, while the companion spatio-temporal experience replay (STER) mechanism addresses topological changes arising from node mobility. This work also demonstrates theoretically that DRL attains optimal policy learning equivalent to a standard Markov decision process under long propagation delays without requiring ranging. Performance evaluations indicate that MobiU-MAC outperforms existing DRL-based MAC protocols for UWANs by leveraging the maximum system delay boundary without ranging overhead, supporting the effectiveness of the proposed theory and algorithm in complex underwater dynamic environments.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.NI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06536v1",
+    "abs_url": "https://arxiv.org/abs/2605.06536v1"
+  },
+  {
+    "paper_id": "arxiv_2605.06501",
+    "title": "Cubit: Token Mixer with Kernel Ridge Regression",
+    "authors": [
+      "Chuanyang Zheng",
+      "Jiankai Sun",
+      "Yihang Gao",
+      "Yuehao Wang",
+      "Liangchen Tan",
+      "Mac Schwager",
+      "Anderson Schneider",
+      "Yuriy Nevmyvaka",
+      "Xiaodong Liu"
+    ],
+    "abstract": "Since its introduction in 2017, the Transformer has become one of the most widely adopted architectures in modern deep learning. Despite extensive efforts to improve positional encoding, attention mechanisms, and feed-forward networks, the core token-mixing mechanism in Transformers remains attention. In this work, we show that the attention module in Transformers can be interpreted as performing Nadaraya-Watson regression, where it computes similarities between tokens and aggregates the corresponding values accordingly. Motivated by this perspective, we propose Cubit, a potential next-generation architecture that leverages Kernel Ridge Regression (KRR), while the vanilla Transformer relies on Nadaraya-Watson regression. Specifically, Cubit modifies the classical attention computation by incorporating the closed-form solution of KRR, combining value aggregation through kernel similarities with normalization via the inverse of the kernel matrix. To improve the training stability, we further propose the Limited-Range Rescale (LRR), which rescales the value layer within a controlled range. We argue that Cubit, as a KRR-based architecture, provides a stronger mathematical foundation than the vanilla Transformer, whose attention mechanism corresponds to Nadaraya-Watson regression. We validate this claim through comprehensive experiments. The experimental results suggest that Cubit may exhibit stronger long-sequence modeling capability. In particular, its performance gain over the Transformer appears to increase as the training sequence length grows.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.LG",
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06501v1",
+    "abs_url": "https://arxiv.org/abs/2605.06501v1"
+  }
+]

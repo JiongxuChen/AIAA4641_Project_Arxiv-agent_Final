@@ -1,0 +1,23 @@
+[
+  {
+    "paper_id": "arxiv_2605.02313",
+    "title": "Differentiable Kernel Ridge Regression for Deep Learning Pipelines",
+    "authors": [
+      "Jean-Marc Mercier",
+      "Gabriele Santin"
+    ],
+    "abstract": "Deep neural networks dominate modern machine learning, while alternative function approximators remain comparatively underexplored at scale. In this work, we revisit kernel methods as drop-in components for standard deep learning pipelines. We introduce \\emph{Sparse Kernels} (SKs), a differentiable, localized, and lazy variant of kernel ridge regression (KRR) that defers training to inference time and reduces to the solution of small local systems. We integrate SKs into PyTorch as modular layers that preserve end-to-end trainability, and we show that they expose three distinct sets of parameters -- feature representations, target values, and evaluation points -- each of which can be fixed or learned. This decomposition broadens the design space available to practitioners, enabling, in particular, training-free transfer, nonlinear probing, and hybrid kernel-neural models. Across convolutional networks, vision transformers, and reinforcement learning, SK-based modules serve two complementary roles: in some settings, they match the performance of trained neural readouts with substantially less training; in others, they augment existing models and improve their performance when used as additional components. Our results suggest that kernel methods, once made scalable and differentiable, can be readily integrated with deep learning rather than treated as a separate paradigm.",
+    "published": "2026-05-04",
+    "categories": [
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.02313v1",
+    "abs_url": "https://arxiv.org/abs/2605.02313v1",
+    "added_at": "2026-05-10T15:30:51.414281",
+    "source_query": "Deep learning, Reinforcement learning",
+    "source_type": "retrieval",
+    "relevance_score": 0.4745,
+    "rank": 1,
+    "cluster": "kernel differentiable ridge"
+  }
+]

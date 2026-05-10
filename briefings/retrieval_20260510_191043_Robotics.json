@@ -1,0 +1,193 @@
+[
+  {
+    "paper_id": "arxiv_2605.06662",
+    "title": "Multi-Robot Coordination in V2X Environments",
+    "authors": [
+      "John Pravin Arockiasamy",
+      "Alexey Vinel"
+    ],
+    "abstract": "This paper presents a Vehicle-to-Everything (V2X) communication framework that enables decentralized cooperation among social robots operating in complex urban traffic environments. Building on ETSI Cooperative Awareness and Maneuver Coordination services, the framework introduces two robot-centric facility-layer services: the Robot Awareness Service (RAS) and the Robot Maneuver Coordination Service (RMCS), realized through the Robot Awareness Message (RAM) and the Robot Maneuver Coordination Message (RMCM), respectively. RAS enables role-aware, task-oriented robot awareness while integrating externally detected Vulnerable Road Users (VRUs), including non-V2X pedestrians, into cooperative awareness. RMCS supports event-driven, low-latency coordination of robot maneuvers under explicitly established roles, without centralized infrastructure or prior pairing. A real-world proof of concept demonstrates deterministic multi-robot coordination between a humanoid robot and a quadrupedal robot assisting a pedestrian during a road-crossing scenario, governed by a formally specified finite-state coordination model. Complementary simulations evaluate robot-mediated VRU clustering in mixed V2X environments, showing that RAS-based clustering integrates non-V2X VRUs in safety-critical areas while reducing redundant transmissions from V2X-enabled VRUs, thereby lowering channel load. Together, the proposed services provide a scalable and standards-aligned foundation for integrating cooperative robots into future Connected, Cooperative, and Automated Mobility ecosystems.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.RO"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06662v1",
+    "abs_url": "https://arxiv.org/abs/2605.06662v1"
+  },
+  {
+    "paper_id": "arxiv_2605.06595",
+    "title": "Cross-Modal Navigation with Multi-Agent Reinforcement Learning",
+    "authors": [
+      "Shuo Liu",
+      "Xinzichen Li",
+      "Christopher Amato"
+    ],
+    "abstract": "Robust embodied navigation relies on complementary sensory cues. However, high-quality and well-aligned multi-modal data is often difficult to obtain in practice. Training a monolithic model is also challenging as rich multi-modal inputs induce complex representations and substantially enlarge the policy space. Cross-modal collaboration among lightweight modality-specialized agents offers a scalable paradigm. It enables flexible deployment and parallel execution, while preserving the strength of each modality. In this paper, we propose \\textbf{CRONA}, a Multi-Agent Reinforcement Learning (MARL) framework for \\textbf{Cro}ss-Modal \\textbf{Na}vigation. CRONA improves collaboration by leveraging control-relevant auxiliary beliefs and a centralized multi-modal critic with global state. Experiments on visual-acoustic navigation tasks show that multi-agent methods significantly improve performance and efficiency over single-agent baselines. We find that homogeneous collaboration with limited modalities is sufficient for short-range navigation under salient cues; heterogeneous collaboration among agents with complementary modalities is generally efficient and effective; and navigation in large, complex environments requires both richer multi-modal perception and increased model capacity.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.RO",
+      "cs.AI",
+      "cs.LG",
+      "cs.MA"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06595v1",
+    "abs_url": "https://arxiv.org/abs/2605.06595v1"
+  },
+  {
+    "paper_id": "arxiv_2605.06593",
+    "title": "ReActor: Reinforcement Learning for Physics-Aware Motion Retargeting",
+    "authors": [
+      "David Müller",
+      "Agon Serifi",
+      "Sammy Christen",
+      "Ruben Grandia",
+      "Espen Knoop",
+      "Moritz Bächer"
+    ],
+    "abstract": "Retargeting human kinematic reference motion onto a robot's morphology remains a formidable challenge. Existing methods often produce physical inconsistencies, such as foot sliding, self-collisions, or dynamically infeasible motions, which hinder downstream imitation learning. We propose a bilevel optimization framework that jointly adapts reference motions to a robot's morphology while training a tracking policy using reinforcement learning. To make the optimization tractable, we derive an approximate gradient for the upper-level loss. Our framework requires only a sparse set of semantic rigid-body correspondences and eliminates the need for manual tuning by identifying optimal values for a parameterization expressive enough to preserve characteristic motion across different embodiments. Moreover, by integrating retargeting directly with physics simulation, we produce physically plausible motions that facilitate robust imitation learning. We validate our method in simulation and on hardware, demonstrating challenging motions for morphologies that differ significantly from a human, including retargeting onto a quadruped.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.RO",
+      "cs.GR",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06593v1",
+    "abs_url": "https://arxiv.org/abs/2605.06593v1"
+  },
+  {
+    "paper_id": "arxiv_2605.06498",
+    "title": "Lie Group Formulation of Recursive Dynamics Algorithms of Higher Order for Floating-Base Robots",
+    "authors": [
+      "Ahmed Ali",
+      "Chiara Gabellieri",
+      "Antonio Franchi"
+    ],
+    "abstract": "In this paper, we describe procedures for computing higher-order time derivatives of the Lie-group Newton-Euler, Articulated-Body Inertia, and hybrid dynamics algorithms for floating-base trees, where the base configuration evolves on SE(3) and the attached mechanism is an open kinematic tree with configuration on the (n1+n2)-dimensional manifold T^{n1} \\times R^{n2}, using spatial representation of twists. After presenting the algorithms, we collect the resulting recursions into closed-form equations of motion, identifying an admissible Coriolis matrix satisfying the passivity property, and showing that the articulated inertia tensor remains unchanged across all time derivatives. We then apply the developed methods to a 12-DoF aerial manipulator to derive analytical expressions for its geometric forward and inverse dynamics along with their first time derivatives whereas the numerical simulations successfully evaluate these dynamics up to fifth order. Finally, to demonstrate their practical utility, we benchmark the proposed extensions and show that, in the considered tests, their computational cost scales quadratically with the derivative order, whereas the automatic-differentiation baseline exhibits exponential scaling.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.RO",
+      "eess.SY"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06498v1",
+    "abs_url": "https://arxiv.org/abs/2605.06498v1"
+  },
+  {
+    "paper_id": "arxiv_2605.06481",
+    "title": "OA-WAM: Object-Addressable World Action Model for Robust Robot Manipulation",
+    "authors": [
+      "Yushan Liu",
+      "Peibo Sun",
+      "Shoujie Li",
+      "Yifan Xie",
+      "Lingfeng Zhang",
+      "Xintao Chao",
+      "Shiyuan Dong",
+      "Fang Chen",
+      "Xiao-Ping Zhang",
+      "Wenbo Ding"
+    ],
+    "abstract": "World Action Models (WAMs) enhance Vision-Language-Action policies by jointly predicting scene evolution and robot actions, but existing methods usually represent the predicted world as holistic images, video tokens, or global latents. These representations are difficult for an action decoder to address when an instruction refers to a particular object, especially under scene shifts where object identity is entangled with context. We propose OA-WAM, an Object-Addressable World Action Model for robust robot manipulation. OA-WAM decomposes each frame into N+1 slot states, with one robot slot and N object slots. Each slot contains a persistent address vector and a time-varying content vector, and is fused with text, image, proprioception, and past-action tokens in a block-causal sequence. A world head predicts next-frame slot states, while a flow-matching action head decodes a 16-step continuous action chunk in the same forward pass. Addressability is enforced by routing cross-slot attention through address-only keys and resetting the address slice at every transformer layer, separating which object to act on from what that object currently is without adding extra tokens. OA-WAM matches strong VLA and WAM baselines on LIBERO (97.8%) and SimplerEnv (79.3%), reaches state-of-the-art performance on the most relevant LIBERO-Plus geometric axes, and remains competitive on the seven-axis aggregate. A causal slot-intervention test yields a swap-binding cosine of 0.87, versus at most 0.09 for holistic baselines. These results suggest that addressable object states provide an effective interface for robust world-action modeling under scene perturbations.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.RO"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06481v1",
+    "abs_url": "https://arxiv.org/abs/2605.06481v1"
+  },
+  {
+    "paper_id": "arxiv_2605.06478",
+    "title": "GA3T: A Ground-Aerial Terrain Traversability Dataset for Heterogeneous Robot Teams in Unstructured Environments",
+    "authors": [
+      "Siwei Cai",
+      "Knut Peterson",
+      "Quan Tran",
+      "Christian Ricks",
+      "Dhanush Parthasarathy",
+      "Amir Kaidarov",
+      "Neil Deshpande",
+      "Sukaina Najm",
+      "David Han",
+      "Lifeng Zhou"
+    ],
+    "abstract": "Heterogeneous air-ground robot teams combine complementary sensing modalities, mobility characteristics, and spatial viewpoints that can significantly enhance perception in complex outdoor environments. However, progress in multi-robot collaborative perception has been constrained by the lack of real-world datasets featuring overlapping multi-modal observations from platforms operating in unstructured terrain. We present GA3T (Ground-Aerial Team for Terrain Traversal), a real-world multi-robot collaborative perception dataset collected using a Clearpath Husky UGV and an Autel EVO~II UAV across diverse unstructured environments, including forest trails, rocky paths, muddy terrain, snow piles, and grass-covered fields. The ground platform provides 3D LiDAR, stereo camera, IMU, and GPS data, while the aerial platform contributes RGB imagery, thermal/infrared observations, and GPS from a complementary overhead viewpoint, allowing for rich cross-modal and cross-view perception. The dataset is collected in 4 unique environments, with over 13,000 synchronized frames across approximately 29 minutes of operation, and includes both SAM~3-based zero-shot segmentation and over 8,000 manually labeled images. A unique aspect of the dataset is its early-spring collection period, during which sparse tree canopies allow the aerial robot to partially observe the ground robot and terrain through the trees, allowing for occlusion-aware collaborative perception. Unlike prior multi-robot datasets that focus on SLAM or simulated cooperative driving, GA3T is specifically designed to support research on cross-view perception, air-ground viewpoint fusion, traversability estimation, and collaborative scene understanding in real off-road environments.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.RO"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06478v1",
+    "abs_url": "https://arxiv.org/abs/2605.06478v1"
+  },
+  {
+    "paper_id": "arxiv_2605.06432",
+    "title": "TouchDrive: Electronics-Free Tactile Sensing Interface for Assistive Grasping",
+    "authors": [
+      "Jing Xu",
+      "Xuezhi Niu",
+      "Didem Gurdur Broo",
+      "Klas Hjort"
+    ],
+    "abstract": "Assistive robotic grasping plays an important role in enabling safe and adaptive manipulation of diverse objects. However, existing systems often rely on electronic sensing and multi-stage processing pipelines, increasing system complexity and reducing accessibility. To address these limitations, we present TouchDrive, a cost-effective, electronics-free tactile sensing interface for assistive grasping. TouchDrive directly converts contact forces into pneumatic feedback through valve-mediated switching, integrating sensing, signal generation, and feedback within a single passive mechanical loop. The system can be employed using a pneumatic normally closed valve, a compressed air tank, sensing element, and haptic feedback actuator without electronics. By delivering tactile cues, TouchDrive empowers users to modulate grasp forces, enabling precise and robust delicate manipulation of compliant and fragile objects. The interface has been validated across diverse robotic platforms, consistently demonstrating reliable performance and practical applicability in assistive grasping tasks, such as handling fruits and everyday items (up to 20 objects).",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.RO"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06432v1",
+    "abs_url": "https://arxiv.org/abs/2605.06432v1"
+  },
+  {
+    "paper_id": "arxiv_2605.06388",
+    "title": "Reconstruction or Semantics? What Makes a Latent Space Useful for Robotic World Models",
+    "authors": [
+      " Nilaksh",
+      "Saurav Jha",
+      "Artem Zholus",
+      "Sarath Chandar"
+    ],
+    "abstract": "World model-based policy evaluation is a practical proxy for testing real-world robot control by rolling out candidate actions in action-conditioned video diffusion models. As these models increasingly adopt latent diffusion modeling (LDM), choosing the right latent space becomes critical. While the status quo uses autoencoding latent spaces like VAEs that are primarily trained for pixel reconstruction, recent work suggests benefits from pretrained encoders with representation-aligned semantic latent spaces. We systematically evaluate these latent spaces for action-conditioned LDM by comparing six reconstruction and semantic encoders to train world model variants under a fixed protocol on BridgeV2 dataset, and show effective world model training in high-dimensional representation spaces with and without dimension compression. We then propose three axes to assess robotic world model performance: visual fidelity, planning and downstream policy performance, and latent representation quality. Our results show visual fidelity alone is insufficient for world model selection. While reconstruction encoders like VAE and Cosmos achieve strong pixel-level scores, semantic encoders such as V-JEPA 2.1 (strongest overall on policy), Web-DINO, and SigLIP 2 generally excel across the other two axes at all model scales. Our study advocates semantic latent space as stronger foundation for policy-relevant robotics diffusion world models.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.CV",
+      "cs.LG",
+      "cs.RO"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06388v1",
+    "abs_url": "https://arxiv.org/abs/2605.06388v1"
+  },
+  {
+    "paper_id": "arxiv_2605.06323",
+    "title": "AssistDLO: Assistive Teleoperation for Deformable Linear Object Manipulation",
+    "authors": [
+      "Berk Guler",
+      "Simon Manschitz",
+      "Kay Pompetzki",
+      "Jan Peters"
+    ],
+    "abstract": "Manipulating Deformable Linear Objects (DLOs) is challenging in robotics due to their infinite-dimensional configuration space and complex nonlinear dynamics. In teleoperation, depth uncertainty hinders state perception and reaction. AssistDLO addresses this challenge as an assistive teleoperation framework for DLO manipulation that combines real-time multi-view state estimation, visual assistance (VA), and a geometry-aware shared-autonomy controller based on Control Barrier Functions (SA-CBF). While traditional shared autonomy methods often rely on simple geometric attractors and may fail to preserve DLO geometry, SA-CBF acts as a geometry-aware funnel, facilitating precise grasping while preserving the operator's high-level authority. The framework is evaluated in a bimanual knot-untangling user study (N = 22) using ropes with varying length and rigidity. Results show that the effectiveness of the assistance depends strongly on operator expertise and DLO properties. SA-CBF provides the strongest gains for naive users, acting as a skill equalizer that increases task success from 71% to 88%, and is effective for stiffer ropes. Conversely, expert users prefer VA, and highly compliant, long ropes benefit more from visual support than localized action assistance. Ultimately, these findings demonstrate that effective DLO teleoperation cannot rely on a fixed strategy, highlighting the critical need for adaptive, user-aware, and material-aware shared autonomy.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.RO"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06323v1",
+    "abs_url": "https://arxiv.org/abs/2605.06323v1"
+  },
+  {
+    "paper_id": "arxiv_2605.06311",
+    "title": "Toward Visually Realistic Simulation: A Benchmark for Evaluating Robot Manipulation in Simulation",
+    "authors": [
+      "Yixin Zhu",
+      "Zixiong Wang",
+      "Jian Yang",
+      "Jin Xie",
+      "Jingyi Yu",
+      "Jiayuan Gu",
+      "Beibei Wang"
+    ],
+    "abstract": "Reliable simulation evaluation of robot manipulation policies serves as a high-fidelity proxy for real-world performance. Although existing benchmarks cover a wide range of task categories, they lack visual realism, creating a large domain gap between simulation and reality. This undermines the reliability of simulation-based evaluation in predicting real-world performance. To mitigate the sim-to-real visual gap, we conduct a systematic analysis to isolate the effects of lighting and material. Our results show that these factors play a critical role in geometric reasoning and spatial grounding, yet are largely overlooked in existing benchmarks. Motivated by the analysis, we propose VISER, a visually realistic benchmark for evaluating robot manipulation in simulation. VISER features a high-fidelity dataset of over 1,000 3D assets with physically-based rendering (PBR) materials, along with 3D scenes created from these assets through curated layouts or generation. To this end, we propose an automated pipeline leveraging Multi-modal Large Language Models (MLLMs) for material-aware part segmentation and material retrieval, enabling scalable generation of physically plausible assets. Building on the high-fidelity 3D asset dataset, we construct diverse evaluation tasks, such as grasping, placing, and long-horizon tasks, enabling scalable and reproducible assessment of Vision-Language-Action (VLA) models. Our benchmark shows a strong correlation between simulation and real-world performance, achieving an average Pearson correlation coefficient of 0.92 across different policies.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.RO"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06311v1",
+    "abs_url": "https://arxiv.org/abs/2605.06311v1"
+  }
+]

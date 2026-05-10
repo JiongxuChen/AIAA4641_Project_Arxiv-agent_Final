@@ -1,0 +1,50 @@
+[
+  {
+    "paper_id": "arxiv_2605.06536",
+    "title": "Delay-Robust Deep Reinforcement Learning for Ranging-Free Channel Access under Mobility in Underwater Acoustic Networks",
+    "authors": [
+      "Huaisheng Ye",
+      "Xiaowen Ye",
+      "Liqun Fu"
+    ],
+    "abstract": "Long propagation delays in underwater acoustic networks (UWANs) cause spatio-temporal uncertainty, constraining channel utilization in medium access control (MAC) protocols. Node mobility within autonomous underwater vehicle scenarios exacerbates these challenges by introducing dynamic propagation delays and varying spatial topologies. We present MobiU-MAC, a deep reinforcement learning (DRL)-based MAC protocol for mobile node access in UWANs that maximizes throughput via autonomous learning. MobiU-MAC incorporates CHILL-STER, a novel DRL algorithm optimized for UWANs that is both ranging-free and delay-robust. CHILL-STER employs a credit horizon-limited $λ$-return (CHILL-Return) mechanism to achieve stable learning under asynchronous delayed rewards, while the companion spatio-temporal experience replay (STER) mechanism addresses topological changes arising from node mobility. This work also demonstrates theoretically that DRL attains optimal policy learning equivalent to a standard Markov decision process under long propagation delays without requiring ranging. Performance evaluations indicate that MobiU-MAC outperforms existing DRL-based MAC protocols for UWANs by leveraging the maximum system delay boundary without ranging overhead, supporting the effectiveness of the proposed theory and algorithm in complex underwater dynamic environments.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.NI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06536v1",
+    "abs_url": "https://arxiv.org/abs/2605.06536v1"
+  },
+  {
+    "paper_id": "arxiv_2605.06437",
+    "title": "Distributed Online Learning for Time-Critical Communication in 6G Industrial Subnetworks",
+    "authors": [
+      "Samira Abdelrahman",
+      "Hossam Farag",
+      "Gilberto Berardinelli"
+    ],
+    "abstract": "6G industrial in-X subnetworks are expected to support highly time-critical alarm reporting in large-scale environments characterized by mobility, bursty event-driven traffic, and limited radio resources. In such settings, conventional medium access solutions are ill-suited to guarantee reliable delivery of critical traffic, e.g., emergency alarms, within strict deadlines, especially when multiple subnetworks become simultaneously active after a common alarm event, a scenario widely referred as medium access with a shared message. This paper proposes a distributed deep reinforcement learning (DRL)-based medium access control protocol for timely alarm transmission in time-critical industrial subnetworks. The proposed method enables each local access point (LAP) to learn, in an online manner, to infer contention conditions from a broadcast contention-signature signal and to autonomously select a transmission pattern over the available channels using a lightweight deep neural network and an (ephsilon)-greedy policy. Simulation results demonstrate that the proposed approach consistently achieves a higher probability of in-time alarm delivery than benchmark random-access schemes, while exhibiting better scalability with increasing network density. For instance, the proposed method improves probability of in-time alarm delivery by at least 7% with a network size of 40 subnetworks, while the gain increases to 21% when the number of subnetworks increases to 60.",
+    "published": "2026-05-07",
+    "categories": [
+      "eess.SY"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06437v1",
+    "abs_url": "https://arxiv.org/abs/2605.06437v1"
+  },
+  {
+    "paper_id": "arxiv_2605.06228",
+    "title": "Soft Deterministic Policy Gradient with Gaussian Smoothing",
+    "authors": [
+      "Hyunjun Na",
+      "Donghwan Lee"
+    ],
+    "abstract": "Deterministic policy gradient (DPG) is widely utilized for continuous control; however, it inherently relies on the differentiability of the critic with respect to the action during policy updates. This assumption is violated in practical control problems involving sparse or discrete rewards, leading to ill-defined policy gradients and unstable learning. To address these challenges, we propose a principled alternative based on a smoothed Bellman equation formulated via Gaussian smoothing. Specifically, we define a novel action-value function based on a smoothed Bellman equation and derive the soft deterministic policy gradient (Soft-DPG). Our formulation eliminates explicit dependence on critic action-gradients and ensures that the gradient remains well-defined even for non-smooth Q-functions. We instantiate this framework into a deep reinforcement learning algorithm, which we call soft deep deterministic policy gradient (Soft DDPG). Empirical evaluations on standard continuous control benchmarks and their discretized-reward variants show that Soft DDPG remains competitive in dense-reward settings and provides clear gains in most discretized-reward environments, where standard DDPG is more sensitive to irregular critic landscapes.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.LG",
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06228v1",
+    "abs_url": "https://arxiv.org/abs/2605.06228v1"
+  }
+]

@@ -1,0 +1,209 @@
+[
+  {
+    "paper_id": "arxiv_2605.04712",
+    "title": "SPHERE: Mitigating the Loss of Spectral Plasticity in Mixture-of-Experts for Deep Reinforcement Learning",
+    "authors": [
+      "Lirui Luo",
+      "Guoxi Zhang",
+      "Hongming Xu",
+      "Cong Fang",
+      "Qing Li"
+    ],
+    "abstract": "In deep reinforcement learning (DRL), an agent is trained from a stream of experience. In a continual learning setting, such agents can suffer from plasticity loss: their ability to learn new skills from new experiences diminishes over training. Recently, Mixture-of-Experts (MoE) networks have been reported to enable scaling laws and facilitate the learning of diverse skills. However, in continual reinforcement learning settings, their performance can degenerate as learning proceeds, indicating a loss of plasticity. To address this, building on Neural Tangent Kernel (NTK) theory, we formalize the plasticity loss in MoE policies as a loss of spectral plasticity. We then derive a tractable proxy for spectral plasticity, one expressible in terms of individual expert feature matrices. Leveraging this proxy, we introduce SPHERE, a practical Parseval penalty tailored for MoE-based policies that alleviates the loss of spectral plasticity. On MetaWorld and HumanoidBench, SPHERE improves average success under continual RL by 133% and 50% over an unregularized MoE baseline, while maintaining higher spectral plasticity throughout training.",
+    "published": "2026-05-06",
+    "categories": [
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.04712v1",
+    "abs_url": "https://arxiv.org/abs/2605.04712v1",
+    "relevance_score": 0.3365,
+    "rank": 1,
+    "cluster": "backdoor plasticity access"
+  },
+  {
+    "paper_id": "arxiv_2605.06536",
+    "title": "Delay-Robust Deep Reinforcement Learning for Ranging-Free Channel Access under Mobility in Underwater Acoustic Networks",
+    "authors": [
+      "Huaisheng Ye",
+      "Xiaowen Ye",
+      "Liqun Fu"
+    ],
+    "abstract": "Long propagation delays in underwater acoustic networks (UWANs) cause spatio-temporal uncertainty, constraining channel utilization in medium access control (MAC) protocols. Node mobility within autonomous underwater vehicle scenarios exacerbates these challenges by introducing dynamic propagation delays and varying spatial topologies. We present MobiU-MAC, a deep reinforcement learning (DRL)-based MAC protocol for mobile node access in UWANs that maximizes throughput via autonomous learning. MobiU-MAC incorporates CHILL-STER, a novel DRL algorithm optimized for UWANs that is both ranging-free and delay-robust. CHILL-STER employs a credit horizon-limited $λ$-return (CHILL-Return) mechanism to achieve stable learning under asynchronous delayed rewards, while the companion spatio-temporal experience replay (STER) mechanism addresses topological changes arising from node mobility. This work also demonstrates theoretically that DRL attains optimal policy learning equivalent to a standard Markov decision process under long propagation delays without requiring ranging. Performance evaluations indicate that MobiU-MAC outperforms existing DRL-based MAC protocols for UWANs by leveraging the maximum system delay boundary without ranging overhead, supporting the effectiveness of the proposed theory and algorithm in complex underwater dynamic environments.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.NI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06536v1",
+    "abs_url": "https://arxiv.org/abs/2605.06536v1",
+    "relevance_score": 0.3208,
+    "rank": 2,
+    "cluster": "backdoor plasticity access"
+  },
+  {
+    "paper_id": "arxiv_2605.04628",
+    "title": "Intelligent Optimal Control of Rydberg Gates with Incremental-Update Deep Reinforcement Learning",
+    "authors": [
+      "Yue Cai",
+      "Hanlin Zhang",
+      "Keye Zhang",
+      "Jing Qian"
+    ],
+    "abstract": "Deep reinforcement learning (DRL), acting as a novel and powerful paradigm for quantum optimal control, offers transformative opportunities for advancing neutral-atom quantum computing. In this work, we theoretically demonstrate a DRL-based framework for realizing Rydberg controlled-NOT gates that achieve both high speed and high fidelity through the synchronous modulation of multiple pulse parameters without any prior heuristic ansatz. By introducing an incremental-update learning policy, our framework effectively regularizes the exploration of the control landscape, ensuring the generation of smooth, experimentally feasible pulse profiles while significantly reducing computational overhead compared to conventional schemes. Crucially, the framework autonomously discovers an early-cutoff policy by optimally reconciling operation speed with high-precision coherent control. Our optimized protocol achieves a peak average fidelity of 0.9991, significantly outperforming conventional methods and surpassing the critical fault-tolerant threshold. This work establishes a generalizable, AI-driven pathway for designing high-performance quantum gates and provides a robust paradigm for autonomous control field optimization across diverse qubit platforms.",
+    "published": "2026-05-06",
+    "categories": [
+      "quant-ph"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.04628v1",
+    "abs_url": "https://arxiv.org/abs/2605.04628v1",
+    "relevance_score": 0.3184,
+    "rank": 3,
+    "cluster": "backdoor plasticity access"
+  },
+  {
+    "paper_id": "arxiv_2605.05989",
+    "title": "Verifiable Model-Free Safety Filters via Reinforcement Learning",
+    "authors": [
+      "Bihui Yin",
+      "Yiwen Lu",
+      "Yuchen Jiang",
+      "Yilin Mo"
+    ],
+    "abstract": "This paper presents a reinforcement learning approach of a model-free safety filter, drawing inspiration from the framework of model-based Predictive Safety Filters (PSFs). Similar to conventional PSFs, our method adopts a Quadratic Programming (QP) formulation by representing the filter as an unrolled QP solver network. However, unlike existing PSFs that derive QP parameters explicitly from system models, we learn these parameters directly through Deep Reinforcement Learning (DRL), thereby eliminating the dependency on accurate system identification. Furthermore, compared to traditional neural network-based methods, this QP structure allows us to furnish a formal certificate for the persistent safety of the learned filter. Numerical results demonstrate that our method outperforms both conventional model-based PSFs and RL-trained Multi-Layer Perceptron (MLP) baselines in terms of safety guarantees, minimal intervention, and per-step computational load.",
+    "published": "2026-05-07",
+    "categories": [
+      "math.OC"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.05989v1",
+    "abs_url": "https://arxiv.org/abs/2605.05989v1",
+    "relevance_score": 0.3148,
+    "rank": 4,
+    "cluster": "task offloading"
+  },
+  {
+    "paper_id": "arxiv_2605.05977",
+    "title": "BehaviorGuard: Online Backdoor Defense for Deep Reinforcement Learning",
+    "authors": [
+      "Yinbo Yu",
+      "Xueyu Yin",
+      "Jiadai Wang",
+      "Chunwei Tian",
+      "Sai Xu",
+      "Qi Zhu",
+      "Daoqiang Zhang"
+    ],
+    "abstract": "Backdoor attacks pose a serious threat to deep reinforcement learning (DRL). Current defenses typically rely on reward anomalies to reverse-engineer triggers and model finetuning to remove backdoors. However, complex trigger patterns undermine their robustness, and fine-tuning entails high costs, limiting practical utility. Therefore, we shift defense concerns to trigger-agnostic backdoor output behaviors and propose BehaviorGuard, an online behavior-based backdoor detection and mitigation framework for DRL. Specifically, we find that regardless of attacks, backdoored policies induce consistent shifts in action distributions to ensure reliable activation, leaving detectable traces in high-quantile regions and distribution tails, even in the absence of triggers. Based on this, we design a novel metric that captures behavioral drift in action distributions to identify and suppress backdoor actions at runtime. To our knowledge, this is the first online backdoor defense that counters attacks both in single- and multi-agent DRL. Evaluated across diverse benchmarks with different backdoor attacks, BehaviorGuard consistently surpasses prior methods in both efficacy and efficiency.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.05977v1",
+    "abs_url": "https://arxiv.org/abs/2605.05977v1",
+    "relevance_score": 0.3079,
+    "rank": 5,
+    "cluster": "backdoor plasticity access"
+  },
+  {
+    "paper_id": "arxiv_2605.06149",
+    "title": "AdaGamma: State-Dependent Discounting for Temporal Adaptation in Reinforcement Learning",
+    "authors": [
+      "Yaomin Wang",
+      "Jianting Pan",
+      "Ran Tian",
+      "Xiaoyang Li",
+      "Yu Zhang",
+      "Hengle Qin",
+      "Tianshu YU"
+    ],
+    "abstract": "The discount factor in reinforcement learning controls both the effective planning horizon and the strength of bootstrapping, yet most deep RL methods use a single fixed value across all states. While state-dependent discounting is conceptually appealing, naive deep actor--critic implementations can become unstable and degenerate toward TD-error collapse. We propose AdaGamma, a practical deep actor--critic method for state-dependent discounting that learns a state-dependent discount function together with a return-consistency objective to regularize the induced backup structure. On the theory side, we analyze the Bellman operator induced by state-dependent discounting and establish its basic well-posedness properties under suitable conditions. Empirically, AdaGamma integrates into both SAC and PPO, yielding consistent improvements on continuous-control benchmarks, and achieves statistically significant gains in an online A/B test on the JD Logistics platform. These results suggest that state-dependent discounting can be made effective in deep RL when coupled with a return-consistency objective that prevents degenerate target manipulation.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.LG",
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06149v1",
+    "abs_url": "https://arxiv.org/abs/2605.06149v1",
+    "relevance_score": 0.3065,
+    "rank": 6,
+    "cluster": "6dma state dependent problems"
+  },
+  {
+    "paper_id": "arxiv_2605.03345",
+    "title": "QoS Assurance Mechanism for 5G Network Slicing Based on the Deep Reinforcement Learning PPO Algorithm",
+    "authors": [
+      "Qingyang Li"
+    ],
+    "abstract": "With the increasing diversity of 5G service types and the intensifying dynamic fluctuations of network load, achieve differentiated quality of service assurance in a network slicing environment has become a key issue in resource management. To address this problem, this paper proposes a deep reinforcement learning mechanism for 5G network slicing quality of service assurance based on the traditional proximal policy optimization actor-critic framework. First, the slicing resource allocation is modeled as a constrained Markov decision process, jointly considering the collaborative optimization of bandwidth, computing, and wireless resources. Meanwhile, a graph attention network and bidirectional long short-term memory are introduced to extract topological correlations and temporal service features, combined with an adaptive Lagrangian penalty and dynamic reward shaping mechanism, to comprehensively optimize delay, throughput, reliability, fairness, and slice isolation performance. Experimental results show that the proposed method outperforms existing baseline models in terms of quality of service satisfaction rate, delay control, resource utilization, and convergence stability.",
+    "published": "2026-05-05",
+    "categories": [
+      "cs.NI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.03345v1",
+    "abs_url": "https://arxiv.org/abs/2605.03345v1",
+    "relevance_score": 0.3059,
+    "rank": 7,
+    "cluster": "task offloading"
+  },
+  {
+    "paper_id": "arxiv_2605.02705",
+    "title": "Federated Reinforcement Learning for Efficient Mobile Crowdsensing under Incomplete Information",
+    "authors": [
+      "Sumedh J. Dongare",
+      "Patrick Weber",
+      "Andrea Ortiz",
+      "Walid Saad",
+      "Oliver Hinz",
+      "Anja Klein"
+    ],
+    "abstract": "Mobile crowdsensing (MCS) is a distributed sensing architecture that utilizes existing sensors on mobile units (MUs) to perform sensing tasks. A mobile crowdsensing platform (MCSP) publishes the sensing tasks and the MUs decide whether to participate in exchange for money. The MCS system is dynamic: the task requirements, the MUs' availability, and their available resources change over time. The MUs aim to find an efficient task participation strategy to maximize their income while the MCSP focuses on maximizing the number of completed tasks. As optimal strategies require perfect non-causal information about the MCS system, which is unavailable in realistic scenarios, the main challenge is to find an efficient task participation strategy for the MUs under incomplete information. To this end, a novel fully decentralized federated deep reinforcement learning algorithm, FDRL-PPO, is proposed. FDRL-PPO enables every MU to learn its own task participation strategy based on its experiences, available resources, and preferences, without relying on perfect non-causal information about the MCS system. To replenish their batteries, the MUs rely on energy harvesting. As a result, their available energy varies over time, leading to varying availability and fragmented learning experiences. To mitigate these challenges, the proposed approach leverages federated learning, enabling MUs to collaboratively improve their models without sharing private raw data like their own experiences. By exchanging only learned models, MUs collectively compensate for individual limitations, and find more scalable, robust, and efficient task participation strategies. Comprehensive evaluations on both synthetic and real-world datasets show that FDRL-PPO consistently outperforms benchmark algorithms in terms of task completion ratio, fairness in task completion, energy consumption, and number of conflicting proposals.",
+    "published": "2026-05-04",
+    "categories": [
+      "cs.LG",
+      "cs.NI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.02705v1",
+    "abs_url": "https://arxiv.org/abs/2605.02705v1",
+    "relevance_score": 0.3052,
+    "rank": 8,
+    "cluster": "task offloading"
+  },
+  {
+    "paper_id": "arxiv_2605.05727",
+    "title": "LLM-Enhanced Deep Reinforcement Learning for Task Offloading in Collaborative Edge Computing",
+    "authors": [
+      "Hao Guo",
+      "Kaixiang Xv",
+      "Ziwu Ge",
+      "Lei Yang"
+    ],
+    "abstract": "Collaborative edge computing uses edge nodes in different locations to execute tasks, necessitating dynamic task offloading decisions to maintain low latency and high reliability, especially under unpredictable node failures. Although deep reinforcement learning (DRL) and large language models (LLMs) have shown promise for task offloading, DRL often suffers from high sample inefficiency and local optima, whereas LLMs struggle with real-time decision-making. To address these limitations, we propose \\textbf{LeDRL}, a hybrid decision framework that couples a \\emph{lightweight LLM} with self-attention-enhanced DRL for real-time task offloading. LeDRL constructs structured, context-aware prompts capturing node status, task semantics, and link dynamics to derive high-level strategy priors. These are selectively processed by a self-attention-based alignment module for context-aware policy optimization. A reflective evaluator distills semantic feedback from past trajectories to guide future prompts, enabling more informative and temporally generalizable LLM queries. Extensive experiments show that LeDRL outperforms baselines in task success rate, convergence speed, and real-time responsiveness across diverse network scales, achieving over 17\\% improvement in success rate. Furthermore, we deploy LeDRL on Jetson-based edge devices using our prototype system \\textit{CoEdgeSys}, demonstrating its robustness and feasibility under resource constraints. Our code is available at:https://github.com/GalleyG5/LeDRL.git.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.DC"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.05727v1",
+    "abs_url": "https://arxiv.org/abs/2605.05727v1",
+    "relevance_score": 0.3029,
+    "rank": 9,
+    "cluster": "task offloading"
+  },
+  {
+    "paper_id": "arxiv_2605.04448",
+    "title": "Queue-Aware and Resilient Routing in LEO Satellite Networks Using Multi-Agent Reinforcement Learning",
+    "authors": [
+      "Mudassar Liaq",
+      "Mahyar Tajeri",
+      "Peng Hu"
+    ],
+    "abstract": "With the rapid growth in data demand and stringent latency requirements of modern applications has driven significant interest in Low Earth Orbit (LEO) satellite constellations as an emerging solution for global Internet coverage. However, routing in LEO networks remains a fundamental challenge due to highly dynamic topologies, time-varying traffic conditions, and its susceptibility to link failures. Conventional routing algorithms typically assume static link metrics and fail to account for queue backlogs or real-time system variations, making them less effective in such environments. We propose a queue-aware multi-agent deep reinforcement learning (MA-DRL) framework for routing in LEO satellite networks. Each satellite is modeled as an independent agent responsible for making local routing decisions, enabling a distributed and scalable solution. The proposed framework formulates a latency-aware optimization problem that incorporates background traffic, queue dynamics at each satellite, and a resilience score to improve robustness. We evaluate the proposed approach against the state-action-reward-state-action (SARSA) and Dijkstra algorithms. While Dijkstra achieves the lowest end-to-end latency under ideal conditions, its computational and signaling overhead becomes a significant bottleneck as the network scales. In contrast, our proposed approach incurs significantly lower overhead (approximately 50% of Dijkstra at a 5 s recalculation interval), scales efficiently with network size, and effectively manages queue backlogs and resilience under increasing traffic load, demonstrating enhanced robustness and scalability in LEO satellite networks while maintaining competitive latency and resilience scores.",
+    "published": "2026-05-06",
+    "categories": [
+      "cs.NI",
+      "eess.SY"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.04448v1",
+    "abs_url": "https://arxiv.org/abs/2605.04448v1",
+    "relevance_score": 0.2842,
+    "rank": 10,
+    "cluster": "backdoor plasticity access"
+  }
+]

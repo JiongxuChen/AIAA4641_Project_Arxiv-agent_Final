@@ -1,0 +1,83 @@
+[
+  {
+    "paper_id": "arxiv_2605.06553",
+    "title": "Diverse Sampling in Diffusion Models with Marginal Preserving Particle Guidance",
+    "authors": [
+      "Gal Vinograd",
+      "Idan Achituve",
+      "Ethan Fetaya"
+    ],
+    "abstract": "We present EDDY (Exact-marginal Diversification via Divergence-free dYnamics), a guidance mechanism for diffusion and flow matching models that promotes diversity among samples generated while maintaining quality. EDDY exploits symmetries of the Fokker-Planck equation, using drift perturbations that change particle trajectories while preserving the evolving marginal distribution. We instantiate this principle through kernel-based anti-symmetric pairwise matrix fields, constructed from the repulsive directions. The resulting divergence-free dynamics promote diversity at the joint particle level while preserving each particle's marginal distribution without any additional training. As computing the guidance can be computationally expensive in cases such as text-to-image generation with perceptual embeddings, we propose practical approximations as an effective and efficient solution. Experiments on synthetic distributions and text-to-image generation show that EDDY improves diversity while maintaining strong distributional fidelity compared to common baselines.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06553v1",
+    "abs_url": "https://arxiv.org/abs/2605.06553v1",
+    "added_at": "2026-05-10T12:09:17.059405",
+    "source_query": "Diffusion",
+    "source_type": "retrieval",
+    "relevance_score": 0.3428,
+    "rank": 1,
+    "cluster": "marginal particle preserving"
+  },
+  {
+    "paper_id": "arxiv_2605.06658",
+    "title": "Relit-LiVE: Relight Video by Jointly Learning Environment Video",
+    "authors": [
+      "Weiqing Xiao",
+      "Hong Li",
+      "Xiuyu Yang",
+      "Houyuan Chen",
+      "Wenyi Li",
+      "Tianqi Liu",
+      "Shaocong Xu",
+      "Chongjie Ye",
+      "Hao Zhao",
+      "Beibei Wang"
+    ],
+    "abstract": "Recent advances have shown that large-scale video diffusion models can be repurposed as neural renderers by first decomposing videos into intrinsic scene representations and then performing forward rendering under novel illumination. While promising, this paradigm fundamentally relies on accurate intrinsic decomposition, which remains highly unreliable for real-world videos and often leads to distorted appearances, broken materials, and accumulated temporal artifacts during relighting. In this work, we present Relit-LiVE, a novel video relighting framework that produces physically consistent, temporally stable results without requiring prior knowledge of camera pose. Our key insight is to explicitly introduce raw reference images into the rendering process, enabling the model to recover critical scene cues that are inevitably lost or corrupted in intrinsic representations. Furthermore, we propose a novel environment video prediction formulation that simultaneously generates relit videos and per-frame environment maps aligned with each camera viewpoint in a single diffusion process. This joint prediction enforces strong geometric-illumination alignment and naturally supports dynamic lighting and camera motion, significantly improving physical consistency in video relighting while easing the requirement of known per-frame camera pose. Extensive experiments demonstrate that Relit-LiVE consistently outperforms state-of-the-art video relighting and neural rendering methods across synthetic and real-world benchmarks. Beyond relighting, our framework naturally supports a wide range of downstream applications, including scene-level rendering, material editing, object insertion, and streaming video relighting. The Project is available at https://github.com/zhuxing0/Relit-LiVE.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06658v1",
+    "abs_url": "https://arxiv.org/abs/2605.06658v1",
+    "added_at": "2026-05-10T12:09:17.059405",
+    "source_query": "Diffusion",
+    "source_type": "retrieval",
+    "relevance_score": 0.2661,
+    "rank": 2,
+    "cluster": "video camera actcam"
+  },
+  {
+    "paper_id": "arxiv_2605.06667",
+    "title": "ActCam: Zero-Shot Joint Camera and 3D Motion Control for Video Generation",
+    "authors": [
+      "Omar El Khalifi",
+      "Thomas Rossi",
+      "Oscar Fossey",
+      "Thibault Fouque",
+      "Ulysse Mizrahi",
+      "Philip Torr",
+      "Ivan Laptev",
+      "Fabio Pizzati",
+      "Baptiste Bellot-Gurlet"
+    ],
+    "abstract": "For artistic applications, video generation requires fine-grained control over both performance and cinematography, i.e., the actor's motion and the camera trajectory. We present ActCam, a zero-shot method for video generation that jointly transfers character motion from a driving video into a new scene and enables per-frame control of intrinsic and extrinsic camera parameters. ActCam builds on any pretrained image-to-video diffusion model that accepts conditioning in terms of scene depth and character pose. Given a source video with a moving character and a target camera motion, ActCam generates pose and depth conditions that remain geometrically consistent across frames. We then run a single sampling process with a two-phase conditioning schedule: early denoising steps condition on both pose and sparse depth to enforce scene structure, after which depth is dropped and pose-only guidance refines high-frequency details without over-constraining the generation. We evaluate ActCam on multiple benchmarks spanning diverse character motions and challenging viewpoint changes. We find that, compared to pose-only control and other pose and camera methods, ActCam improves camera adherence and motion fidelity, and is preferred in human evaluations, especially under large viewpoint changes. Our results highlight that careful camera-consistent conditioning and staged guidance can enable strong joint camera and motion control without training. Project page: https://elkhomar.github.io/actcam/.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06667v1",
+    "abs_url": "https://arxiv.org/abs/2605.06667v1",
+    "added_at": "2026-05-10T12:09:17.059405",
+    "source_query": "Diffusion",
+    "source_type": "retrieval",
+    "relevance_score": 0.213,
+    "rank": 3,
+    "cluster": "video camera actcam"
+  }
+]
