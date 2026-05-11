@@ -181,7 +181,7 @@ class TaskHistory:
         task_id_prefix: str = 'run_now'
     ) -> str:
         """Add a full pipeline task (retrieval + ranking + briefing)"""
-        task_id = f"{task_id_prefix}_{datetime.now().strftime('%Y%m%d_%H%M%S_%f')}"
+        task_id = f"{task_id_prefix}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         task = {
             'task_id': task_id,
             'task_type': 'full_pipeline',
@@ -215,7 +215,7 @@ class TaskHistory:
         task_id_prefix: str = 'run_now'
     ) -> str:
         """Add a retrieval-only task"""
-        task_id = f"{task_id_prefix}_{datetime.now().strftime('%Y%m%d_%H%M%S_%f')}"
+        task_id = f"{task_id_prefix}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         task = {
             'task_id': task_id,
             'task_type': 'retrieval_only',
@@ -244,7 +244,7 @@ class TaskHistory:
         add_to_library: bool = True,
         include_existing: bool = False,
         use_llm: bool = False,
-        llm_model: str = 'deepseek-v4-flash',
+        llm_model: str = 'deepseek-ai/DeepSeek-R1',
         llm_api_key: str = '',
         top_k: int = 10,
         min_clusters: int = 2,
@@ -253,7 +253,7 @@ class TaskHistory:
         is_recurring: bool = False
     ) -> str:
         """Add a scheduled task"""
-        task_id = f"scheduled_{datetime.now().strftime('%Y%m%d_%H%M%S_%f')}"
+        task_id = f"scheduled_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         if not schedule_date:
             schedule_date = datetime.now().strftime('%Y-%m-%d')
         task = {
@@ -289,7 +289,7 @@ class TaskHistory:
         task_id_prefix: str = 'task'
     ) -> str:
         """Add a generic task record for legacy API endpoints."""
-        task_id = f"{task_id_prefix}_{datetime.now().strftime('%Y%m%d_%H%M%S_%f')}"
+        task_id = f"{task_id_prefix}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         task = {
             'task_id': task_id,
             'task_type': task_type,

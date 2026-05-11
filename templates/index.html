@@ -356,6 +356,7 @@
         var currentTasks = [];
         var selectedTaskPapers = [];
         var selectedTaskQuery = '';
+        var agentConfig = {};
         
         document.querySelectorAll('.nav button').forEach(function(btn) {
             btn.addEventListener('click', function() {
@@ -381,6 +382,72 @@
                 loadTaskOptions();
                 checkFollowupFromLibrary();
             }
+        }
+
+        async function loadAgentConfig() {
+            try {
+                var resp = await fetch('/api/config');
+                if (!resp.ok) throw new Error('Failed to load config');
+                agentConfig = await resp.json();
+                applyAgentConfig(agentConfig);
+            } catch (e) {
+                console.warn('Using built-in UI defaults because /api/config failed:', e);
+            }
+        }
+
+        function firstConfigValue(value, fallback) {
+            if (Array.isArray(value)) {
+                return value.length > 0 ? value[0] : fallback;
+            }
+            if (value === undefined || value === null || value === '') {
+                return fallback;
+            }
+            return value;
+        }
+
+        function setSelectValue(id, value) {
+            var el = document.getElementById(id);
+            if (!el || value === undefined || value === null) return;
+            var normalized = String(value);
+            for (var i = 0; i < el.options.length; i++) {
+                if (el.options[i].value === normalized) {
+                    el.value = normalized;
+                    return;
+                }
+            }
+        }
+
+        function setInputValue(id, value) {
+            var el = document.getElementById(id);
+            if (!el || value === undefined || value === null) return;
+            el.value = value;
+        }
+
+        function setCheckboxValue(id, value) {
+            var el = document.getElementById(id);
+            if (!el || value === undefined || value === null) return;
+            el.checked = Boolean(value);
+        }
+
+        function applyAgentConfig(config) {
+            setSelectValue('task-type', config.task_type || 'full_pipeline');
+            setSelectValue('run-mode', config.run_mode || 'immediate');
+            setInputValue('task-query', firstConfigValue(config.queries, ''));
+            setInputValue('task-days', config.days || 7);
+            setInputValue('task-max-results', config.max_results || 20);
+            document.getElementById('task-days').max = config.max_days || 180;
+            setInputValue('task-schedule-time', firstConfigValue(config.schedule_time, '09:00'));
+            setCheckboxValue('is-recurring', config.is_recurring || false);
+            setCheckboxValue('add-to-library', config.add_to_library !== false);
+            setCheckboxValue('include-existing', config.include_existing || false);
+            setCheckboxValue('use-llm', config.use_llm || false);
+            setInputValue('llm-model', config.llm_model || 'deepseek-ai/DeepSeek-R1');
+            setInputValue('llm-api-key', config.llm_api_key || '');
+            setInputValue('followup-llm-model', config.followup_llm_model || config.llm_model || 'deepseek-ai/DeepSeek-R1');
+            setInputValue('followup-llm-api-key', config.followup_llm_api_key || '');
+            toggleRunMode();
+            toggleTaskType();
+            toggleLLMSettings();
         }
         
         function toggleTaskType() {
@@ -542,6 +609,13 @@
             var label = status || '-';
             return '<span class="tag ' + getStatusTag(status) + '">' + escapeHtml(label) + '</span>';
         }
+
+        function displayValue(value) {
+            if (value === 0) return '0';
+            if (value === false) return 'false';
+            if (value === undefined || value === null || value === '') return '-';
+            return value;
+        }
         
         function getTaskTime(t) {
             if (t.schedule_time) {
@@ -615,8 +689,8 @@
                     '<td>' + escapeHtml(group.schedule_time || '-') + '</td>' +
                     '<td>' + escapeHtml(group.query || '-') + '</td>' +
                     '<td>' + typeLabel + '</td>' +
-                    '<td>' + (representativeTask.days || '-') + '</td>' +
-                    '<td>' + (representativeTask.max_results || '-') + '</td>' +
+                    '<td>' + displayValue(representativeTask.days) + '</td>' +
+                    '<td>' + displayValue(representativeTask.max_results) + '</td>' +
                 '</tr>';
                 
                 html += '<tr id="schedule-tasks-' + idx + '" style="display: none;">' +
@@ -731,7 +805,7 @@
                 runNowTasks.forEach(function(t) {
                     var typeTag = getTaskTypeTag(t.task_type);
                     var typeLabel = getTaskTypeLabel(t.task_type);
-                    var params = t.days + ' days, ' + t.max_results + ' results';
+                    var params = displayValue(t.days) + ' days, ' + displayValue(t.max_results) + ' results';
                     html += '<tr>' +
                         '<td><button class="btn btn-secondary btn-sm" onclick="viewTask(\'' + t.task_id + '\')">View</button></td>' +
                         '<td>' + t.task_id + '</td>' +
@@ -767,7 +841,7 @@
             html += '<p><strong>Query:</strong> ' + (task.query || '-') + '</p>';
             html += '<p><strong>Type:</strong> ' + (task.task_type || '-') + '</p>';
             html += '<p><strong>Status:</strong> ' + (task.status || '-') + '</p>';
-            html += '<p><strong>Days:</strong> ' + (task.days || '-') + ' | <strong>Max Results:</strong> ' + (task.max_results || '-') + '</p>';
+            html += '<p><strong>Days:</strong> ' + displayValue(task.days) + ' | <strong>Max Results:</strong> ' + displayValue(task.max_results) + '</p>';
             html += '<p><strong>Papers Retrieved:</strong> ' + papers.length + '</p>';
             html += '</div>';
             
@@ -1196,7 +1270,13 @@
             }
         });
         
-        loadDashboard();
+        async function initPage() {
+            await loadAgentConfig();
+            loadDashboard();
+            loadScheduledTasks();
+        }
+
+        initPage();
     </script>
 </body>
 </html>

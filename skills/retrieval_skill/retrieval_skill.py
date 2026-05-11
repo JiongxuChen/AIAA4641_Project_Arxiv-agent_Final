@@ -22,6 +22,7 @@ Output format:
 """
 
 import argparse
+import csv
 import datetime
 import json
 import os
@@ -36,18 +37,71 @@ from typing import Any, Dict, List
 ARXIV_API_URLS = ["https://export.arxiv.org/api/query", "http://export.arxiv.org/api/query"]
 
 
+def parse_query_terms(query: str) -> List[str]:
+    """
+    Parse a user query into searchable terms.
+
+    Supported input forms:
+        - Single keyword: "LLM"
+        - Single phrase: "Deep learning"
+        - Comma-separated keywords/phrases: "LLM, Deep learning"
+
+    Commas separate alternative search terms. Spaces inside a term are kept as
+    part of the phrase instead of being converted into implicit AND operators.
+    """
+    if not isinstance(query, str):
+        return []
+
+    raw_query = query.strip()
+    if not raw_query:
+        return []
+
+    try:
+        raw_terms = next(csv.reader([raw_query], skipinitialspace=True))
+    except csv.Error:
+        raw_terms = raw_query.split(",")
+
+    terms = []
+    seen = set()
+    for raw_term in raw_terms:
+        term = " ".join(raw_term.strip().strip('"').strip("'").split())
+        if not term:
+            continue
+
+        normalized = term.lower()
+        if normalized in seen:
+            continue
+
+        seen.add(normalized)
+        terms.append(term)
+
+    return terms
+
+
+def _escape_arxiv_phrase(term: str) -> str:
+    """Escape user text for an arXiv quoted phrase query."""
+    return term.replace("\\", " ").replace('"', " ").strip()
+
+
 def build_arxiv_query(query: str) -> str:
     """
     Build the arXiv API search_query string.
 
     Args:
-        query: User-provided keywords, spaces are treated as AND.
+        query: User-provided keyword, phrase, or comma-separated terms.
 
     Returns:
         A search string formatted for the arXiv API.
     """
-    keywords = query.strip().split()
-    return "all:" + "+AND+".join(keywords)
+    terms = parse_query_terms(query)
+    if not terms:
+        raise ValueError("query must contain at least one keyword or phrase")
+
+    clauses = [f'all:"{_escape_arxiv_phrase(term)}"' for term in terms]
+    if len(clauses) == 1:
+        return clauses[0]
+
+    return "(" + " OR ".join(clauses) + ")"
 
 
 def fetch_from_api(search_query: str, start: int, max_results: int) -> Dict:
@@ -321,7 +375,8 @@ def retrieve_papers(query: str, days: int, max_results: int) -> List[Dict]:
     Main entry point: fetch candidate papers from arXiv for a topic and time range.
 
     Args:
-        query: Search keywords, e.g. "graph neural networks".
+        query: Search keyword, phrase, or comma-separated terms,
+            e.g. "LLM", "Deep learning", or "LLM, Deep learning".
         days: Recent days window, e.g. 7 for the last 7 days.
         max_results: Maximum number of papers to return, e.g. 30.
 
@@ -419,7 +474,11 @@ def save_papers(papers: List[Dict], output_file: str, format: str = "json") -> b
 
 def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Paper Retrieval Skill - Fetch papers from arXiv.")
-    parser.add_argument("--query", required=True, help="Search keywords, e.g. 'graph neural networks'")
+    parser.add_argument(
+        "--query",
+        required=True,
+        help="Search keyword, phrase, or comma-separated terms, e.g. 'LLM, Deep learning'",
+    )
     parser.add_argument("--days", type=int, default=7, help="Recent days window (default: 7)")
     parser.add_argument("--max-results", type=int, default=20, help="Maximum number of papers (default: 20)")
     parser.add_argument("--output", default="retrieved_papers.json", help="Output JSON file")

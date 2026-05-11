@@ -38,12 +38,21 @@ DEFAULT_AGENT_CONFIG: Dict[str, Any] = {
     "days": 7,
     "max_results": 20,
     "top_k": 10,
+    "web_ui_port": 5000,
     "schedule_time": ["09:00"],
+    "run_mode": "immediate",
     "task_type": "full_pipeline",
     "add_to_library": True,
     "include_existing": False,
+    "is_recurring": False,
     "use_llm": False,
     "llm_model": "deepseek-ai/DeepSeek-R1",
+    "llm_api_key": "",
+    "followup_llm_model": "deepseek-ai/DeepSeek-R1",
+    "followup_llm_api_key": "",
+    "retrieval_check_existing": False,
+    "retrieval_add_to_library": False,
+    "max_days": 180,
     "output_dir": "briefings",
     "min_clusters": 2,
     "max_clusters": 4,
@@ -200,7 +209,7 @@ class ResearchBriefingAgent:
                 "retrieval_papers": papers,
                 "retrieval_file": retrieval_file,
                 "papers_retrieved": actual_results,
-                "max_results": actual_results,
+                "max_results": request.max_results,
             }
             if existing_task_id:
                 self.task_history.update_task(existing_task_id, "success", details)
@@ -209,7 +218,7 @@ class ResearchBriefingAgent:
                 task_id = self.task_history.add_retrieval_task(
                     query=request.query,
                     days=request.days,
-                    max_results=actual_results,
+                    max_results=request.max_results,
                     status="success",
                     retrieval_papers=papers,
                     retrieval_file=retrieval_file,
@@ -254,7 +263,7 @@ class ResearchBriefingAgent:
             "retrieval_file": retrieval_file,
             "papers_retrieved": actual_results,
             "papers_ranked": len(ranked),
-            "max_results": actual_results,
+            "max_results": request.max_results,
         }
 
         if existing_task_id:
@@ -264,7 +273,7 @@ class ResearchBriefingAgent:
             task_id = self.task_history.add_full_pipeline_task(
                 query=request.query,
                 days=request.days,
-                max_results=actual_results,
+                max_results=request.max_results,
                 status="success",
                 retrieval_papers=papers,
                 ranked_papers=ranked,
@@ -444,17 +453,11 @@ class ResearchBriefingAgent:
         return self.papers_library.get_all_papers()
 
     def delete_papers(self, paper_ids: List[str]) -> Dict[str, Any]:
-        """Delete papers and record the operation in task history."""
+        """Delete papers from the shared paper library."""
         deleted = 0
         for paper_id in paper_ids:
             if self.papers_library.remove_paper(paper_id):
                 deleted += 1
-        self.task_history.add_task(
-            "delete_papers",
-            ", ".join(paper_ids),
-            "success",
-            {"count": deleted, "requested_count": len(paper_ids)},
-        )
         return {"success": True, "deleted": deleted}
 
     def get_tasks(self) -> List[Dict[str, Any]]:

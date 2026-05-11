@@ -4,11 +4,23 @@
 
 The Retrieval Skill fetches candidate papers from arXiv based on a user-provided topic and time range. It queries the arXiv API, handles pagination, filters by date, and removes duplicates.
 
+The query parser supports multiple input forms:
+
+- Single keyword: `"LLM"`
+- Single phrase: `"Deep learning"`
+- Multiple keywords or phrases separated by commas: `"LLM, Deep learning"`
+
+Comma-separated terms are treated as alternatives and combined with `OR` in the
+arXiv search query. Spaces inside one term are preserved as a phrase.
+
 ## Quick Start
 
 ```bash
 # Command line usage
 python retrieval_skill.py --query "LLM agents" --days 7 --max-results 20 --output papers.json
+
+# Multiple keyword/phrase alternatives
+python retrieval_skill.py --query "LLM, Deep learning" --days 7 --max-results 20 --output papers.json
 
 # Save as CSV
 python retrieval_skill.py --query "graph neural networks" --days 30 --output papers.csv --format csv
@@ -18,7 +30,7 @@ python retrieval_skill.py --query "graph neural networks" --days 30 --output pap
 
 | Argument | Type | Default | Description |
 |----------|------|---------|-------------|
-| `--query` | str | (required) | Search keywords |
+| `--query` | str | (required) | Search keyword, phrase, or comma-separated keywords/phrases |
 | `--days` | int | 7 | Recent days window |
 | `--max-results` | int | 20 | Maximum number of papers |
 | `--output` | str | `retrieved_papers.json` | Output file |
@@ -41,7 +53,7 @@ papers = retrieve_papers(
 **Input:**
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `query` | str | Search keywords (e.g., "graph neural networks") |
+| `query` | str | Search keyword, phrase, or comma-separated keywords/phrases |
 | `days` | int | Recent days window (e.g., 7 for last 7 days) |
 | `max_results` | int | Maximum papers to return (max 200) |
 
@@ -63,7 +75,7 @@ papers = retrieve_papers_with_cache(
 **Input:**
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `query` | str | Search keywords |
+| `query` | str | Search keyword, phrase, or comma-separated keywords/phrases |
 | `days` | int | Recent days window |
 | `max_results` | int | Maximum papers |
 | `cache_file` | str | Cache file path (default: arxiv_cache.json) |
@@ -244,11 +256,23 @@ except ValueError as e:
 
 Retrieval Skill 根据用户指定的主题和时间范围从 arXiv 获取候选论文。它查询 arXiv API，处理分页，按日期过滤，并去除重复项。
 
+Query 解析支持多种输入形式：
+
+- 单个关键词：`"LLM"`
+- 单个短语：`"Deep learning"`
+- 多个关键词或短语组合：`"LLM, Deep learning"`
+
+逗号分隔的多个 term 会被当作备选搜索项，并在 arXiv 查询中用 `OR` 组合。同一个
+term 内部的空格会作为短语保留，不会再被拆成多个 AND 关键词。
+
 ## 快速开始
 
 ```bash
 # 命令行使用
 python retrieval_skill.py --query "LLM agents" --days 7 --max-results 20 --output papers.json
+
+# 多个关键词/短语组合
+python retrieval_skill.py --query "LLM, Deep learning" --days 7 --max-results 20 --output papers.json
 
 # 保存为 CSV
 python retrieval_skill.py --query "graph neural networks" --days 30 --output papers.csv --format csv
@@ -258,7 +282,7 @@ python retrieval_skill.py --query "graph neural networks" --days 30 --output pap
 
 | 参数 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
-| `--query` | str | (必填) | 搜索关键词 |
+| `--query` | str | (必填) | 搜索关键词、短语，或逗号分隔的关键词/短语组合 |
 | `--days` | int | 7 | 时间范围（天数） |
 | `--max-results` | int | 20 | 最大论文数量 |
 | `--output` | str | `retrieved_papers.json` | 输出文件 |
@@ -281,7 +305,7 @@ papers = retrieve_papers(
 **输入：**
 | 参数 | 类型 | 说明 |
 |------|------|------|
-| `query` | str | 搜索关键词（如："graph neural networks"） |
+| `query` | str | 搜索关键词、短语，或逗号分隔的关键词/短语组合 |
 | `days` | int | 时间范围天数（如：7 表示最近7天） |
 | `max_results` | int | 返回的最大论文数（最大200） |
 
@@ -303,7 +327,7 @@ papers = retrieve_papers_with_cache(
 **输入：**
 | 参数 | 类型 | 说明 |
 |------|------|------|
-| `query` | str | 搜索关键词 |
+| `query` | str | 搜索关键词、短语，或逗号分隔的关键词/短语组合 |
 | `days` | int | 时间范围天数 |
 | `max_results` | int | 最大论文数 |
 | `cache_file` | str | 缓存文件路径（默认：arxiv_cache.json） |
