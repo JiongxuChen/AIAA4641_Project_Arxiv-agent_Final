@@ -1,0 +1,217 @@
+[
+  {
+    "paper_id": "arxiv_2605.06395",
+    "title": "Consistent Geometric Deep Learning via Hilbert Bundles and Cellular Sheaves",
+    "authors": [
+      "Kartik Tandon",
+      "Julian Gould",
+      "Tanishq Bhatia",
+      "Francesca Dominici",
+      "Alejandro Ribeiro",
+      "Claudio Battiloro"
+    ],
+    "abstract": "Modern deep learning architectures increasingly contend with sophisticated signals that are natively infinite-dimensional, such as time series, probability distributions, or operators, and are defined over irregular domains. Yet, a unified learning theory for these settings has been lacking. To start addressing this gap, we introduce a novel convolutional learning framework for possibly infinite-dimensional signals supported on a manifold. Namely, we use the connection Laplacian associated with a Hilbert bundle as a convolutional operator, and we derive filters and neural networks, dubbed as \\textit{HilbNets}. We make HilbNets and, more generally, the convolution operation, implementable via a two-stage sampling procedure. First, we show that sampling the manifold induces a Hilbert Cellular Sheaf, a generalized graph structure with Hilbert feature spaces and edge-wise coupling rules, and we prove that its sheaf Laplacian converges in probability to the underlying connection Laplacian as the sampling density increases. Notably, this result is a generalization to the infinite-dimensional bundle setting of the Belkin \\& Niyogi \\cite{BELKIN20081289} convergence result for the graph Laplacian to the manifold Laplacian, a theoretical cornerstone of geometric learning methods. Second, we discretize the signals and prove that the discretized (implementable) HilbNets converge to the underlying continuous architectures and are transferable across different samplings of the same bundle, providing consistency for learning. Finally, we validate our framework on synthetic and real-world tasks. Overall, our results broaden the scope of geometric learning as a whole by lifting classical Laplacian-based frameworks to settings where the signal at each point lives in its own Hilbert space.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "eess.SP"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06395v1",
+    "abs_url": "https://arxiv.org/abs/2605.06395v1",
+    "relevance_score": 0.2219,
+    "rank": 1,
+    "cluster": "hilbert topological neural"
+  },
+  {
+    "paper_id": "arxiv_2605.06467",
+    "title": "No Triangulation Without Representation: Generalization in Topological Deep Learning",
+    "authors": [
+      "Johannes S. Schmidt",
+      "Martin Carrasco",
+      "Ernst Röell",
+      "Guy Wolf",
+      "Nello Blaser",
+      "Bastian Rieck"
+    ],
+    "abstract": "Despite an ever-increasing interest in topological deep learning models that target higher-order datasets, there is no consensus on how to evaluate such models. This is exacerbated by the fact that topological objects permit operations, such as structural refinements, that are not appropriate for graph data. In this work, we extend MANTRA, a benchmark dataset containing manifold triangulations, to a larger class of manifolds with more diverse homeomorphism types. We show that, unlike prior claims, both graph neural networks (GNNs) and higher-order message passing (HOMP) methods can saturate the benchmark. However, we find that this is contingent on the right representation and feature assignment, emphasizing their importance in baseline models. We thus provide a novel evaluation protocol based on representational diversity and triangulation refinement. Surprisingly, we find no indication that existing models are capable of generalizing beyond the combinatorial structure of the data. This points towards a research gap in developing models that understand topological structure independent of scale. Our work thus provides the necessary scaffolding to evaluate future models and enable the development of topology-aware inductive biases.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.LG",
+      "math.AT"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06467v1",
+    "abs_url": "https://arxiv.org/abs/2605.06467v1",
+    "relevance_score": 0.1918,
+    "rank": 2,
+    "cluster": "hilbert topological neural"
+  },
+  {
+    "paper_id": "arxiv_2605.06382",
+    "title": "Rethinking Vacuity for OOD Detection in Evidential Deep Learning",
+    "authors": [
+      "Claire McNamara"
+    ],
+    "abstract": "Vacuity, or Uncertainty Mass (UM), is commonly used as a metric to evaluate Out-of-Distribution (OOD) detection in Evidential Deep Learning (EDL). It generally involves dividing the number of classes ($K$) by the total strength of belief ($S$) of the model's predictions, where $S$ is derived from summing the Dirichlet parameters. As such, UM is sensitive to the cardinality of $K$. In particular, it is unlikely in practice that there is a linear relationship between $K$ and $S$ as $K$ and $S$ increase due to the nature of EDL (suppressing incorrectly assigned evidence). As a result, when comparing In Distribution (ID) and OOD results, it is important that $K_{\\mathrm{ID}}$ and $K_{\\mathrm{OOD}}$ are equal; something that is not always ensured in practice. We provide an empirical demonstration of how results for AUROC and AUPR can substantially differ when class cardinality between ID and OOD differs by 1, with AUROC differing by as much as 0.318 and AUPR by 0.613 for standard EDL, and AUROC by 0.360 and AUPR by 0.683 for IB-EDL. More concretely, our findings isolate an evaluation artefact: when K differs between ID and OOD, AUROC/AUPR can be artificially inflated without any change in model predictions. We further discuss the evaluation of EDL over causal language models using Multiple-Choice Question-Answer (MCQA) datasets and argue for clearer definitions of ID and OOD in this context. Our primary contribution is an empirical and theoretical demonstration that vacuity-based OOD detection in EDL-fine-tuned LLMs is highly sensitive to uncontrolled differences in evaluated class cardinality.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06382v1",
+    "abs_url": "https://arxiv.org/abs/2605.06382v1",
+    "relevance_score": 0.1844,
+    "rank": 3,
+    "cluster": "ood fake news"
+  },
+  {
+    "paper_id": "arxiv_2605.06397",
+    "title": "Photonic-Implemented Efficient Deep Quantum Neural Network via Virtual-Driven Hilbert Space Expansion",
+    "authors": [
+      "Haoran Ma",
+      "Huihui Zhu",
+      "Zichao Zhao",
+      "Qishen Liang",
+      "Liao Ye",
+      "Baojie Hou",
+      "Jia Guo",
+      "Leong Chuan Kwek",
+      "Mile Gu",
+      "Jayne Thompson",
+      "Wei Luo",
+      "Yuehai Wang",
+      "Jianyi Yang"
+    ],
+    "abstract": "The growing computational demands of classical neural networks have intensified the search for energy-efficient and powerful computational alternatives. Quantum neural networks (QNNs) implemented on integrated photonic platforms offer a compelling avenue, offering exceptional computational power enhancements, with inherent programmability and scalability of integrated architectures. A critical challenge, however, is implementing the fundamental non-unitary and nonlinear activation function of QNNs within a linear quantum photonic system. Existing strategies, such as the adding ancillary qubits and measurement-based feedback or forward are constrained by high qubit resource costs, overhead devices, and poor cascadability. Here, we propose a novel deep photonic QNN with an expanded computational Hilbert space via input replication and mode expansion, which enables the realization of effective non-unitary and nonlinear activation on a linear programmable quantum photonic chip. This approach eliminates the need for physical ancillary qubits, measurement-induced qubit consumption and the measurement device burden, thereby significantly reduce resource costs. The fabricated chip integrates four high-quality entanglement sources and a programmable high-dimensional interferometric network, enabling a two-hidden-layer QNN that exhibits dimension-enhanced expressivity over the existing QNN architectures. We demonstrate its capabilities across diverse tasks, including nonlinear classification, image generation, and quantum Gibbs state preparation. This work establishes a scalable and efficient architecture toward practical quantum deep learning systems capable of tackling problems beyond the reach of classical computation.",
+    "published": "2026-05-07",
+    "categories": [
+      "quant-ph"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06397v1",
+    "abs_url": "https://arxiv.org/abs/2605.06397v1",
+    "relevance_score": 0.1608,
+    "rank": 4,
+    "cluster": "hilbert topological neural"
+  },
+  {
+    "paper_id": "arxiv_2605.06435",
+    "title": "COVID-19 Infodemic. Understanding content features in detecting fake news using a machine learning approach",
+    "authors": [
+      "Vimala Balakrishnan",
+      "Lee Zing Hii",
+      "Eric Laporte"
+    ],
+    "abstract": "The use of content features, particularly textual and linguistic for fake news detection is under-researched, despite empirical evidence showing the features could contribute to differentiating real and fake news. To this end, this study investigates a selection of content features such as word bigrams, part of speech distribution etc. to improve fake news detection. We performed a series of experiments on a new dataset gathered during the COVID-19 pandemic and using Decision Tree, K-Nearest Neighbor, Logistic Regression, Support Vector Machine and Random Forest. Random Forest yielded the best results, followed closely by Support Vector Machine, across all setups. In general, both the textual and linguistic features were found to improve fake news detection when used separately, however, combining them into a single model did not improve the detection significantly. Differences were also noted between the use of bigrams and part of speech tags. The study shows that textual and linguistic features can be used successfully in detecting fake news using the traditional machine learning approach as opposed to deep learning.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06435v1",
+    "abs_url": "https://arxiv.org/abs/2605.06435v1",
+    "relevance_score": 0.1491,
+    "rank": 5,
+    "cluster": "ood fake news"
+  },
+  {
+    "paper_id": "arxiv_2605.06394",
+    "title": "Lecture Notes on Statistical Physics and Neural Networks",
+    "authors": [
+      "Olaf Hohm"
+    ],
+    "abstract": "These lecture notes introduce some topics of classical statistical physics, particularly those that are relevant for neural networks and deep learning. Statistical physics is treated as a branch of probability theory or statistics, with the goal of making concepts such as phase transitions and the renormalization group accessible to readers without prior knowledge of physics. We introduce the Boltzmann-Gibbs distribution and the thermodynamic potentials on a finite configuration space, notably for Ising spins and spin-glass models on a lattice, and then define phase transitions as discontinuities that arise in the limit that the number of lattice points goes to infinity. We further introduce Hopfield networks and Boltzmann machines, which are governed by the same energy function as spin-glass models, and discuss the learning algorithm for restricted Boltzmann machines. In this algorithm hidden neurons are integrated out as in the renormalization group. Finally, modern deep learning is introduced, whose early developments were in part motivated by restricted Boltzmann machines in that they carry many layers of hidden neurons. A description of large language models is given.",
+    "published": "2026-05-07",
+    "categories": [
+      "cond-mat.dis-nn",
+      "hep-th"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06394v1",
+    "abs_url": "https://arxiv.org/abs/2605.06394v1",
+    "relevance_score": 0.1469,
+    "rank": 6,
+    "cluster": "hilbert topological neural"
+  },
+  {
+    "paper_id": "arxiv_2605.06446",
+    "title": "FedFrozen: Two-Stage Federated Optimization via Attention Kernel Freezing",
+    "authors": [
+      "Junye Du",
+      "Zhenghao Li",
+      "Yushi Feng",
+      "Long Feng"
+    ],
+    "abstract": "Federated learning with heterogeneous clients remains a significant challenge for deep learning, primarily due to client drift arising from inconsistent local updates. Existing federated optimization methods typically address this issue through objective-level regularization or update-correction mechanisms. Recent studies, however, suggest that Transformer-based architectures may be inherently more robust than conventional models under heterogeneous federated training. Motivated by this observation, we investigate how different parameter components within the attention mechanism influence federated optimization. Specifically, we decompose the attention module into a query/key block, which determines the attention kernel, and a value block, which performs semantic transformation under the induced kernel. Based on this perspective, we propose FedFrozen, a two-stage federated optimization framework that first performs full-model warm-up training and then freezes the query/key block while continuing to optimize the value block. Under a linear-attention formulation, we show that the warm-up stage can be interpreted as an inexact descent procedure on a regularized kernel-profile objective, while the frozen stage reduces to a restricted value-block optimization problem under a fixed attention kernel. Our analysis further reveals an explicit trade-off that governs the choice of warm-up length. Simulations validate the predicted bias-drift behavior, and real-data experiments demonstrate that FedFrozen improves both the stability and effectiveness of Transformer models in heterogeneous federated learning.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06446v1",
+    "abs_url": "https://arxiv.org/abs/2605.06446v1",
+    "relevance_score": 0.1274,
+    "rank": 7,
+    "cluster": "optimization kernel attention"
+  },
+  {
+    "paper_id": "arxiv_2605.06575",
+    "title": "Directional Consistency as a Complementary Optimization Signal: The GONO Framework",
+    "authors": [
+      "Victor Daniel Gera"
+    ],
+    "abstract": "We identify and formalize an underexplored phenomenon in deep learning optimization: directional alignment and loss convergence can be decoupled. An optimizer can exhibit near-perfect directional consistency (cc_t -> 1, measured via consecutive gradient cosine similarity) while the loss remains high or decreases slowly. This observation reveals that existing optimizers such as Adam, SGD, and RMSprop lack explicit mechanisms to exploit temporal consistency in gradient directions, relying instead on magnitude-based signals that fail to distinguish plateaus, saddle points, and genuine convergence. Motivated by this, we introduce GONO (Gradient-Oriented Norm-Adaptive Optimizer), which adapts Adam's momentum coefficient beta_1 based on cc_t: amplifying momentum under directional consistency and suppressing it during oscillation. We prove GONO matches Adam's O(1/sqrt(T)) convergence rate and reduces exactly to Adam when the signal is uninformative. Empirically, cc_t achieves oscillation detection with F1=1.00 (vs. 0.45 for gradient norm), and GONO remains competitive with AdamW on MNIST (98.15%), CIFAR-10 (43.14%), and ResNet-18 (75.44%), establishing directional alignment as a theoretically grounded, practically actionable optimization signal. Code: https://github.com/victordaniel/gono-optimizer",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.LG",
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06575v1",
+    "abs_url": "https://arxiv.org/abs/2605.06575v1",
+    "relevance_score": 0.1096,
+    "rank": 8,
+    "cluster": "optimization kernel attention"
+  },
+  {
+    "paper_id": "arxiv_2605.06501",
+    "title": "Cubit: Token Mixer with Kernel Ridge Regression",
+    "authors": [
+      "Chuanyang Zheng",
+      "Jiankai Sun",
+      "Yihang Gao",
+      "Yuehao Wang",
+      "Liangchen Tan",
+      "Mac Schwager",
+      "Anderson Schneider",
+      "Yuriy Nevmyvaka",
+      "Xiaodong Liu"
+    ],
+    "abstract": "Since its introduction in 2017, the Transformer has become one of the most widely adopted architectures in modern deep learning. Despite extensive efforts to improve positional encoding, attention mechanisms, and feed-forward networks, the core token-mixing mechanism in Transformers remains attention. In this work, we show that the attention module in Transformers can be interpreted as performing Nadaraya-Watson regression, where it computes similarities between tokens and aggregates the corresponding values accordingly. Motivated by this perspective, we propose Cubit, a potential next-generation architecture that leverages Kernel Ridge Regression (KRR), while the vanilla Transformer relies on Nadaraya-Watson regression. Specifically, Cubit modifies the classical attention computation by incorporating the closed-form solution of KRR, combining value aggregation through kernel similarities with normalization via the inverse of the kernel matrix. To improve the training stability, we further propose the Limited-Range Rescale (LRR), which rescales the value layer within a controlled range. We argue that Cubit, as a KRR-based architecture, provides a stronger mathematical foundation than the vanilla Transformer, whose attention mechanism corresponds to Nadaraya-Watson regression. We validate this claim through comprehensive experiments. The experimental results suggest that Cubit may exhibit stronger long-sequence modeling capability. In particular, its performance gain over the Transformer appears to increase as the training sequence length grows.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.LG",
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06501v1",
+    "abs_url": "https://arxiv.org/abs/2605.06501v1",
+    "relevance_score": 0.0588,
+    "rank": 9,
+    "cluster": "optimization kernel attention"
+  },
+  {
+    "paper_id": "arxiv_2605.06599",
+    "title": "Weight-Decay Turns Transformer Loss Landscapes Villani: Functional-Analytic Foundations for Optimization and Generalization",
+    "authors": [
+      "Abhijit Das",
+      "Sayantan Dutta"
+    ],
+    "abstract": "Weight decay is widely used as a regularizer in large language models, yet its precise role in shaping Transformer loss landscapes remains theoretically underexplored. This paper provides the first rigorous functional-analytic characterization of the standard Transformer objective--cross-entropy loss with $L^2$ regularization--by proving it satisfies Villani's criteria for coercive energy functions. Specifically, we show that the regularized loss $\\mathcal{F}$ is infinitely differentiable, grows at least quadratically, has Gaussian-integrable tails, and satisfies the differential growth condition $-Δ\\mathcal{F} + \\tfrac{1}{s}\\|\\nabla\\mathcal{F}\\|^{2} \\to \\infty$ as $\\|θ\\| \\to \\infty$ for all $s>0$. From this structure, we derive explicit log-Sobolev and Poincaré constants $C_{\\mathrm{LS}} \\leq λ^{-1} + d/λ^{2}$, linking the regularization strength $λ$ and model dimension $d$ to finite-time convergence guarantees for noisy stochastic gradient descent and PAC-Bayesian generalization bounds that tighten with increasing $λ$. To validate our theory, we introduce a scalable Villani diagnostic $Ψ_s(θ) = -Δ\\mathcal{F} + s^{-1}\\|\\nabla \\mathcal{F}\\|^2$ and estimate it efficiently using Hutchinson trace probes in models with over 100M parameters. Experiments on GPT-Neo-125M across Penn Treebank and WikiText-103 confirm the predicted quadratic growth of $Ψ_s$, spectral inflation of the Hessian, and exponential convergence behavior consistent with our log-Sobolev analysis. These results demonstrate that weight decay not only improves generalization empirically but also establishes the mathematical conditions required for fast Langevin mixing and theoretically grounded curvature-aware optimization in deep learning.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.LG",
+      "eess.AS"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.06599v1",
+    "abs_url": "https://arxiv.org/abs/2605.06599v1",
+    "relevance_score": 0.0582,
+    "rank": 10,
+    "cluster": "optimization kernel attention"
+  }
+]

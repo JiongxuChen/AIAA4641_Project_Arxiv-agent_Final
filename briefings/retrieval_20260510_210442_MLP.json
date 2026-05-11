@@ -1,0 +1,295 @@
+[
+  {
+    "paper_id": "arxiv_2605.05685",
+    "title": "Temporal Functional Circuits: From Spline Plots to Faithful Explanations in KAN Forecasting",
+    "authors": [
+      "Naveen Mysore"
+    ],
+    "abstract": "Unlike MLPs, Kolmogorov-Arnold Networks (KANs) expose explicit learnable edge functions on every connection, enabling mechanistic explanation in time-series forecasting. This paper introduces Temporal Functional Circuits, a framework that transforms KAN edge functions from latent visualizations into faithful, temporally grounded explanations. Built on a gated residual KAN that decomposes forecasts into a linear base and a sparsely activated KAN correction, the framework (i) maps each edge to input lags via output-aware attribution, (ii) ranks edges by learned activation range, and (iii) validates faithfulness through edge-level interventions including zeroing and spline removal. Removing the learned B-spline component while retaining the base SiLU term degrades forecasts, providing evidence that the spline shape itself carries predictive value beyond the base activation. On four synthetic regimes of increasing complexity, the learned gate opens progressively wider as signal complexity grows. On regime-switching signals, gated KAN achieves 59% lower MSE than linear-only models. Across eight benchmarks, the gated architecture is competitive with linear, attention, and MLP alternatives, while providing interpretable edge functions that MLP-based corrections cannot offer.",
+    "published": "2026-05-07",
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "stat.ML"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.05685v1",
+    "abs_url": "https://arxiv.org/abs/2605.05685v1"
+  },
+  {
+    "paper_id": "arxiv_2605.05179",
+    "title": "Estimating the expected output of wide random MLPs more efficiently than sampling",
+    "authors": [
+      "Wilson Wu",
+      "Victor Lecomte",
+      "Michael Winer",
+      "George Robinson",
+      "Jacob Hilton",
+      "Paul Christiano"
+    ],
+    "abstract": "By far the most common way to estimate an expected loss in machine learning is to draw samples, compute the loss on each one, and take the empirical average. However, sampling is not necessarily optimal. Given an MLP at initialization, we show how to estimate its expected output over Gaussian inputs without running samples through the network at all. Instead, we produce approximate representations of the distributions of activations at each layer, leveraging tools such as cumulants and Hermite expansions. We show both theoretically and empirically that for sufficiently wide networks, our estimator achieves a target mean squared error using substantially fewer FLOPs than Monte Carlo sampling. We find moreover that our methods perform particularly well at estimating the probabilities of rare events, and additionally demonstrate how they can be used for model training. Together, these findings suggest a path to producing models with a greatly reduced probability of catastrophic tail risks.",
+    "published": "2026-05-06",
+    "categories": [
+      "cs.LG",
+      "cond-mat.dis-nn",
+      "stat.ML"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.05179v1",
+    "abs_url": "https://arxiv.org/abs/2605.05179v1"
+  },
+  {
+    "paper_id": "arxiv_2605.04971",
+    "title": "Why Geometric Continuity Emerges in Deep Neural Networks: Residual Connections and Rotational Symmetry Breaking",
+    "authors": [
+      "Kyungwon Jeong",
+      "Won-Gi Paeng",
+      "Honggyo Suh"
+    ],
+    "abstract": "Weight matrices in deep networks exhibit geometric continuity -- principal singular vectors of adjacent layers point in similar directions. While this property has been widely observed, its origin remains unexplained. Through experiments on toy MLPs and small transformers, we identify two mechanisms: residual connections create cross-layer gradient coherence that aligns weight updates across layers, and symmetry-breaking nonlinearities constrain all layers to a shared coordinate frame, preventing the rotation drift that would otherwise destabilize weight structure. Crucially, a nonlinear but rotation-preserving activation fails to retain continuity, isolating symmetry breaking -- not nonlinearity itself -- as the active ingredient. Activation and normalization play distinct roles: activation concentrates continuity in the leading singular direction, while normalization distributes it across multiple directions. In transformers, continuity is projection-specific: Q, K, Gate, and Up (which read from the residual stream) develop input-space ($\\mathbf{v}_1$) continuity; O and Down (which write to it) develop output-space ($\\mathbf{u}_1$) continuity; V alone, lacking an adjacent nonlinearity, develops only low continuity.",
+    "published": "2026-05-06",
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.04971v1",
+    "abs_url": "https://arxiv.org/abs/2605.04971v1"
+  },
+  {
+    "paper_id": "arxiv_2605.04919",
+    "title": "Phase-Time Array Enabled Multistatic Sensing with Multi-Level Fusion for UAV Localization",
+    "authors": [
+      "Ming Gao",
+      "Jianhua Mo",
+      "Meixia Tao"
+    ],
+    "abstract": "Multistatic collaborative sensing eliminates self-interference, achieves spatial diversity gains, and enables wide-range seamless integrated sensing and communication (ISAC). However, conventional data fusion methods suffer from severe error amplification in geometry-sensitive regions. In addition, the conventional analog phased array solution introduces large beam sweeping overhead, whereas the fully digital arrays request high hardware cost. We propose a multistatic sensing framework enabled by a phase-time array (PTA). The rainbow beamforming maps spatial directions to orthogonal frequency division multiplexing (OFDM) subcarriers, achieving wide-angle coverage with a single radio frequency (RF) chain. We develop two parameter-level schemes-a geometry-aware analytical estimator (GDOP-WLS) and a lightweight multilayer perceptron (PF-MLP)-to mitigate the effects of topological singularities. Additionally, an end-to-end signal-level convolutional neural network (SF-CNN) directly estimates target coordinates from raw signals, avoiding cascaded estimation errors. The results demonstrate that the parameter-level schemes ensure robust convergence under adverse geometric conditions with minimal computational latency. Conversely, the signal-level scheme achieves sub-meter precision but requires an increased computational load. Consequently, the proposed framework establishes a scalable solution for collaborative surveillance of unmanned aerial vehicles (UAVs), providing flexible trade-offs among hardware complexity, latency, and accuracy.",
+    "published": "2026-05-06",
+    "categories": [
+      "eess.SP"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.04919v1",
+    "abs_url": "https://arxiv.org/abs/2605.04919v1"
+  },
+  {
+    "paper_id": "arxiv_2605.04445",
+    "title": "LEGO: LoRA-Enabled Generator-Oriented Framework for Synthetic Image Detection",
+    "authors": [
+      "Yutong Xiao",
+      "Ran Ran",
+      "Jiwei Wei",
+      "Shuchang Zhou",
+      "Ke Liu",
+      "Zheng Ziqiang",
+      "Caiyan Qin"
+    ],
+    "abstract": "The rapid advancement of generative technologies has made synthetic images nearly indistinguishable from real ones, thereby creating an urgent need for robust detectors to counter misinformation. However, existing methods mainly rely on universal artifact features that are shared across multiple generators. We observe that as the diversity of generators increases, the overlap of these common features gradually decreases. This severely undermines model generalization. In contrast, focusing only on unique artifacts tends to cause overfitting to specific forgery patterns. To address this challenge, we propose LEGO (LoRA-Enabled Generator-Oriented Framework). The core mechanism of LEGO employs an MLP to modulate multiple LoRA (Low-Rank Adaptation) blocks, each pretrained to capture the unique artifacts of a specific generator, followed by attention-based feature fusion. Unlike conventional methods that seek a single universal solution, LEGO delegates unique artifact extraction to specialized LoRA modules by dividing its training procedure into two stages. Each LoRA module is individually trained on a single-generator dataset to learn generator-specific representations, then MLP and attention layers are trained on mixed datasets to dynamically regulate the contribution of each module. Benefiting from its modular yet robust design, LEGO can be naturally extended by incorporating new LoRA modules for adaptation to newly emerging next-generation datasets, while still achieving substantially better performance than prior SOTA methods with fewer than 30,000 training images, less than 10% of their training data, and only 5 epochs in each training stage.",
+    "published": "2026-05-06",
+    "categories": [
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.04445v1",
+    "abs_url": "https://arxiv.org/abs/2605.04445v1"
+  },
+  {
+    "paper_id": "arxiv_2605.03737",
+    "title": "Discovering Reaction Mechanisms with Transition Path Sampling-Based Active Learning of Machine-Learned Potentials",
+    "authors": [
+      "Ashique Lal",
+      "Rik S. Breebaart",
+      "Peter G. Bolhuis",
+      "Evert Jan Meijer"
+    ],
+    "abstract": "Machine-learned interatomic potentials (MLPs) provide near density functional theory (DFT) accuracy at reduced computational cost, but their reliability depends on representative training data and often deteriorates in transition-state regions governing rare events. We introduce an active-learning framework in which Transition Path Sampling (TPS) serves as a targeted data-generation engine for constructing MLPs accurate in barrier regions. TPS generates ensembles of unbiased reactive trajectories, and a committee-based uncertainty estimate identifies configurations for selective DFT labeling and retraining. Iterating this cycle systematically refines the potential energy surface in dynamically relevant regions, without the need of prior knowledge of the mechanism. Applied to electrochemical CO$_2$ reduction to CO on copper in explicit water, the approach removes nonphysical artifacts present in early models, achieves near-DFT energy and force accuracy, and enables stable long-time sampling of reactive pathways. Extended TPS simulations reveal multiple dynamically accessible protonation mechanisms. This work establishes TPS as an efficient and principled active-learning strategy for reactive molecular simulations at electrochemical interfaces.",
+    "published": "2026-05-05",
+    "categories": [
+      "physics.chem-ph",
+      "physics.comp-ph"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.03737v1",
+    "abs_url": "https://arxiv.org/abs/2605.03737v1"
+  },
+  {
+    "paper_id": "arxiv_2605.03944",
+    "title": "TabSurv: Adapting Modern Tabular Neural Networks to Survival Analysis",
+    "authors": [
+      "Stanislav Kirpichenko",
+      "Andrei Konstantinov",
+      "Lev Utkin"
+    ],
+    "abstract": "Survival analysis on tabular data is a well-studied problem. However, existing deep learning methods are often highly task-specific, which can limit the transfer of new approaches from other domains and introduce constraints that may affect performance. We propose TabSurv, an approach that adapts modern tabular architectures to survival analysis using either the Weibull distribution or non-parametric survival prediction. TabSurv optimizes SurvHL, a novel histogram loss function supporting censored data. In addition to a baseline feed-forward network, we implement deep ensembles of MLPs for survival analysis within TabSurv. In contrast to prior work, the ensemble components are trained in parallel, optimizing survival distribution parameters before averaging, which promotes diversity across ensemble component predictions. We perform a comprehensive empirical evaluation of different proposed architectures on 10 diverse real-world survival datasets. Our results show that TabSurv consistently outperforms on average established classical and deep learning baselines, such as RSF, DeepSurv, DeepHit, SurvTRACE. Notably, deep ensembles with Weibull parametrization instead of non-parametric models achieve the highest average rank by C-index. Overall, our study clarifies how modern tabular neural networks can be adapted and trained to tackle survival analysis problems, offering a strong and reliable approach. The TabSurv implementation is publicly available.",
+    "published": "2026-05-05",
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "stat.ML"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.03944v1",
+    "abs_url": "https://arxiv.org/abs/2605.03944v1"
+  },
+  {
+    "paper_id": "arxiv_2605.03937",
+    "title": "MiniMind-O Technical Report: An Open Small-Scale Speech-Native Omni Model",
+    "authors": [
+      "Jingyao Gong"
+    ],
+    "abstract": "MiniMind-O is an open 0.1B-scale omni model built on the MiniMind language model. It accepts text, speech, and image inputs, and returns both text and streaming speech. The release includes model code, checkpoints, and the main Parquet training datasets for text-to-audio, image-to-text, and audio-to-audio training, making the complete interaction loop directly inspectable. The model uses a full MiniMind backbone as the Thinker and an independent four-layer Talker made from MiniMind blocks. Frozen SenseVoice-Small and SigLIP2 encoders provide speech and image features, which are mapped by lightweight MLP projectors and injected at modality-placeholder positions. The Talker reads a middle-layer Thinker state together with an autoregressive eight-layer Mimi-code buffer. Speaker control is handled by a dedicated speaker token, right-aligned reference codec prompts, and precomputed CAM++ speaker embeddings, so voice conditioning remains part of the audio-code context rather than a separate TTS module. With a 768-dimensional Talker, the dense and MoE variants reach average CERs of 0.0897 and 0.0900 in Thinker--Talker consistency evaluation, with overall voice-cloning similarities of 0.5995 and 0.5937. Beyond reporting a working system, the paper identifies three scale-critical design choices for small omni models: middle-layer semantic bridging, a released multimodal sequence format, and a parameter-efficient eight-codebook interface.",
+    "published": "2026-05-05",
+    "categories": [
+      "cs.SD",
+      "cs.MM",
+      "eess.AS"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.03937v1",
+    "abs_url": "https://arxiv.org/abs/2605.03937v1"
+  },
+  {
+    "paper_id": "arxiv_2605.03816",
+    "title": "The Manokhin Probability Matrix: A Diagnostic Framework for Classifier Probability Quality",
+    "authors": [
+      "Valery Manokhin"
+    ],
+    "abstract": "The Brier score conflates two distinct properties of probabilistic predictions: reliability (calibration error) and resolution (discriminatory power). We introduce the Manokhin Probability Matrix, a BCG-style two-dimensional diagnostic framework that separates them. Classifiers are placed on a 2x2 grid by Spiegelhalter Z-statistic and AUC-ROC expected rank, then assigned to one of four archetypes: Eagle (good on both axes), Bull (strong discrimination, poor calibration), Sloth (well-calibrated, weak discriminator), and Mole (poor on both). Each archetype carries a distinct prescription. We populate the matrix from a large-scale empirical study spanning 21 classifiers, 5 post-hoc calibrators, and 30 real-world binary classification tasks from the TabArena-v0.1 suite. The assignment is unambiguous. CatBoost, TabICL, EBM, TabPFN, GBC, and Random Forest are Eagles. XGBoost, LightGBM, and HGB are Bulls; Venn-Abers calibration cuts log-loss by 6.5 to 12.6% on Bulls but degrades Eagles by 2.1%. SVM, LR, LDA, and the empirical base-rate predictor are Sloths. MLP, KNN, Naive Bayes, and ExtraTrees are Moles. A theoretical asymmetry follows: no order-preserving post-hoc calibrator can add discriminatory power (Proposition 1), so calibration is the fixable part and discrimination is the hard part. The practical rule is direct: do not optimise aggregate Brier score without first decomposing it; optimise discrimination first, then fix calibration post-hoc. Code and raw experimental data are available at https://github.com/valeman/classifier_calibration.",
+    "published": "2026-05-05",
+    "categories": [
+      "stat.ML",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.03816v1",
+    "abs_url": "https://arxiv.org/abs/2605.03816v1"
+  },
+  {
+    "paper_id": "arxiv_2605.03491",
+    "title": "Real-Time Evaluation of Autonomous Systems under Adversarial Attacks",
+    "authors": [
+      "Adithya Mohan",
+      "Xujun Xie",
+      "Venkatesh Thirugnana Sambandham",
+      "Torsten Schön"
+    ],
+    "abstract": "Most evaluations of autonomous driving policies under adversarial conditions are conducted in simulation, due to cost efficiency and the absence of physical risk. However, purely virtual testing fails to capture structural inconsistencies, supervision constraints, and state-representation effects that arise in real-world data and fundamentally shape policy robustness. This work presents an offline trajectory-learning and adversarial robustness evaluation framework grounded in real-world intersection driving data. Within a controlled data contract, we train and compare three trajectory-learning paradigms: Multi-Layer Perceptron (MLP)-based Behavior Cloning (BC), Transformer-based object-tokenized BC, and inverse reinforcement learning (IRL) formulated within a Generative Adversarial Imitation Learning (GAIL) framework. Models are evaluated using Average Displacement Error (ADE) and Final Displacement Error (FDE).\n  Inference-time robustness is assessed by subjecting trained policies to gradient-based adversarial perturbations across multiple intersection scenarios, yielding a structured robustness evaluation matrix. Results show that state-structure design and architectural inductive biases critically influence adversarial stability, leading to markedly different robustness profiles despite comparable nominal prediction accuracy (ADE < 0.08). Inference-time Projected Gradient Descent (PGD) attacks induce final displacement errors of up to approximately 8 meters. The proposed framework establishes a scalable benchmark for studying offline trajectory learning and adversarial robustness in real-world autonomous driving settings.",
+    "published": "2026-05-05",
+    "categories": [
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.03491v1",
+    "abs_url": "https://arxiv.org/abs/2605.03491v1"
+  },
+  {
+    "paper_id": "arxiv_2605.02888",
+    "title": "SpecKV: Adaptive Speculative Decoding with Compression-Aware Gamma Selection",
+    "authors": [
+      "Shikhar Shukla"
+    ],
+    "abstract": "Speculative decoding accelerates large language model (LLM) inference by using a small draft model to propose candidate tokens that a larger target model verifies. A critical hyperparameter in this process is the speculation length $γ$, which determines how many tokens the draft model proposes per step. Nearly all existing systems use a fixed $γ$ (typically 4), yet empirical evidence suggests that the optimal value varies across task types and, crucially, depends on the compression level applied to the target model. In this paper, we present SpecKV, a lightweight adaptive controller that selects $γ$ per speculation step using signals extracted from the draft model itself. We profile speculative decoding across 4 task categories, 4 speculation lengths, and 3 compression levels (FP16, INT8, NF4), collecting 5,112 step-level records with per-step acceptance rates, draft entropy, and draft confidence. We demonstrate that the optimal $γ$ shifts across compression regimes and that draft model confidence and entropy are strong predictors of acceptance rate (correlation $\\approx$ 0.56). SpecKV uses a small MLP trained on these signals to maximize expected tokens per speculation step, achieving a 56.0% improvement over the fixed-$γ=4$ baseline with only 0.34 ms overhead per decision (<0.5% of step time). The improvement is statistically significant (p < 0.001, paired bootstrap test). We release all profiling data, trained models, and notebooks as open-source artifacts.",
+    "published": "2026-05-04",
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "cs.CL",
+      "cs.DC",
+      "eess.SY"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.02888v2",
+    "abs_url": "https://arxiv.org/abs/2605.02888v2"
+  },
+  {
+    "paper_id": "arxiv_2605.02689",
+    "title": "MSMixer: Learned Multi-Scale Temporal Mixing with Complementary Linear Shortcut for Long-Term Time Series Forecasting",
+    "authors": [
+      "Ahmed Cherif"
+    ],
+    "abstract": "Long-term time series forecasting requires models that simultaneously capture rapid oscillations, medium-range periodicities, and slowly evolving macro-trends from a fixed look-back window. Existing lightweight MLP-based models typically operate on a single temporal resolution, limiting their ability to explicitly model patterns at multiple scales. We propose MSMixer, a channel-independent multi-scale MLP architecture that addresses this limitation through three complementary innovations: (i) three parallel scale branches at down-sample factors {1x, 4x, 16x} with independent MLP blocks, (ii) a learnable softmax gate that dynamically weighs branch outputs, and (iii) a DLinear complementary shortcut that provides full-window trend and seasonality context. MSMixer contains only 112K parameters at H=96 and runs at O(T) complexity. Evaluated on four ETT benchmarks with standard chronological splits and three random seeds, MSMixer achieves the lowest average MSE (0.357) among lightweight models, outperforming DLinear (0.386, -7.4%) and NLinear (0.365, -2.1%), winning 12 of 16 configurations. Against five Transformer-based baselines from the literature, MSMixer achieves best or second-best MSE in 9 of 16 configurations while using 5x fewer parameters than PatchTST. Ablation and sensitivity analyses confirm the complementary contributions of the multi-scale branches and the DLinear shortcut.",
+    "published": "2026-05-04",
+    "categories": [
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.02689v1",
+    "abs_url": "https://arxiv.org/abs/2605.02689v1"
+  },
+  {
+    "paper_id": "arxiv_2605.02575",
+    "title": "Self-Supervised Spatial And Zero-Shot Angular Super-Resolution by Spatial-Angular Implicit Representation For Rotating-View SNR-Efficient Diffusion MRI",
+    "authors": [
+      "Yinzhe Wu",
+      "Hongyu Rui",
+      "Fanwen Wang",
+      "Jiahao Huang",
+      "Zi Wang",
+      "Guang Yang"
+    ],
+    "abstract": "Rotating-view thick-slice acquisition is highly SNR-efficient for mesoscale diffusion MRI (dMRI) but requires numerous rotating views to satisfy Nyquist sampling, resulting in long scan time. We propose a self-supervised Spatial-Angular Implicit Neural Representation (SA-INR) that reconstructs high-resolution dMRI from a single view per diffusion direction, representing a massive acceleration. Our model, an MLP conditioned on a b=0 structural prior and the b-direction via FiLM, is trained end-to-end on the anisotropic input. The framework not only accurately reconstructs the trained b-directions (spatial SR) but also learns a continuous q-space representation, enabling high-fidelity \"zero-shot\" synthesis of unseen b-directions (angular SR). On simulated data, our method achieved high fidelity for both trained (34.82 dB) and unseen (33.08 dB) directions. Most importantly, the synthesized angular data also improved the quantitative accuracy of downstream DTI model fitting. Our SA-INR framework breaks the classical sampling limits, paving the way for fast, quantitative high-resolution dMRI.",
+    "published": "2026-05-04",
+    "categories": [
+      "cs.CV",
+      "eess.SP"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.02575v1",
+    "abs_url": "https://arxiv.org/abs/2605.02575v1"
+  },
+  {
+    "paper_id": "arxiv_2605.01851",
+    "title": "Beyond Data-Physics Consistency: A Cross-Correlated Physics-Informed Neural Network for Robust Inverse Scattering",
+    "authors": [
+      "Shilong Sun"
+    ],
+    "abstract": "The electromagnetic inverse scattering problem (ISP), due to its inherent strong nonlinearity and severe ill-posedness, has long been a core challenge in microwave imaging. In recent years, physics-informed neural networks (PINNs) have provided a novel paradigm for solving ISPs by embedding Maxwell's equations into the deep learning optimization process. However, conventional PINN methods rely solely on independent data-equation and state-equation residuals to construct the consistency loss, which easily causes them to fall into local minima and suffer from low computational efficiency when facing high-contrast targets or multi-frequency observation data. To transcend the traditional data-physics consistency framework, this paper proposes a novel cross-correlated physics-informed neural network (CC-PINN). The core innovations of this work include: (1) constructing a Fourier feature MLP network architecture based on weight normalization, which possesses excellent capability for solving inverse scattering problems; (2) introducing a cross-correlated residual term that directly couples the reconstructed dielectric parameters and the predicted internal total field to the external observation field, breaking the decoupling between the contrast source and the permittivity optimization in traditional PINNs and significantly enhancing the robustness of PINNs for ISP; (3) introducing a zero-padding-based 2D-FFT acceleration algorithm, which reduces the computational complexity of the forward Green's function integration. Experimental results on synthetic and measured data demonstrate that CC-PINN can reconstruct high-contrast dielectric targets with high fidelity, and its convergence robustness far exceeds that of PINN algorithms using classical cost functions, regardless of whether simultaneous multi-frequency processing or frequency-hopping strategies are employed.",
+    "published": "2026-05-03",
+    "categories": [
+      "eess.SP"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.01851v1",
+    "abs_url": "https://arxiv.org/abs/2605.01851v1"
+  },
+  {
+    "paper_id": "arxiv_2605.01711",
+    "title": "Linear-Time Global Visual Modeling without Explicit Attention",
+    "authors": [
+      "Ruize He",
+      "Dongchen Han",
+      "Gao Huang"
+    ],
+    "abstract": "Existing research largely attributes the global sequence modeling capability of Transformers to the explicit computation of attention weights, a process that inherently incurs quadratic computational complexity. In this work, we offer a novel perspective: we demonstrate that attention can be mathematically reframed as a Multi-Layer Perceptron (MLP) equipped with dynamically predicted parameters. Through this lens, we explain attention's global modeling power not as explicit token-wise aggregation, but as an implicit process where dynamically generated parameters act as a compressed representation of the global context. Inspired by this insight, we investigate a fundamental question: can we achieve Transformer-level sequence global modeling entirely through dynamic parameterization while maintaining linear complexity, effectively replacing explicit attention? To explore this, we design various dynamic parameter prediction strategies and integrate them into standard network layers. Extensive empirical studies on vision models demonstrate that dynamic parameterization can indeed serve as a highly effective, linear-complexity alternative to explicit attention, opening new pathways for efficient sequence modeling. Code is available at https://github.com/LeapLabTHU/WeightFormer.",
+    "published": "2026-05-03",
+    "categories": [
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.01711v2",
+    "abs_url": "https://arxiv.org/abs/2605.01711v2"
+  },
+  {
+    "paper_id": "arxiv_2605.01705",
+    "title": "Toward Resilient 5G Networks: Comparative Analysis of Federated and Centralized Learning for RF Jamming Detection",
+    "authors": [
+      "Samhita Kuili",
+      "Mohammadreza Amini",
+      "Burak Kantarci"
+    ],
+    "abstract": "Jamming attacks are proliferating and pose a significant threat to the security of 5G and beyond networks. These attacks target 5G radio frequency (RF) domain and can disrupt the communication in wireless networks. While conventional machine learning and deep learning approaches demonstrate its potential for jamming detection, they typically require centralized data collection, compromising the privacy of user equipment (UEs). This work proposes a federated learning (FL)-based jamming detection framework that operates on over-the-air In-phase and Quadrature (IQ) samples extracted from Synchronization Signal Blocks (SSBs) in the RF domain. The framework enables collaborative model training across multiple UEs without sharing raw RF signal data. We adopt Federated Averaging (FedAvg) algorithm to train a 1D convolutional neural network (1DCNN) for effective detection of attacks. Numerical results demonstrate that the proposed FL framework achieves 97% accuracy and 97% F1-score, outperforming centralized baselines including MLP, 1DCNN, SVM, and logistic regression, while preserving the data privacy of all participating UEs",
+    "published": "2026-05-03",
+    "categories": [
+      "cs.NI",
+      "cs.CR",
+      "cs.LG",
+      "eess.SP"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.01705v1",
+    "abs_url": "https://arxiv.org/abs/2605.01705v1"
+  },
+  {
+    "paper_id": "arxiv_2605.01669",
+    "title": "PRCD-MAP: Learning How Much to Trust Imperfect Priors in Causal Discovery",
+    "authors": [
+      "Xihang Shan",
+      "Da Zhou"
+    ],
+    "abstract": "External priors of unknown reliability create a brittle trade-off in causal discovery: blind trust amplifies errors, blind rejection wastes signal. Real priors are also heterogeneously reliable -- physical laws are trustworthy, LLM-suggested edges are speculative -- yet existing methods either ignore priors or impose them through globally uniform trust. We propose PRCD-MAP, a soft prior-consumption layer that assigns per-edge trust to an imperfect prior and uses it to modulate a prior-aware $\\ell_1$ and prior-weighted $\\ell_2$ regularizer in a MAP objective. Trust is calibrated by empirical Bayes on a Laplace-approximated marginal likelihood and propagated along the prior graph by an MLP, so data-confirmed neighborhoods boost trust and contradictions suppress it. PRCD-MAP enjoys a population-level safety guarantee: it is $\\varepsilon$-safe in expectation over the prior-generation distribution, with $\\varepsilon\\leq C\\cdot\\mathrm{acc}(1{-}\\mathrm{acc})\\cdot d^2/T$ at the parametric $T^{-1}$ rate and vanishing at the prior-quality endpoints. When the prior is uninformative, learned trust provably collapses to its floor and the method recovers a no-prior baseline. Empirically, on real CausalTime data PRCD-MAP exploits informative LLM priors (LLM-prior gain $+0.067/+0.089$ AUROC on AQI/Medical over a no-prior PRCD-MAP backbone; combined backbone+prior lead $+0.123/+0.043$ over PCMCI+), auto-attenuates on the anonymous-variable Traffic stress test, and retains a lead at $d{=}300$; against BayesDAG, the closest soft-Bayesian baseline, PRCD-MAP wins on every CausalTime dataset under a matched $W_0$-only protocol. A four-way ablation isolates each component: EB calibration and MLP trust propagation jointly carry the plurality of the gain, with positive sign on every dataset. Extensions to nonlinear (NAM) and cross-sectional settings show the calibrated-trust principle is setting-agnostic.",
+    "published": "2026-05-03",
+    "categories": [
+      "stat.ML",
+      "cs.LG",
+      "stat.ME"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.01669v2",
+    "abs_url": "https://arxiv.org/abs/2605.01669v2"
+  }
+]

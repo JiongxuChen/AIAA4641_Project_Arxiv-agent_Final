@@ -1,0 +1,83 @@
+[
+  {
+    "paper_id": "arxiv_2605.08063",
+    "title": "Flow-OPD: On-Policy Distillation for Flow Matching Models",
+    "authors": [
+      "Zhen Fang",
+      "Wenxuan Huang",
+      "Yu Zeng",
+      "Yiming Zhao",
+      "Shuang Chen",
+      "Kaituo Feng",
+      "Yunlong Lin",
+      "Lin Chen",
+      "Zehui Chen",
+      "Shaosheng Cao",
+      "Feng Zhao"
+    ],
+    "abstract": "Existing Flow Matching (FM) text-to-image models suffer from two critical bottlenecks under multi-task alignment: the reward sparsity induced by scalar-valued rewards, and the gradient interference arising from jointly optimizing heterogeneous objectives, which together give rise to a 'seesaw effect' of competing metrics and pervasive reward hacking. Inspired by the success of On-Policy Distillation (OPD) in the large language model community, we propose Flow-OPD, the first unified post-training framework that integrates on-policy distillation into Flow Matching models. Flow-OPD adopts a two-stage alignment strategy: it first cultivates domain-specialized teacher models via single-reward GRPO fine-tuning, allowing each expert to reach its performance ceiling in isolation; it then establishes a robust initial policy through a Flow-based Cold-Start scheme and seamlessly consolidates heterogeneous expertise into a single student via a three-step orchestration of on-policy sampling, task-routing labeling, and dense trajectory-level supervision. We further introduce Manifold Anchor Regularization (MAR), which leverages a task-agnostic teacher to provide full-data supervision that anchors generation to a high-quality manifold, effectively mitigating the aesthetic degradation commonly observed in purely RL-driven alignment. Built upon Stable Diffusion 3.5 Medium, Flow-OPD raises the GenEval score from 63 to 92 and the OCR accuracy from 59 to 94, yielding an overall improvement of roughly 10 points over vanilla GRPO, while preserving image fidelity and human-preference alignment and exhibiting an emergent 'teacher-surpassing' effect. These results establish Flow-OPD as a scalable alignment paradigm for building generalist text-to-image models.",
+    "published": "2026-05-08",
+    "categories": [
+      "cs.CV",
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.08063v1",
+    "abs_url": "https://arxiv.org/abs/2605.08063v1",
+    "added_at": "2026-05-11T12:09:05.628906",
+    "source_query": "Diffusion",
+    "source_type": "retrieval",
+    "relevance_score": 0.2159,
+    "rank": 1,
+    "cluster": "flow trajectory opd"
+  },
+  {
+    "paper_id": "arxiv_2605.08078",
+    "title": "Normalizing Trajectory Models",
+    "authors": [
+      "Jiatao Gu",
+      "Tianrong Chen",
+      "Ying Shen",
+      "David Berthelot",
+      "Shuangfei Zhai",
+      "Josh Susskind"
+    ],
+    "abstract": "Diffusion-based models decompose sampling into many small Gaussian denoising steps -- an assumption that breaks down when generation is compressed to a few coarse transitions. Existing few-step methods address this through distillation, consistency training, or adversarial objectives, but sacrifice the likelihood framework in the process. We introduce Normalizing Trajectory Models (NTM), which models each reverse step as an expressive conditional normalizing flow with exact likelihood training. Architecturally, NTM combines shallow invertible blocks within each step with a deep parallel predictor across the trajectory, forming an end-to-end network trainable from scratch or initializable from pretrained flow-matching models. Its exact trajectory likelihood further enables self-distillation: a lightweight denoiser trained on the model's own score produces high-quality samples in four steps. On text-to-image benchmarks, NTM matches or outperforms strong image generation baselines in just four sampling steps while uniquely retaining exact likelihood over the generative trajectory.",
+    "published": "2026-05-08",
+    "categories": [
+      "cs.CV",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.08078v1",
+    "abs_url": "https://arxiv.org/abs/2605.08078v1",
+    "added_at": "2026-05-11T12:09:05.628900",
+    "source_query": "Diffusion",
+    "source_type": "retrieval",
+    "relevance_score": 0.0239,
+    "rank": 2,
+    "cluster": "flow trajectory opd"
+  },
+  {
+    "paper_id": "arxiv_2605.08066",
+    "title": "Covert Signaling for Communication and Sensing over the Bosonic Channels",
+    "authors": [
+      "Tianrui Tan",
+      "Evan J. D. Anderson",
+      "Michael S. Bullock",
+      "Boulat A. Bash"
+    ],
+    "abstract": "Preventing signal detection in communication and active sensing requires careful control of transmission power. In fact, the square-root laws (SRL) for covert classical and quantum communication and sensing prescribe that the average output power per channel use scales as $1/\\sqrt{n}$ for $n$ channel uses. Two strategies for achieving this are diffuse and sparse signaling. The former transmits signals with power decaying as $1/\\sqrt{n}$ on all $n$ channel uses, which is convenient for mathematical analysis. The latter transmits constant-power signals rarely, on approximately $\\sqrt{n}$ out of $n$ channel uses, while remaining silent on the others. This offers significant practical advantages in compatibility with modern digital transmitters. Here, we study sparse signaling over lossy thermal-noise bosonic channels, which describe quantumly many practical channels (including optical, microwave, and radio-frequency). We characterize the input signal state that minimizes detectability. We find an unintuitive optimal quantum state structure: a mixture of just two consecutive photon-number states. In particular, in the low-brightness regime, the optimal signal state is a mixture of vacuum and a single photon. Since these states are generally suboptimal for both communication and active sensing, we explore the resulting trade-off and identify input-power thresholds for transitions between optimizing for covertness vs. performance in communication and sensing tasks.",
+    "published": "2026-05-08",
+    "categories": [
+      "quant-ph",
+      "cs.IT"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.08066v1",
+    "abs_url": "https://arxiv.org/abs/2605.08066v1",
+    "added_at": "2026-05-11T12:09:05.628905",
+    "source_query": "Diffusion",
+    "source_type": "retrieval",
+    "relevance_score": 0.0,
+    "rank": 3,
+    "cluster": "sensing communication signaling"
+  }
+]
