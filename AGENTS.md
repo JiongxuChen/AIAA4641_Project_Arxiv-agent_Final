@@ -2,7 +2,7 @@
 
 ## Name
 
-arxiv-research-agent
+aiaa4641-project-arxiv-agent-final
 
 ## Description
 
