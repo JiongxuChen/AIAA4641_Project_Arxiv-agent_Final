@@ -26,15 +26,58 @@ import csv
 import datetime
 import json
 import os
+import re
 import sys
 import time
 import urllib.parse
+import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 #os.environ['http_proxy'] = 'http://127.0.0.1:7897'
 #os.environ['https_proxy'] = 'http://127.0.0.1:7897'
 ARXIV_API_URLS = ["https://export.arxiv.org/api/query", "http://export.arxiv.org/api/query"]
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+DEFAULT_LIBRARY_FILE = os.path.join(PROJECT_ROOT, "papers_library.json")
+ATOM_NS = "http://www.w3.org/2005/Atom"
+ARXIV_NS = "http://arxiv.org/schemas/atom"
+OPENSEARCH_NS = "http://a9.com/-/spec/opensearch/1.1/"
+REQUEST_DELAY_SECONDS = 3
+MAX_RETRIES = 2
+RETRY_DELAY_SECONDS = 20
+MAX_ARXIV_RESULTS = 200
+ID_VERSION_RE = re.compile(r"v\d+$")
+CORE_OUTPUT_FIELDS = (
+    "paper_id",
+    "title",
+    "authors",
+    "abstract",
+    "published",
+    "categories",
+    "pdf_url",
+    "abs_url",
+)
+
+
+class ArxivRateLimitError(RuntimeError):
+    """Raised when arXiv returns HTTP 429."""
+
+
+def clean_text(text: Optional[str]) -> str:
+    """Normalize arXiv text fields by collapsing whitespace."""
+    if not text:
+        return ""
+    return " ".join(str(text).split())
+
+
+def normalize_paper_output(paper: Dict[str, Any]) -> Dict[str, Any]:
+    """Return only the fields consumed by the rest of the agent."""
+    normalized = {field: paper.get(field, "") for field in CORE_OUTPUT_FIELDS}
+    if not isinstance(normalized["authors"], list):
+        normalized["authors"] = [str(normalized["authors"])] if normalized["authors"] else []
+    if not isinstance(normalized["categories"], list):
+        normalized["categories"] = [str(normalized["categories"])] if normalized["categories"] else []
+    return normalized
 
 
 def parse_query_terms(query: str) -> List[str]:
@@ -104,6 +147,136 @@ def build_arxiv_query(query: str) -> str:
     return "(" + " OR ".join(clauses) + ")"
 
 
+def build_arxiv_query_with_date(query: str, days: int) -> str:
+    """Build an arXiv query and push the recent-day filter into the API query."""
+    search_query = build_arxiv_query(query)
+    if days <= 0:
+        return search_query
+
+    end_date = datetime.date.today()
+    start_date = end_date - datetime.timedelta(days=days)
+    start = start_date.strftime("%Y%m%d") + "0000"
+    end = end_date.strftime("%Y%m%d") + "2359"
+    return f"({search_query}) AND submittedDate:[{start} TO {end}]"
+
+
+def _library_term_matches(term: str, text: str) -> bool:
+    """Match a fallback term as an exact phrase or as all component tokens."""
+    if term in text:
+        return True
+    tokens = [token for token in term.split() if token]
+    return bool(tokens) and all(token in text for token in tokens)
+
+
+def _search_library_fallback(query: str, days: int, max_results: int) -> List[Dict]:
+    """Fallback to local paper library when arXiv temporarily rate-limits us."""
+    if not os.path.exists(DEFAULT_LIBRARY_FILE):
+        return []
+
+    try:
+        with open(DEFAULT_LIBRARY_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except (json.JSONDecodeError, OSError):
+        return []
+
+    papers = data.get("papers", [])
+    if not isinstance(papers, list):
+        return []
+
+    terms = [term.lower() for term in parse_query_terms(query)]
+    matched = []
+    seen = set()
+    for paper in papers:
+        paper_id = paper.get("paper_id") or paper.get("title")
+        if not paper_id or paper_id in seen:
+            continue
+        text = " ".join(
+            [
+                str(paper.get("title", "")),
+                str(paper.get("abstract", "")),
+                " ".join(paper.get("categories", []) or []),
+                str(paper.get("source_query", "")),
+            ]
+        ).lower()
+        if any(_library_term_matches(term, text) for term in terms):
+            seen.add(paper_id)
+            matched.append(dict(paper))
+
+    matched = filter_by_date(matched, days)
+    if matched:
+        print(f"Using {len(matched[:max_results])} local library papers as fallback for query: {query}")
+    return [normalize_paper_output(paper) for paper in matched[:max_results]]
+
+
+def _entry_text(entry: ET.Element, path: str, ns: Dict[str, str]) -> str:
+    elem = entry.find(path, ns)
+    return elem.text if elem is not None and elem.text else ""
+
+
+def _parse_arxiv_xml(data: bytes) -> Dict:
+    root = ET.fromstring(data)
+    ns = {
+        'atom': ATOM_NS,
+        'arxiv': ARXIV_NS,
+        'opensearch': OPENSEARCH_NS,
+    }
+
+    feed_data = {
+        'feed': {},
+        'entries': []
+    }
+
+    total_results = root.find('.//opensearch:totalResults', ns)
+    if total_results is not None:
+        feed_data['feed']['opensearch_totalresults'] = total_results.text
+
+    for entry in root.findall('.//atom:entry', ns):
+        entry_data: Dict[str, Any] = {
+            'id': _entry_text(entry, 'atom:id', ns),
+            'title': clean_text(_entry_text(entry, 'atom:title', ns)),
+            'summary': clean_text(_entry_text(entry, 'atom:summary', ns)),
+            'published': _entry_text(entry, 'atom:published', ns),
+            'authors': [],
+            'tags': [],
+            'links': [],
+        }
+
+        for author_elem in entry.findall('atom:author', ns):
+            name = _entry_text(author_elem, 'atom:name', ns)
+            if name:
+                entry_data['authors'].append({'name': clean_text(name)})
+
+        for category_elem in entry.findall('atom:category', ns):
+            term = category_elem.get('term')
+            if term:
+                entry_data['tags'].append({'term': term})
+
+        for link_elem in entry.findall('atom:link', ns):
+            link_data = {
+                'title': link_elem.get('title', ''),
+                'rel': link_elem.get('rel', ''),
+                'href': link_elem.get('href', ''),
+                'type': link_elem.get('type', ''),
+            }
+            entry_data['links'].append(link_data)
+
+        primary_cat = entry.find('arxiv:primary_category', ns)
+        if primary_cat is not None:
+            entry_data['arxiv_primary_category'] = {'term': primary_cat.get('term', '')}
+
+        feed_data['entries'].append(entry_data)
+
+    return feed_data
+
+
+def _is_rate_limit_error(error: Exception) -> bool:
+    return isinstance(error, urllib.error.HTTPError) and error.code == 429
+
+
+def _is_http_error(error: Exception) -> bool:
+    return isinstance(error, urllib.error.HTTPError)
+
+
 def fetch_from_api(search_query: str, start: int, max_results: int) -> Dict:
     """
     Query the arXiv API and parse the result.
@@ -118,81 +291,37 @@ def fetch_from_api(search_query: str, start: int, max_results: int) -> Dict:
     """
     encoded_query = urllib.parse.quote(search_query)
 
-    for api_url in ARXIV_API_URLS:
-        url = f"{api_url}?search_query={encoded_query}&start={start}&max_results={max_results}&sortBy=submittedDate&sortOrder=descending"
+    last_error: Optional[Exception] = None
+    for attempt in range(1, MAX_RETRIES + 1):
+        if attempt > 1:
+            time.sleep(RETRY_DELAY_SECONDS)
 
-        try:
-            with urllib.request.urlopen(url, timeout=30) as response:
-                data = response.read()
-                root = ET.fromstring(data)
-                ns = {'atom': 'http://www.w3.org/2005/Atom', 'opensearch': 'http://a9.com/-/spec/opensearch/1.1/'}
+        for api_url in ARXIV_API_URLS:
+            params = (
+                f"search_query={encoded_query}"
+                f"&start={start}"
+                f"&max_results={max_results}"
+                f"&sortBy=submittedDate"
+                f"&sortOrder=descending"
+            )
+            url = f"{api_url}?{params}"
 
-                feed_data = {
-                    'feed': {},
-                    'entries': []
-                }
+            try:
+                request = urllib.request.Request(
+                    url,
+                    headers={"User-Agent": "Project-arxiv ResearchBriefingAgent/1.0"},
+                )
+                with urllib.request.urlopen(request, timeout=60) as response:
+                    return _parse_arxiv_xml(response.read())
+            except Exception as e:
+                last_error = e
+                print(f"Attempt {attempt}/{MAX_RETRIES} using {api_url} failed: {e}")
+                if _is_rate_limit_error(e):
+                    raise ArxivRateLimitError(str(e)) from e
+                if _is_http_error(e):
+                    continue
 
-                total_results = root.find('.//opensearch:totalResults', ns)
-                if total_results is not None:
-                    feed_data['feed']['opensearch_totalresults'] = total_results.text
-
-                for entry in root.findall('.//atom:entry', ns):
-                    entry_data = {}
-
-                    id_elem = entry.find('atom:id', ns)
-                    if id_elem is not None:
-                        entry_data['id'] = id_elem.text
-
-                    title_elem = entry.find('atom:title', ns)
-                    if title_elem is not None:
-                        entry_data['title'] = title_elem.text
-
-                    summary_elem = entry.find('atom:summary', ns)
-                    if summary_elem is not None:
-                        entry_data['summary'] = summary_elem.text
-
-                    published_elem = entry.find('atom:published', ns)
-                    if published_elem is not None:
-                        entry_data['published'] = published_elem.text
-
-                    authors = []
-                    for author_elem in entry.findall('atom:author', ns):
-                        name_elem = author_elem.find('atom:name', ns)
-                        if name_elem is not None:
-                            authors.append({'name': name_elem.text})
-                    entry_data['authors'] = authors
-
-                    tags = []
-                    for category_elem in entry.findall('atom:category', ns):
-                        term = category_elem.get('term')
-                        if term:
-                            tags.append({'term': term})
-                    entry_data['tags'] = tags
-
-                    links = []
-                    for link_elem in entry.findall('atom:link', ns):
-                        link_data = {}
-                        if link_elem.get('title'):
-                            link_data['title'] = link_elem.get('title')
-                        if link_elem.get('rel'):
-                            link_data['rel'] = link_elem.get('rel')
-                        if link_elem.get('href'):
-                            link_data['href'] = link_elem.get('href')
-                        links.append(link_data)
-                    entry_data['links'] = links
-
-                    primary_cat = entry.find('arxiv:primary_category', {'arxiv': 'http://arxiv.org/schemas/atom'})
-                    if primary_cat is not None:
-                        entry_data['arxiv_primary_category'] = {'term': primary_cat.get('term')}
-
-                    feed_data['entries'].append(entry_data)
-
-                return feed_data
-        except Exception as e:
-            print(f"Attempt to use {api_url} failed: {e}")
-            continue
-
-    raise RuntimeError("All arXiv API endpoints failed")
+    raise RuntimeError(f"All arXiv API endpoints failed: {last_error}")
 
 
 def extract_paper_info(entry: Any) -> Dict[str, Any]:
@@ -207,8 +336,8 @@ def extract_paper_info(entry: Any) -> Dict[str, Any]:
 
     entry_id = get_attr(entry, 'id', '')
     if entry_id:
-        paper_id = entry_id.split("/abs/")[-1]
-        paper_id = paper_id.split("v")[0]
+        paper_id = entry_id.split("/abs/")[-1].strip()
+        paper_id = ID_VERSION_RE.sub("", paper_id)
         paper_id = f"arxiv_{paper_id}"
     else:
         paper_id = ""
@@ -251,7 +380,10 @@ def extract_paper_info(entry: Any) -> Dict[str, Any]:
     links = get_attr(entry, 'links', [])
     for link in links:
         if isinstance(link, dict):
-            if link.get('title') == 'pdf':
+            link_title = link.get('title', '')
+            link_type = link.get('type', '')
+            href = link.get('href', '')
+            if link_title == 'pdf' or link_type == 'application/pdf' or "/pdf/" in href:
                 pdf_url = link.get('href', '')
             elif link.get('rel') == 'alternate':
                 abs_url = link.get('href', '')
@@ -271,19 +403,13 @@ def extract_paper_info(entry: Any) -> Dict[str, Any]:
     except (ValueError, TypeError):
         published_date = ""
 
-    title = get_attr(entry, 'title', '')
-    if title and not isinstance(title, str):
-        title = str(title)
-
-    summary = get_attr(entry, 'summary', '')
-    if summary and not isinstance(summary, str):
-        summary = str(summary)
-
+    title = clean_text(get_attr(entry, 'title', ''))
+    summary = clean_text(get_attr(entry, 'summary', ''))
     return {
         "paper_id": paper_id,
-        "title": title.strip() if title else "",
+        "title": title,
         "authors": authors,
-        "abstract": summary.strip() if summary else "",
+        "abstract": summary,
         "published": published_date,
         "categories": categories,
         "pdf_url": pdf_url,
@@ -296,8 +422,9 @@ def deduplicate_papers(papers: List[Dict]) -> List[Dict]:
     seen_ids = set()
     unique_papers = []
     for paper in papers:
-        if paper["paper_id"] not in seen_ids:
-            seen_ids.add(paper["paper_id"])
+        paper_id = paper.get("paper_id") or paper.get("title")
+        if paper_id and paper_id not in seen_ids:
+            seen_ids.add(paper_id)
             unique_papers.append(paper)
     return unique_papers
 
@@ -324,17 +451,18 @@ def filter_by_date(papers: List[Dict], days: int) -> List[Dict]:
 
 def fetch_papers_with_pagination(query: str, days: int, max_results: int) -> List[Dict]:
     """Fetch papers with pagination since the API may only return a limited number per request."""
-    search_query = build_arxiv_query(query)
+    search_query = build_arxiv_query_with_date(query, days)
     all_papers = []
     start = 0
-    page_size = 100
+    page_size = min(100, max_results)
 
     max_pages = (max_results + page_size - 1) // page_size
 
     try:
         for _ in range(max_pages):
             try:
-                feed = fetch_from_api(search_query, start, page_size)
+                page_limit = min(page_size, max_results - len(all_papers))
+                feed = fetch_from_api(search_query, start, page_limit)
 
                 total_results = int(feed.get('feed', {}).get('opensearch_totalresults', 0))
                 if start >= total_results:
@@ -344,14 +472,16 @@ def fetch_papers_with_pagination(query: str, days: int, max_results: int) -> Lis
                     paper = extract_paper_info(entry)
                     all_papers.append(paper)
 
-                start += page_size
+                start += page_limit
 
                 if len(all_papers) >= max_results:
                     break
 
-                time.sleep(1)
+                time.sleep(REQUEST_DELAY_SECONDS)
 
             except Exception as e:
+                if isinstance(e, ArxivRateLimitError):
+                    raise
                 print(f"Warning: paginated request failed (start={start}): {e}")
                 break
 
@@ -363,6 +493,8 @@ def fetch_papers_with_pagination(query: str, days: int, max_results: int) -> Lis
             print("Warning: No papers retrieved from arXiv API. Please check your network connection or try again later.")
 
     except Exception as e:
+        if isinstance(e, ArxivRateLimitError):
+            raise
         print(f"Error retrieving papers: {e}")
         print("Failed to retrieve papers from arXiv. Please check your network connection or try again later.")
         return []
@@ -398,46 +530,24 @@ def retrieve_papers(query: str, days: int, max_results: int) -> List[Dict]:
     if not isinstance(max_results, int) or max_results <= 0:
         raise ValueError("max_results must be a positive integer")
 
-    max_results = min(max_results, 200)
+    max_results = min(max_results, MAX_ARXIV_RESULTS)
 
-    papers = fetch_papers_with_pagination(query, days, max_results)
+    try:
+        papers = fetch_papers_with_pagination(query, days, max_results)
+    except ArxivRateLimitError as e:
+        print(f"arXiv API rate-limited this request: {e}")
+        return _search_library_fallback(query, days, max_results)
+
+    if papers:
+        return [normalize_paper_output(paper) for paper in papers]
 
     return papers
 
 
 def retrieve_papers_with_cache(query: str, days: int, max_results: int,
-                                cache_file: str = "arxiv_cache.json") -> List[Dict]:
-    """A cached variant of retrieve_papers to avoid repeated API calls."""
-    cache_key = f"{query}_{days}_{max_results}"
-
-    if os.path.exists(cache_file):
-        try:
-            with open(cache_file, 'r', encoding='utf-8') as f:
-                cache = json.load(f)
-            if cache_key in cache:
-                print(f"Using cached results for query: {query}")
-                return cache[cache_key]
-        except (json.JSONDecodeError, IOError):
-            pass
-
-    papers = retrieve_papers(query, days, max_results)
-
-    cache = {}
-    if os.path.exists(cache_file):
-        try:
-            with open(cache_file, 'r', encoding='utf-8') as old_f:
-                cache = json.load(old_f)
-        except (json.JSONDecodeError, IOError):
-            cache = {}
-
-    cache[cache_key] = papers
-    try:
-        with open(cache_file, 'w', encoding='utf-8') as f:
-            json.dump(cache, f, ensure_ascii=False, indent=2)
-    except IOError:
-        pass
-
-    return papers
+                                cache_file: str = "") -> List[Dict]:
+    """Compatibility wrapper retained for older callers; no cache file is created."""
+    return retrieve_papers(query, days, max_results)
 
 
 def save_papers(papers: List[Dict], output_file: str, format: str = "json") -> bool:
