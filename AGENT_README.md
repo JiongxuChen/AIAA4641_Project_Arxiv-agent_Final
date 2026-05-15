@@ -367,16 +367,6 @@ The CLI shows the agent architecture:
 Both modes are backed by the same agent class, so they are not separate
 implementations.
 
-### 14. Recommended Submission Description
-
-For StudyClawHub or the final report, the agent can be described as:
-
-> The arXiv Research Agent is a web-first research assistant. Its agent layer is
-> implemented in `agent.py` as `ResearchBriefingAgent`, which orchestrates
-> retrieval, ranking, briefing, follow-up query, scheduling, and persistence.
-> The Web UI provides the complete interactive experience, while the CLI offers
-> a reproducible way to run the same agent workflows from code. The skills are
-> submitted separately and are called by the agent through clear module APIs.
 
 ---
 
@@ -727,21 +717,3 @@ CLI 展示 agent 架构：
 
 两种模式背后使用的是同一个 agent class，因此不是两套分离实现。
 
-### 14. 推荐提交描述
-
-在 StudyClawHub 或最终报告中，可以这样描述 agent：
-
-> The arXiv Research Agent is a web-first research assistant. Its agent layer is
-> implemented in `agent.py` as `ResearchBriefingAgent`, which orchestrates
-> retrieval, ranking, briefing, follow-up query, scheduling, and persistence.
-> The Web UI provides the complete interactive experience, while the CLI offers
-> a reproducible way to run the same agent workflows from code. The skills are
-> submitted separately and are called by the agent through clear module APIs.
-
-也可以用中文概括为：
-
-> 这个项目的 Web UI 是主要展示入口，`agent.py` 是统一的 agent 编排层。
-> Agent 负责把 retrieval、ranking、briefing 和 follow-up query 等 skill 组织成
-> 完整工作流，并负责任务历史、论文库和定时任务的持久化。CLI 模式不是为了替代
-> 网页，而是为了提供一个可复现的命令行入口，证明同一个 agent 层可以在没有
-> 浏览器的情况下完成 skill 编排。
