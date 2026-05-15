@@ -43,7 +43,7 @@ DEFAULT_AGENT_CONFIG: Dict[str, Any] = {
     "run_mode": "immediate",
     "task_type": "full_pipeline",
     "add_to_library": True,
-    "include_existing": False,
+    "include_existing": True,
     "is_recurring": False,
     "use_llm": False,
     "llm_model": "deepseek-ai/DeepSeek-R1",
@@ -68,7 +68,7 @@ class AgentTaskRequest:
     days: int = 7
     max_results: int = 20
     add_to_library: bool = True
-    include_existing: bool = False
+    include_existing: bool = True
     use_llm: bool = False
     llm_model: str = "deepseek-ai/DeepSeek-R1"
     llm_api_key: str = ""
@@ -120,6 +120,20 @@ def _schedule_times_from_config(config: Dict[str, Any]) -> List[str]:
     raise ValueError("schedule_time must be a string or a list of strings")
 
 
+def _scheduled_datetime(task: Dict[str, Any], default_date: str) -> Optional[datetime]:
+    """Parse a scheduled task's date/time at minute precision."""
+
+    schedule_time = (task.get("schedule_time") or "").strip()
+    if not schedule_time:
+        return None
+
+    schedule_date = (task.get("schedule_date") or default_date).strip()
+    try:
+        return datetime.strptime(f"{schedule_date} {schedule_time}", "%Y-%m-%d %H:%M")
+    except ValueError:
+        return None
+
+
 class ResearchBriefingAgent:
     """Coordinate retrieval, ranking, briefing, scheduling, and persistence."""
 
@@ -154,7 +168,7 @@ class ResearchBriefingAgent:
             days=int(kwargs.get("days", 7)),
             max_results=int(kwargs.get("max_results", 20)),
             add_to_library=bool(kwargs.get("add_to_library", True)),
-            include_existing=bool(kwargs.get("include_existing", False)),
+            include_existing=bool(kwargs.get("include_existing", True)),
             use_llm=bool(kwargs.get("use_llm", False)),
             llm_model=kwargs.get("llm_model", "deepseek-ai/DeepSeek-R1"),
             llm_api_key=kwargs.get("llm_api_key", ""),
@@ -344,20 +358,7 @@ class ResearchBriefingAgent:
             return {"success": False, "error": "Scheduled task is missing task_id"}
 
         self.task_history.update_task(task_id, "running")
-        request_kwargs = {
-            "query": task.get("query", ""),
-            "task_type": task.get("task_type", "full_pipeline"),
-            "days": task.get("days", 7),
-            "max_results": task.get("max_results", 20),
-            "add_to_library": task.get("add_to_library", True),
-            "include_existing": task.get("include_existing", False),
-            "use_llm": task.get("use_llm", False),
-            "llm_model": task.get("llm_model", "deepseek-ai/DeepSeek-R1"),
-            "llm_api_key": task.get("llm_api_key", ""),
-            "top_k": task.get("top_k", self.top_k),
-            "min_clusters": task.get("min_clusters", self.min_clusters),
-            "max_clusters": task.get("max_clusters", self.max_clusters),
-        }
+        request_kwargs = self._request_kwargs_from_scheduled_task(task)
 
         try:
             request = self.build_request(**request_kwargs)
@@ -377,19 +378,128 @@ class ResearchBriefingAgent:
 
         return result
 
-    def run_due_scheduled_tasks(self, now: Optional[datetime] = None) -> List[Dict[str, Any]]:
-        """Run all pending tasks whose schedule date/time is due."""
+    def _request_kwargs_from_scheduled_task(self, task: Dict[str, Any]) -> Dict[str, Any]:
+        """Recover an executable request from a stored scheduled task."""
+
+        return {
+            "query": task.get("query", ""),
+            "task_type": task.get("task_type", "full_pipeline"),
+            "days": task.get("days", 7),
+            "max_results": task.get("max_results", 20),
+            "add_to_library": task.get("add_to_library", True),
+            "include_existing": task.get("include_existing", True),
+            "use_llm": task.get("use_llm", False),
+            "llm_model": task.get("llm_model", "deepseek-ai/DeepSeek-R1"),
+            "llm_api_key": task.get("llm_api_key", ""),
+            "top_k": task.get("top_k", self.top_k),
+            "min_clusters": task.get("min_clusters", self.min_clusters),
+            "max_clusters": task.get("max_clusters", self.max_clusters),
+        }
+
+    def _next_recurring_datetime(self, task: Dict[str, Any], now: datetime) -> Optional[datetime]:
+        """Return the next daily run datetime for a recurring scheduled task."""
+
+        schedule_time = (task.get("schedule_time") or "").strip()
+        try:
+            scheduled_time = datetime.strptime(schedule_time, "%H:%M").time()
+        except ValueError:
+            return None
+
+        current_minute = now.replace(second=0, microsecond=0)
+        candidate = now.replace(
+            hour=scheduled_time.hour,
+            minute=scheduled_time.minute,
+            second=0,
+            microsecond=0,
+        )
+        if candidate < current_minute:
+            candidate += timedelta(days=1)
+        return candidate
+
+    def _pending_schedule_exists(self, task: Dict[str, Any], schedule_date: str) -> bool:
+        """Check whether an equivalent future pending task already exists."""
+
+        expected_type = task.get("task_type", "full_pipeline")
+        for existing in self.task_history.tasks:
+            if existing is task or existing.get("status") != "pending":
+                continue
+            if (
+                existing.get("query") == task.get("query")
+                and existing.get("task_type", "full_pipeline") == expected_type
+                and existing.get("schedule_time") == task.get("schedule_time")
+                and existing.get("schedule_date") == schedule_date
+            ):
+                return True
+        return False
+
+    def mark_missed_scheduled_tasks(self, now: Optional[datetime] = None) -> List[Dict[str, Any]]:
+        """Mark pending scheduled tasks as missing when their run window passed."""
 
         now = now or datetime.now()
-        current_time = now.strftime("%H:%M")
+        current_minute = now.replace(second=0, microsecond=0)
         current_date = now.strftime("%Y-%m-%d")
-        results = []
+        results: List[Dict[str, Any]] = []
 
         for task in list(self.task_history.tasks):
             if task.get("status") != "pending" or not task.get("schedule_time"):
                 continue
-            schedule_date = task.get("schedule_date", current_date)
-            if task.get("schedule_time") == current_time and schedule_date == current_date:
+
+            scheduled_at = _scheduled_datetime(task, current_date)
+            if scheduled_at is None or scheduled_at >= current_minute:
+                continue
+
+            task_id = task.get("task_id")
+            if not task_id:
+                continue
+
+            scheduled_at_label = scheduled_at.strftime("%Y-%m-%d %H:%M")
+            details = {
+                "missed_at": now.isoformat(),
+                "scheduled_at": scheduled_at_label,
+                "error": f"Scheduled task missed its run window: {scheduled_at_label}",
+            }
+            self.task_history.update_task(task_id, "missing", details)
+
+            result: Dict[str, Any] = {
+                "success": False,
+                "task_id": task_id,
+                "status": "missing",
+                "scheduled_at": scheduled_at_label,
+            }
+
+            if task.get("is_recurring", False):
+                next_run = self._next_recurring_datetime(task, now)
+                if next_run is not None:
+                    next_date = next_run.strftime("%Y-%m-%d")
+                    if not self._pending_schedule_exists(task, next_date):
+                        request_kwargs = self._request_kwargs_from_scheduled_task(task)
+                        rescheduled = self.schedule_task(
+                            schedule_time=task.get("schedule_time", ""),
+                            schedule_date=next_date,
+                            is_recurring=True,
+                            **request_kwargs,
+                        )
+                        result["next_task_id"] = rescheduled.get("task_id")
+                        result["next_schedule_date"] = next_date
+
+            results.append(result)
+
+        return results
+
+    def run_due_scheduled_tasks(self, now: Optional[datetime] = None) -> List[Dict[str, Any]]:
+        """Run all pending tasks whose schedule date/time is due."""
+
+        now = now or datetime.now()
+        current_minute = now.replace(second=0, microsecond=0)
+        current_date = now.strftime("%Y-%m-%d")
+        results = self.mark_missed_scheduled_tasks(now)
+
+        for task in list(self.task_history.tasks):
+            if task.get("status") != "pending" or not task.get("schedule_time"):
+                continue
+
+            scheduled_at = _scheduled_datetime(task, current_date)
+            if scheduled_at == current_minute:
                 results.append(self.run_existing_scheduled_task(task))
 
         return results
@@ -413,7 +523,7 @@ class ResearchBriefingAgent:
                 days=config.get("days", 7),
                 max_results=config.get("max_results", 20),
                 add_to_library=config.get("add_to_library", True),
-                include_existing=config.get("include_existing", False),
+                include_existing=config.get("include_existing", True),
                 use_llm=config.get("use_llm", False),
                 llm_model=config.get("llm_model", "deepseek-ai/DeepSeek-R1"),
                 top_k=config.get("top_k", self.top_k),
@@ -437,7 +547,7 @@ class ResearchBriefingAgent:
                         days=config.get("days", 7),
                         max_results=config.get("max_results", 20),
                         add_to_library=config.get("add_to_library", True),
-                        include_existing=config.get("include_existing", False),
+                        include_existing=config.get("include_existing", True),
                         use_llm=config.get("use_llm", False),
                         llm_model=config.get("llm_model", "deepseek-ai/DeepSeek-R1"),
                         top_k=config.get("top_k", self.top_k),

@@ -207,7 +207,7 @@
                     </div>
                     <div class="form-group task-config-full">
                         <label style="display: flex; align-items: center; gap: 5px;">
-                            <input type="checkbox" id="include-existing"> Include papers already in library
+                            <input type="checkbox" id="include-existing" checked> Include papers already in library
                         </label>
                         <small style="color: #666; margin-left: 24px;">If checked, papers already in library will still appear in this task's results</small>
                     </div>
@@ -439,7 +439,7 @@
             setInputValue('task-schedule-time', firstConfigValue(config.schedule_time, '09:00'));
             setCheckboxValue('is-recurring', config.is_recurring || false);
             setCheckboxValue('add-to-library', config.add_to_library !== false);
-            setCheckboxValue('include-existing', config.include_existing || false);
+            setCheckboxValue('include-existing', config.include_existing !== false);
             setCheckboxValue('use-llm', config.use_llm || false);
             setInputValue('llm-model', config.llm_model || 'deepseek-ai/DeepSeek-R1');
             setInputValue('llm-api-key', config.llm_api_key || '');

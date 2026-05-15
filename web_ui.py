@@ -228,7 +228,7 @@ def run_full_task():
     days = data.get('days', config.get('days', 7))
     max_results = data.get('max_results', config.get('max_results', 20))
     add_to_library = data.get('add_to_library', config.get('add_to_library', True))
-    include_existing = data.get('include_existing', config.get('include_existing', False))
+    include_existing = data.get('include_existing', config.get('include_existing', True))
     use_llm = data.get('use_llm', config.get('use_llm', False))
     llm_model = data.get('llm_model', config.get('llm_model', 'deepseek-ai/DeepSeek-R1'))
     llm_api_key = data.get('llm_api_key', config.get('llm_api_key', ''))

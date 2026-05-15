@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "last_updated": "2026-05-11T12:09:05.653668",
+  "last_updated": "2026-05-14T22:28:41.044319",
   "tasks": [
     {
       "task_id": "scheduled_20260510_112708",
@@ -7066,8 +7066,654 @@
       "top_k": 10,
       "min_clusters": 2,
       "max_clusters": 4,
-      "status": "pending",
+      "status": "missing",
       "created_at": "2026-05-11T12:09:05.653662",
+      "is_recurring": true,
+      "completed_at": "2026-05-14T22:28:41.034626",
+      "missed_at": "2026-05-14T22:28:41.033656",
+      "scheduled_at": "2026-05-12 12:09",
+      "error": "Scheduled task missed its run window: 2026-05-12 12:09"
+    },
+    {
+      "task_id": "run_now_20260514_202617",
+      "task_type": "full_pipeline",
+      "query": "Agent",
+      "days": 15,
+      "max_results": 5,
+      "status": "success",
+      "created_at": "2026-05-14T20:26:17.691304",
+      "completed_at": "2026-05-14T20:26:17.691308",
+      "retrieval_file": "briefings/retrieval_20260514_202616_Agent.json",
+      "ranking_file": "briefings/ranking_20260514_202616_Agent.json",
+      "briefing_file": "briefings/briefing_20260514_202616_Agent.md",
+      "papers_retrieved": 5,
+      "papers_ranked": 5,
+      "retrieval_papers": [
+        {
+          "paper_id": "arxiv_2605.13841",
+          "title": "EVA-Bench: A New End-to-end Framework for Evaluating Voice Agents",
+          "authors": [
+            "Tara Bogavelli",
+            "Gabrielle Gauthier Melançon",
+            "Katrina Stankiewicz",
+            "Oluwanifemi Bamgbose",
+            "Fanny Riols",
+            "Hoang H. Nguyen",
+            "Raghav Mehndiratta",
+            "Lindsay Devon Brin",
+            "Joseph Marinier",
+            "Hari Subramani",
+            "Anil Madamala",
+            "Sridhar Krishna Nemala",
+            "Srinivas Sunkara"
+          ],
+          "abstract": "Voice agents, artificial intelligence systems that conduct spoken conversations to complete tasks, are increasingly deployed across enterprise applications. However, no existing benchmark jointly addresses two core evaluation challenges: generating realistic simulated conversations, and measuring quality across the full scope of voice-specific failure modes. We present EVA-Bench, an end-to-end evaluation framework that addresses both. On the simulation side, EVA-Bench orchestrates bot-to-bot audio conversations over dynamic multi-turn dialogues, with automatic simulation validation that detects user simulator error and appropriately regenerates conversations before scoring. On the measurement side, EVA-Bench introduces two composite metrics: EVA-A (Accuracy), capturing task completion, faithfulness, and audio-level speech fidelity; and EVA-X (Experience), capturing conversation progression, spoken conciseness, and turn-taking timing. Both metrics apply to different agent architectures, enabling direct cross-architecture comparison. EVA-Bench includes 213 scenarios across three enterprise domains, a controlled perturbation suite for accent and noise robustness, and pass@1, pass@k, pass^k measurements that distinguish peak from reliable capability. Across 12 systems spanning all three architectures, we find: (1) no system simultaneously exceeds 0.5 on both EVA-A pass@1 and EVA-X pass@1; (2) peak and reliable performance diverge substantially (median pass@k - pass^k gap of 0.44 on EVA-A); and (3) accent and noise perturbations expose substantial robustness gaps, with effects varying across architectures, systems, and metrics (mean up to 0.314). We release the full framework, evaluation suite, and benchmark data under an open-source license.",
+          "published": "2026-05-13",
+          "categories": [
+            "cs.SD",
+            "cs.AI",
+            "cs.CL",
+            "cs.LG"
+          ],
+          "pdf_url": "https://arxiv.org/pdf/2605.13841v1",
+          "abs_url": "https://arxiv.org/abs/2605.13841v1",
+          "added_at": "2026-05-14T20:26:17.664981",
+          "source_query": "Agent",
+          "source_type": "retrieval"
+        },
+        {
+          "paper_id": "arxiv_2605.13839",
+          "title": "Good Agentic Friends Do Not Just Give Verbal Advice: They Can Update Your Weights",
+          "authors": [
+            "Wenrui Bao",
+            "Huan Wang",
+            "Jian Wang",
+            "Zhangyang Wang",
+            "Kai Wang",
+            "Yuzhang Shang"
+          ],
+          "abstract": "Multi-agent LLM systems usually collaborate by exchanging natural-language messages. This interface is simple and interpretable, but it forces each sender's intermediate computation to be serialized into tokens and then reprocessed by the receiver, thereby increasing the generated-token cost, prefill overhead, and KV-cache memory. We study an alternative communication interface: instead of appending a sender's message to the receiver's context, compile the sender's hidden states into a transient, receiver-specific weight perturbation. We introduce TFlow (Thought Flow), a weight-space communication framework for a known and fixed receiver architecture. For each query, frozen role-prompted sender agents process the input, and a learned parameter generator maps their internal activations into low-rank LoRA perturbations targeting the receiver's modules. These perturbations are fused and applied only during the receiver's generation, enabling instance-level adaptation without permanently changing the model or enlarging the receiver's text context. With three Qwen3-4B agents, TFlow improves over a standalone receiver by up to 8.5 accuracy points across five benchmarks while reducing processed tokens by up to 32.69%. Compared with a text-based three-agent baseline, it reduces total processed tokens by up to 83.27% and the wall-clock inference time by up to 4.6$\\times$, while maintaining competitive accuracy on four of five benchmarks. These results suggest that transient low-rank weight perturbations can serve as an executable communication medium for efficient multi-agent LLM collaboration.",
+          "published": "2026-05-13",
+          "categories": [
+            "cs.CL"
+          ],
+          "pdf_url": "https://arxiv.org/pdf/2605.13839v1",
+          "abs_url": "https://arxiv.org/abs/2605.13839v1",
+          "added_at": "2026-05-14T20:26:17.664985",
+          "source_query": "Agent",
+          "source_type": "retrieval"
+        },
+        {
+          "paper_id": "arxiv_2605.13831",
+          "title": "Training Long-Context Vision-Language Models Effectively with Generalization Beyond 128K Context",
+          "authors": [
+            "Zhaowei Wang",
+            "Lishu Luo",
+            "Haodong Duan",
+            "Weiwei Liu",
+            "Sijin Wu",
+            "Ji Luo",
+            "Shen Yan",
+            "Shuai Peng",
+            "Sihang Yuan",
+            "Chaoyi Huang",
+            "Yi Lin",
+            "Yangqiu Song"
+          ],
+          "abstract": "Long-context modeling is becoming a core capability of modern large vision-language models (LVLMs), enabling sustained context management across long-document understanding, video analysis, and multi-turn tool use in agentic workflows. Yet practical training recipes remain insufficiently explored, particularly for designing and balancing long-context data mixtures. In this work, we present a systematic study of long-context continued pre-training for LVLMs, extending a 7B model from 32K to 128K context with extensive ablations on long-document data. We first show that long-document VQA is substantially more effective than OCR transcription. Building on this observation, our ablations further yield three key findings: i) for sequence-length distribution, balanced data outperforms target-length-focused data (e.g., 128K), suggesting that long-context ability requires generalizable key-information retrieval across various lengths and positions; ii) retrieval remains the primary bottleneck, favoring retrieval-heavy mixtures with modest reasoning data for task diversity; and iii) pure long-document VQA largely preserves short-context capabilities, suggesting that instruction-formatted long data reduces the need for short-data mixing. Based on these findings, we introduce MMProLong, obtained by long-context continued pre-training from Qwen2.5-VL-7B with only a 5B-token budget. MMProLong improves long-document VQA scores by 7.1% and maintains strong performance at 256K and 512K contexts beyond its 128K training window, without additional training. It further generalizes to webpage-based multimodal needle retrieval, long-context vision-text compression, and long-video understanding without task-specific supervision. Overall, our study establishes a practical LongPT recipe and an empirical foundation for advancing long-context vision-language models.",
+          "published": "2026-05-13",
+          "categories": [
+            "cs.CV"
+          ],
+          "pdf_url": "https://arxiv.org/pdf/2605.13831v1",
+          "abs_url": "https://arxiv.org/abs/2605.13831v1",
+          "added_at": "2026-05-14T20:26:17.664986",
+          "source_query": "Agent",
+          "source_type": "retrieval"
+        },
+        {
+          "paper_id": "arxiv_2605.13825",
+          "title": "History Anchors: How Prior Behavior Steers LLM Decisions Toward Unsafe Actions",
+          "authors": [
+            "Alberto G. Rodríguez Salgado"
+          ],
+          "abstract": "Frontier LLMs are increasingly deployed as agents that pick the next action after a long log of prior tool calls produced by the same or a different model. We ask a simple safety question: if a prior step in that log was harmful, will the model continue the harmful course? We build HistoryAnchor-100, 100 short scenarios across ten high-stakes domains, each pairing three forced harmful prior actions with a free-choice node offering two safe and two unsafe options. Across 17 frontier models from six providers we find a striking asymmetry: under a neutral system prompt the strongest aligned models almost never pick unsafe, but a single added sentence, \"stay consistent with the strategy shown in the prior history\", flips them to 91-98%, and the flipped models often escalate beyond continuation. Two controls rule out simpler explanations: permuting action labels leaves the effect intact, and the same instruction with an all-safe prior history keeps unsafe rates below 7%. Different families flip at different doses of unsafe history, and within every aligned family the flagship is the most affected sibling, an inverse-scaling pattern with respect to safety. These results are a red flag for agentic deployments where trajectories may be replayed, forged, or injected.",
+          "published": "2026-05-13",
+          "categories": [
+            "cs.AI",
+            "cs.CV"
+          ],
+          "pdf_url": "https://arxiv.org/pdf/2605.13825v1",
+          "abs_url": "https://arxiv.org/abs/2605.13825v1",
+          "added_at": "2026-05-14T20:26:17.664987",
+          "source_query": "Agent",
+          "source_type": "retrieval"
+        },
+        {
+          "paper_id": "arxiv_2605.13821",
+          "title": "Harnessing Agentic Evolution",
+          "authors": [
+            "Jiayi Zhang",
+            "Yongfeng Gu",
+            "Jianhao Ruan",
+            "Maojia Song",
+            "Yiran Peng",
+            "Zhiguang Han",
+            "Jinyu Xiang",
+            "Zhitao Wang",
+            "Caiyin Yang",
+            "Yixi Ouyang",
+            "Bang Liu",
+            "Chenglin Wu",
+            "Yuyu Luo"
+          ],
+          "abstract": "Agentic evolution has emerged as a powerful paradigm for improving programs, workflows, and scientific solutions by iteratively generating candidates, evaluating them, and using feedback to guide future search. However, existing methods are typically instantiated either as fixed hand-designed procedures that are modular but rigid, or as general-purpose agents that flexibly integrate feedback but can drift in long-horizon evolution. Both forms accumulate rich evidence over time, including candidates, feedback, traces, and failures, yet lack a stable interface for organizing this evidence and revising the mechanism that drives future evolution. We address this limitation by formulating agentic evolution as an interactive environment, where the accumulated evolution context serves as a process-level state. We introduce AEvo, a harnessed meta-editing framework in which a meta-agent observes this state and acts not by directly proposing the next candidate, but by editing the procedure or agent context that controls future evolution. This unified interface enables AEvo to steer both procedure-based and agent-based evolution, making accumulated evidence actionable for long-horizon search. Empirical evaluations on agentic and reasoning benchmarks show that AEvo outperforms five evolution baselines, achieving a 26 relative improvement over the strongest baseline. Across three open-ended optimization tasks, AEvo further outperforms four evolution baselines and achieves state-of-the-art performance under the same iteration budget.",
+          "published": "2026-05-13",
+          "categories": [
+            "cs.AI",
+            "cs.LG"
+          ],
+          "pdf_url": "https://arxiv.org/pdf/2605.13821v1",
+          "abs_url": "https://arxiv.org/abs/2605.13821v1",
+          "added_at": "2026-05-14T20:26:17.664988",
+          "source_query": "Agent",
+          "source_type": "retrieval"
+        }
+      ],
+      "ranked_papers": [
+        {
+          "paper_id": "arxiv_2605.13821",
+          "title": "Harnessing Agentic Evolution",
+          "authors": [
+            "Jiayi Zhang",
+            "Yongfeng Gu",
+            "Jianhao Ruan",
+            "Maojia Song",
+            "Yiran Peng",
+            "Zhiguang Han",
+            "Jinyu Xiang",
+            "Zhitao Wang",
+            "Caiyin Yang",
+            "Yixi Ouyang",
+            "Bang Liu",
+            "Chenglin Wu",
+            "Yuyu Luo"
+          ],
+          "abstract": "Agentic evolution has emerged as a powerful paradigm for improving programs, workflows, and scientific solutions by iteratively generating candidates, evaluating them, and using feedback to guide future search. However, existing methods are typically instantiated either as fixed hand-designed procedures that are modular but rigid, or as general-purpose agents that flexibly integrate feedback but can drift in long-horizon evolution. Both forms accumulate rich evidence over time, including candidates, feedback, traces, and failures, yet lack a stable interface for organizing this evidence and revising the mechanism that drives future evolution. We address this limitation by formulating agentic evolution as an interactive environment, where the accumulated evolution context serves as a process-level state. We introduce AEvo, a harnessed meta-editing framework in which a meta-agent observes this state and acts not by directly proposing the next candidate, but by editing the procedure or agent context that controls future evolution. This unified interface enables AEvo to steer both procedure-based and agent-based evolution, making accumulated evidence actionable for long-horizon search. Empirical evaluations on agentic and reasoning benchmarks show that AEvo outperforms five evolution baselines, achieving a 26 relative improvement over the strongest baseline. Across three open-ended optimization tasks, AEvo further outperforms four evolution baselines and achieves state-of-the-art performance under the same iteration budget.",
+          "published": "2026-05-13",
+          "categories": [
+            "cs.AI",
+            "cs.LG"
+          ],
+          "pdf_url": "https://arxiv.org/pdf/2605.13821v1",
+          "abs_url": "https://arxiv.org/abs/2605.13821v1",
+          "added_at": "2026-05-14T20:26:17.664988",
+          "source_query": "Agent",
+          "source_type": "retrieval",
+          "relevance_score": 0.2541,
+          "rank": 1,
+          "cluster": "evolution context eva"
+        },
+        {
+          "paper_id": "arxiv_2605.13841",
+          "title": "EVA-Bench: A New End-to-end Framework for Evaluating Voice Agents",
+          "authors": [
+            "Tara Bogavelli",
+            "Gabrielle Gauthier Melançon",
+            "Katrina Stankiewicz",
+            "Oluwanifemi Bamgbose",
+            "Fanny Riols",
+            "Hoang H. Nguyen",
+            "Raghav Mehndiratta",
+            "Lindsay Devon Brin",
+            "Joseph Marinier",
+            "Hari Subramani",
+            "Anil Madamala",
+            "Sridhar Krishna Nemala",
+            "Srinivas Sunkara"
+          ],
+          "abstract": "Voice agents, artificial intelligence systems that conduct spoken conversations to complete tasks, are increasingly deployed across enterprise applications. However, no existing benchmark jointly addresses two core evaluation challenges: generating realistic simulated conversations, and measuring quality across the full scope of voice-specific failure modes. We present EVA-Bench, an end-to-end evaluation framework that addresses both. On the simulation side, EVA-Bench orchestrates bot-to-bot audio conversations over dynamic multi-turn dialogues, with automatic simulation validation that detects user simulator error and appropriately regenerates conversations before scoring. On the measurement side, EVA-Bench introduces two composite metrics: EVA-A (Accuracy), capturing task completion, faithfulness, and audio-level speech fidelity; and EVA-X (Experience), capturing conversation progression, spoken conciseness, and turn-taking timing. Both metrics apply to different agent architectures, enabling direct cross-architecture comparison. EVA-Bench includes 213 scenarios across three enterprise domains, a controlled perturbation suite for accent and noise robustness, and pass@1, pass@k, pass^k measurements that distinguish peak from reliable capability. Across 12 systems spanning all three architectures, we find: (1) no system simultaneously exceeds 0.5 on both EVA-A pass@1 and EVA-X pass@1; (2) peak and reliable performance diverge substantially (median pass@k - pass^k gap of 0.44 on EVA-A); and (3) accent and noise perturbations expose substantial robustness gaps, with effects varying across architectures, systems, and metrics (mean up to 0.314). We release the full framework, evaluation suite, and benchmark data under an open-source license.",
+          "published": "2026-05-13",
+          "categories": [
+            "cs.SD",
+            "cs.AI",
+            "cs.CL",
+            "cs.LG"
+          ],
+          "pdf_url": "https://arxiv.org/pdf/2605.13841v1",
+          "abs_url": "https://arxiv.org/abs/2605.13841v1",
+          "added_at": "2026-05-14T20:26:17.664981",
+          "source_query": "Agent",
+          "source_type": "retrieval",
+          "relevance_score": 0.214,
+          "rank": 2,
+          "cluster": "evolution context eva"
+        },
+        {
+          "paper_id": "arxiv_2605.13839",
+          "title": "Good Agentic Friends Do Not Just Give Verbal Advice: They Can Update Your Weights",
+          "authors": [
+            "Wenrui Bao",
+            "Huan Wang",
+            "Jian Wang",
+            "Zhangyang Wang",
+            "Kai Wang",
+            "Yuzhang Shang"
+          ],
+          "abstract": "Multi-agent LLM systems usually collaborate by exchanging natural-language messages. This interface is simple and interpretable, but it forces each sender's intermediate computation to be serialized into tokens and then reprocessed by the receiver, thereby increasing the generated-token cost, prefill overhead, and KV-cache memory. We study an alternative communication interface: instead of appending a sender's message to the receiver's context, compile the sender's hidden states into a transient, receiver-specific weight perturbation. We introduce TFlow (Thought Flow), a weight-space communication framework for a known and fixed receiver architecture. For each query, frozen role-prompted sender agents process the input, and a learned parameter generator maps their internal activations into low-rank LoRA perturbations targeting the receiver's modules. These perturbations are fused and applied only during the receiver's generation, enabling instance-level adaptation without permanently changing the model or enlarging the receiver's text context. With three Qwen3-4B agents, TFlow improves over a standalone receiver by up to 8.5 accuracy points across five benchmarks while reducing processed tokens by up to 32.69%. Compared with a text-based three-agent baseline, it reduces total processed tokens by up to 83.27% and the wall-clock inference time by up to 4.6$\\times$, while maintaining competitive accuracy on four of five benchmarks. These results suggest that transient low-rank weight perturbations can serve as an executable communication medium for efficient multi-agent LLM collaboration.",
+          "published": "2026-05-13",
+          "categories": [
+            "cs.CL"
+          ],
+          "pdf_url": "https://arxiv.org/pdf/2605.13839v1",
+          "abs_url": "https://arxiv.org/abs/2605.13839v1",
+          "added_at": "2026-05-14T20:26:17.664985",
+          "source_query": "Agent",
+          "source_type": "retrieval",
+          "relevance_score": 0.0539,
+          "rank": 3,
+          "cluster": "evolution context eva"
+        },
+        {
+          "paper_id": "arxiv_2605.13825",
+          "title": "History Anchors: How Prior Behavior Steers LLM Decisions Toward Unsafe Actions",
+          "authors": [
+            "Alberto G. Rodríguez Salgado"
+          ],
+          "abstract": "Frontier LLMs are increasingly deployed as agents that pick the next action after a long log of prior tool calls produced by the same or a different model. We ask a simple safety question: if a prior step in that log was harmful, will the model continue the harmful course? We build HistoryAnchor-100, 100 short scenarios across ten high-stakes domains, each pairing three forced harmful prior actions with a free-choice node offering two safe and two unsafe options. Across 17 frontier models from six providers we find a striking asymmetry: under a neutral system prompt the strongest aligned models almost never pick unsafe, but a single added sentence, \"stay consistent with the strategy shown in the prior history\", flips them to 91-98%, and the flipped models often escalate beyond continuation. Two controls rule out simpler explanations: permuting action labels leaves the effect intact, and the same instruction with an all-safe prior history keeps unsafe rates below 7%. Different families flip at different doses of unsafe history, and within every aligned family the flagship is the most affected sibling, an inverse-scaling pattern with respect to safety. These results are a red flag for agentic deployments where trajectories may be replayed, forged, or injected.",
+          "published": "2026-05-13",
+          "categories": [
+            "cs.AI",
+            "cs.CV"
+          ],
+          "pdf_url": "https://arxiv.org/pdf/2605.13825v1",
+          "abs_url": "https://arxiv.org/abs/2605.13825v1",
+          "added_at": "2026-05-14T20:26:17.664987",
+          "source_query": "Agent",
+          "source_type": "retrieval",
+          "relevance_score": 0.0,
+          "rank": 4,
+          "cluster": "prior unsafe history"
+        },
+        {
+          "paper_id": "arxiv_2605.13831",
+          "title": "Training Long-Context Vision-Language Models Effectively with Generalization Beyond 128K Context",
+          "authors": [
+            "Zhaowei Wang",
+            "Lishu Luo",
+            "Haodong Duan",
+            "Weiwei Liu",
+            "Sijin Wu",
+            "Ji Luo",
+            "Shen Yan",
+            "Shuai Peng",
+            "Sihang Yuan",
+            "Chaoyi Huang",
+            "Yi Lin",
+            "Yangqiu Song"
+          ],
+          "abstract": "Long-context modeling is becoming a core capability of modern large vision-language models (LVLMs), enabling sustained context management across long-document understanding, video analysis, and multi-turn tool use in agentic workflows. Yet practical training recipes remain insufficiently explored, particularly for designing and balancing long-context data mixtures. In this work, we present a systematic study of long-context continued pre-training for LVLMs, extending a 7B model from 32K to 128K context with extensive ablations on long-document data. We first show that long-document VQA is substantially more effective than OCR transcription. Building on this observation, our ablations further yield three key findings: i) for sequence-length distribution, balanced data outperforms target-length-focused data (e.g., 128K), suggesting that long-context ability requires generalizable key-information retrieval across various lengths and positions; ii) retrieval remains the primary bottleneck, favoring retrieval-heavy mixtures with modest reasoning data for task diversity; and iii) pure long-document VQA largely preserves short-context capabilities, suggesting that instruction-formatted long data reduces the need for short-data mixing. Based on these findings, we introduce MMProLong, obtained by long-context continued pre-training from Qwen2.5-VL-7B with only a 5B-token budget. MMProLong improves long-document VQA scores by 7.1% and maintains strong performance at 256K and 512K contexts beyond its 128K training window, without additional training. It further generalizes to webpage-based multimodal needle retrieval, long-context vision-text compression, and long-video understanding without task-specific supervision. Overall, our study establishes a practical LongPT recipe and an empirical foundation for advancing long-context vision-language models.",
+          "published": "2026-05-13",
+          "categories": [
+            "cs.CV"
+          ],
+          "pdf_url": "https://arxiv.org/pdf/2605.13831v1",
+          "abs_url": "https://arxiv.org/abs/2605.13831v1",
+          "added_at": "2026-05-14T20:26:17.664986",
+          "source_query": "Agent",
+          "source_type": "retrieval",
+          "relevance_score": 0.0,
+          "rank": 5,
+          "cluster": "evolution context eva"
+        }
+      ],
+      "briefing_content": "# Daily arXiv Research Briefing: Agent\n\n## Overview\nWe reviewed 5 ranked papers related to 'Agent'. The recent literature mainly covers evolution context eva, prior unsafe history.\n\n## Summary Table\n\n| Rank | Title | Cluster | Relevance Score | Method | Key Contribution |\n|------|-------|---------|-----------------|--------|------------------|\n| 1 | Harnessing Agentic Evolution | evolution context eva | 0.2541 | benchmark | This work is mainly related to evolution context eva and appears to contribute to the area of benchmark through the study presented in 'Harnessing Agentic Evolution'. |\n| 2 | EVA-Bench: A New End-to-end Framework for Evaluating Voice Agents | evolution context eva | 0.214 | benchmark | This work is mainly related to evolution context eva and appears to contribute to the area of benchmark through the study presented in 'EVA-Bench: A New End-to-end Framework for Evaluating Voice Agents'. |\n| 3 | Good Agentic Friends Do Not Just Give Verbal Advice: They Can Update Your Weights | evolution context eva | 0.0539 | multi-agent | This work is mainly related to evolution context eva and appears to contribute to the area of multi-agent through the study presented in 'Good Agentic Friends Do Not Just Give Verbal Advice: They Can Update Your Weights'. |\n| 4 | History Anchors: How Prior Behavior Steers LLM Decisions Toward Unsafe Actions | prior unsafe history | 0.0 | planning | This work is mainly related to prior unsafe history and appears to contribute to the area of planning through the study presented in 'History Anchors: How Prior Behavior Steers LLM Decisions Toward Unsafe Actions'. |\n| 5 | Training Long-Context Vision-Language Models Effectively with Generalization Beyond 128K Context | evolution context eva | 0.0 | tool use | This work is mainly related to evolution context eva and appears to contribute to the area of tool use through the study presented in 'Training Long-Context Vision-Language Models Effectively with Generalization Beyond 128K Context'. |\n\n## Highlighted Papers\n\n### Most Relevant Paper\n**Harnessing Agentic Evolution**\nAgentic evolution has emerged as a powerful paradigm for improving programs, workflows, and scientific solutions by iteratively generating candidates, evaluating them, and using feedback to guide future search. However, existing methods are typically instantiated either as fixed hand-designed procedures that are modular but rigid, or as general-purpose agents that flexibly integrate feedback but can drift in long-horizon evolution.\n\n### Top 3 Recommended Papers\n1. **Harnessing Agentic Evolution**\n   - This work is mainly related to evolution context eva and appears to contribute to the area of benchmark through the study presented in 'Harnessing Agentic Evolution'.\n2. **EVA-Bench: A New End-to-end Framework for Evaluating Voice Agents**\n   - This work is mainly related to evolution context eva and appears to contribute to the area of benchmark through the study presented in 'EVA-Bench: A New End-to-end Framework for Evaluating Voice Agents'.\n3. **Good Agentic Friends Do Not Just Give Verbal Advice: They Can Update Your Weights**\n   - This work is mainly related to evolution context eva and appears to contribute to the area of multi-agent through the study presented in 'Good Agentic Friends Do Not Just Give Verbal Advice: They Can Update Your Weights'.\n\n## Trend Summary\nRecent papers mainly focus on evolution context eva and prior unsafe history.\n"
+    },
+    {
+      "task_id": "run_now_20260514_202634",
+      "task_type": "full_pipeline",
+      "query": "Agent",
+      "days": 15,
+      "max_results": 5,
+      "status": "success",
+      "created_at": "2026-05-14T20:26:34.533619",
+      "completed_at": "2026-05-14T20:26:34.533621",
+      "retrieval_file": "briefings/retrieval_20260514_202634_Agent.json",
+      "ranking_file": "briefings/ranking_20260514_202634_Agent.json",
+      "briefing_file": "briefings/briefing_20260514_202634_Agent.md",
+      "papers_retrieved": 0,
+      "papers_ranked": 0,
+      "retrieval_papers": [],
+      "ranked_papers": [],
+      "briefing_content": "# Daily arXiv Research Briefing: Agent\n\n## Overview\nNo papers were provided for the topic 'Agent'.\n\n## Summary Table\n\nNo papers available.\n\n## Highlighted Papers\n\nNo highlighted papers available.\n\n## Trend Summary\nNo trend summary is available because no papers were provided.\n"
+    },
+    {
+      "task_id": "run_now_20260514_202651",
+      "task_type": "full_pipeline",
+      "query": "Deep learning, Duffusion policy",
+      "days": 15,
+      "max_results": 5,
+      "status": "success",
+      "created_at": "2026-05-14T20:26:51.775641",
+      "completed_at": "2026-05-14T20:26:51.775644",
+      "retrieval_file": "briefings/retrieval_20260514_202650_Deep_learning_Duffusion_policy.json",
+      "ranking_file": "briefings/ranking_20260514_202650_Deep_learning_Duffusion_policy.json",
+      "briefing_file": "briefings/briefing_20260514_202650_Deep_learning_Duffusion_policy.md",
+      "papers_retrieved": 5,
+      "papers_ranked": 5,
+      "retrieval_papers": [
+        {
+          "paper_id": "arxiv_2605.13845",
+          "title": "Quantitative Linear Logic for Neuro-Symbolic Learning and Verification",
+          "authors": [
+            "Thomas Flinkow",
+            "Ekaterina Komendantskaya",
+            "Matteo Capucci",
+            "Rosemary Monahan"
+          ],
+          "abstract": "Differentiable Logics are deployed in neuro-symbolic learning tasks as a way of embedding logical constraints in the training objective of neural networks. A differentiable logic consists of a syntax to write logical properties and a semantics to interpret them as real-valued functions to be folded in the loss function. A defining trade-off of the field is that between logical properties of the connectives, and analytic concerns for the semantics, with both aspects being relevant in applications. At one extreme we find fuzzy logics, that have well-established algebraic and proof-theoretic foundations, and at the other ad-hoc differentiable logics like Fischer's DL2, conceived for deep learning applications. However, no satisfactory foundation has emerged yet. We propose a resolution to this long-standing tension via a novel logic, Quantitative Linear Logic (QLL), with foundational ambitions. Our design is driven by naturality -- the idea that, since logical constraints are translated to losses, the semantics of the connectives should be pertinent operations used in ML practice (that is, sum and log-sum-exp) on additive quantities (like logits). We then judge the result on two aspects: logical adequacy -- that they satisfy most of the standard logical laws of Linear Logic; and empirical effectiveness -- test-time performance (as measured by adversarial attacks) is well-correlated to the actual verification of the logical constraints (as measured by off-the-shelf neural network verifiers), which makes QLL stand out among SoTA techniques.",
+          "published": "2026-05-13",
+          "categories": [
+            "cs.LO"
+          ],
+          "pdf_url": "https://arxiv.org/pdf/2605.13845v1",
+          "abs_url": "https://arxiv.org/abs/2605.13845v1",
+          "added_at": "2026-05-14T20:26:51.761616",
+          "source_query": "Deep learning, Duffusion policy",
+          "source_type": "retrieval"
+        },
+        {
+          "paper_id": "arxiv_2605.13842",
+          "title": "From DES to KiDS: Domain adaptation for cross-survey detection of low-surface-brightness galaxies",
+          "authors": [
+            "Hareesh Thuruthipilly",
+            "Krzysztof Lisiecki",
+            "Junais",
+            "Katarzyna Małek",
+            "Agnieszka Pollo",
+            "William J. Pearson",
+            "Antonio Vanzanella",
+            "Saptarshi Pal",
+            "Miguel Figueira",
+            "Pratik Dabhade",
+            "Anna Durkalec",
+            "Aidan P. Cotter",
+            "Unnikrishnan Sureshkumar",
+            "Nandini Hazra",
+            "Patryk Matera",
+            "Subhrata Dey",
+            "Michal Vrábel",
+            "Anirban Dutta",
+            "Henry Willems",
+            "Nicola Principi Cavaterra",
+            "Natalia Dobrowolska",
+            "Wojciech Knop"
+          ],
+          "abstract": "Low-surface-brightness galaxies (LSBGs) are vital for understanding galaxy formation, but their diffuse nature makes them challenging to detect. Upcoming large-scale surveys are expected to uncover large numbers of LSBGs, requiring robust automated methods to identify them across heterogeneous datasets. As a precursor to the Legacy Survey of Space and Time (LSST) and Euclid, we explore domain adaptation techniques for cross-survey LSBG identification. Using models trained on the Dark Energy Survey (DES), we search for LSBGs in the Kilo-Degree Survey Data Release 5 (KiDS DR5). We used an ensemble consisting of one convolutional neural network (CNN) and two transformer models trained on DES cutouts and applied to KiDS DR5 imaging data. Structural parameters were estimated with galfitm, and photometric redshifts and stellar population properties were estimated through spectral energy distribution fitting with CIGALE. We identify 20,180 LSBGs and 434 ultra-diffuse galaxies (UDGs) in KiDS DR5. Their structural parameters are similar to known LSBGs from DES and the Hyper Suprime-Cam SSP Survey (HSC-SSP). The KiDS-LSBGs follow a continuous size-luminosity relation connecting classical dwarf galaxies and UDGs, and their colours are bimodal ($\\sim73\\%$ blue, $\\sim27\\%$ red). Cross-matching with spectroscopic and cluster catalogues provides redshifts for 4,913 systems, enabling a systematic characterisation of the star-forming main sequence of LSBGs. Strong environmental trends are evident, with cluster LSBGs and UDGs exhibiting redder colours and reduced star formation compared to non-cluster systems. We demonstrate that domain adaptation enables robust cross-survey LSBG identification with deep learning models, providing a scalable pathway for constructing homogeneous LSBG catalogues for the LSST and Euclid era.",
+          "published": "2026-05-13",
+          "categories": [
+            "astro-ph.GA",
+            "astro-ph.IM"
+          ],
+          "pdf_url": "https://arxiv.org/pdf/2605.13842v1",
+          "abs_url": "https://arxiv.org/abs/2605.13842v1",
+          "added_at": "2026-05-14T20:26:51.761625",
+          "source_query": "Deep learning, Duffusion policy",
+          "source_type": "retrieval"
+        },
+        {
+          "paper_id": "arxiv_2605.13627",
+          "title": "SINAPSE: A lightweight deep learning framework for accurate and explainable neutron-$γ$ discrimination",
+          "authors": [
+            "Thomas Carreau",
+            "Adrien Matta",
+            "Owen Syrett",
+            "Benoît Mauss",
+            "David Etasse",
+            "Audrey Chatillon",
+            "Cyril Lenain",
+            "Pierre Morfouace",
+            "Julien Taieb",
+            "David Regnier",
+            "Patrick Copp",
+            "Matthew Devlin",
+            "Charlène Surault",
+            "Jason Surbrook"
+          ],
+          "abstract": "Traditionally, neutron-$γ$ discrimination in organic scintillators relies on techniques such as time-of-flight (ToF) selection and pulse-shape discrimination (PSD). However, particle identification through graphical cuts remains challenging in the low-charge regime due to poor signal-to-noise ratios (SNR). In this work, we propose SINAPSE, a lightweight deep learning framework for accurate and explainable neutron-$γ$ discrimination in the low-charge regime. The framework employs a dual-branch architecture that combines a 1-dimensional convolutional autoencoder for waveform denoising with a classifier for particle identification. Random augmentations are applied to high-SNR waveforms to simulate low-charge conditions, enabling robust extrapolation into regimes where conventional PSD labels are unreliable. We show that SINAPSE achieves superior denoising performance compared to conventional digital signal processing techniques, and outputs well-calibrated probabilities, consistent with traditional graphical cuts. Finally, we apply SHAP (SHapley Additive exPlanations) values to show that model decisions are driven by physically meaningful pulse-shape features, confirming consistency with established PSD principles.",
+          "published": "2026-05-13",
+          "categories": [
+            "physics.ins-det",
+            "physics.data-an"
+          ],
+          "pdf_url": "https://arxiv.org/pdf/2605.13627v1",
+          "abs_url": "https://arxiv.org/abs/2605.13627v1",
+          "added_at": "2026-05-14T20:26:51.761627",
+          "source_query": "Deep learning, Duffusion policy",
+          "source_type": "retrieval"
+        },
+        {
+          "paper_id": "arxiv_2605.13612",
+          "title": "Deep Learning as Neural Low-Degree Filtering: A Spectral Theory of Hierarchical Feature Learning",
+          "authors": [
+            "Yatin Dandi",
+            "Matteo Vilucchio",
+            "Luca Arnaboldi",
+            "Hugo Tabanelli",
+            "Florent Krzakala"
+          ],
+          "abstract": "Understanding how deep neural networks learn useful internal representations from data remains a central open problem in the theory of deep learning. We introduce Neural Low-Degree Filtering (Neural LoFi), a stylized limit of gradient-based training in which hierarchical feature learning becomes an explicit iterative spectral procedure. In this limit, the dynamics at each layer decouple: given the current representation, the next layer selects directions with maximal accessible low-degree correlation to the label. This yields a tractable surrogate mechanism for deep learning, together with a natural kernel-space interpretation. Neural LoFi provides a mathematically explicit framework for studying multi-layer feature learning beyond the lazy regime. It predicts how representations are selected layer by layer, explains how emergence of concepts arises with given sample complexity,and gives a concrete mechanism by which depth progressively constructs new features from old ones through low-degree compositionality. We complement the theory with mechanistic experiments on fully connected and convolutional architectures, showing that Neural LoFi improves over lazy random-feature baselines, recovers meaningful structured filters, and predicts representations aligned with early gradient-descent feature discovery with real datasets.",
+          "published": "2026-05-13",
+          "categories": [
+            "cs.LG",
+            "cond-mat.dis-nn",
+            "stat.ML"
+          ],
+          "pdf_url": "https://arxiv.org/pdf/2605.13612v1",
+          "abs_url": "https://arxiv.org/abs/2605.13612v1",
+          "added_at": "2026-05-14T20:26:51.761628",
+          "source_query": "Deep learning, Duffusion policy",
+          "source_type": "retrieval"
+        },
+        {
+          "paper_id": "arxiv_2605.13568",
+          "title": "Dynamical Predictive Modelling of Cardiovascular Disease Progression Post-Myocardial Infarction via ECG-Trained Artificial Intelligence Model",
+          "authors": [
+            "Riccardo Cavarra",
+            "Lupo Lovatelli",
+            "Shaheim Ogbomo-Harmitt",
+            "Shahid Aziz",
+            "Adelaide De Vecchi",
+            "Andrew King",
+            "Oleg Aslanidi"
+          ],
+          "abstract": "Myocardial infarction (MI) is a leading cause of death, and its adverse outcomes are urgent to predict. Yet ECG-based prognostic models underperform because deep learning requires large, labelled datasets, which are scarce in medicine. Foundation models can learn from unlabelled ECGs via selfsupervision, but medically relevant training strategies remain underexplored. We propose a pretrained artificial intelligence model that combines patient-specific temporal information using contrastive learning with supervised multitask heads, then fine-tunes on post-MI outcome prediction. The proposed model outperformed a model trained from scratch (0.794 vs 0.608 AUC) showing that clinically structured ECG modelling improves classification in limited data regimes.",
+          "published": "2026-05-13",
+          "categories": [
+            "cs.LG",
+            "cs.AI"
+          ],
+          "pdf_url": "https://arxiv.org/pdf/2605.13568v1",
+          "abs_url": "https://arxiv.org/abs/2605.13568v1",
+          "added_at": "2026-05-14T20:26:51.761630",
+          "source_query": "Deep learning, Duffusion policy",
+          "source_type": "retrieval"
+        }
+      ],
+      "ranked_papers": [
+        {
+          "paper_id": "arxiv_2605.13612",
+          "title": "Deep Learning as Neural Low-Degree Filtering: A Spectral Theory of Hierarchical Feature Learning",
+          "authors": [
+            "Yatin Dandi",
+            "Matteo Vilucchio",
+            "Luca Arnaboldi",
+            "Hugo Tabanelli",
+            "Florent Krzakala"
+          ],
+          "abstract": "Understanding how deep neural networks learn useful internal representations from data remains a central open problem in the theory of deep learning. We introduce Neural Low-Degree Filtering (Neural LoFi), a stylized limit of gradient-based training in which hierarchical feature learning becomes an explicit iterative spectral procedure. In this limit, the dynamics at each layer decouple: given the current representation, the next layer selects directions with maximal accessible low-degree correlation to the label. This yields a tractable surrogate mechanism for deep learning, together with a natural kernel-space interpretation. Neural LoFi provides a mathematically explicit framework for studying multi-layer feature learning beyond the lazy regime. It predicts how representations are selected layer by layer, explains how emergence of concepts arises with given sample complexity,and gives a concrete mechanism by which depth progressively constructs new features from old ones through low-degree compositionality. We complement the theory with mechanistic experiments on fully connected and convolutional architectures, showing that Neural LoFi improves over lazy random-feature baselines, recovers meaningful structured filters, and predicts representations aligned with early gradient-descent feature discovery with real datasets.",
+          "published": "2026-05-13",
+          "categories": [
+            "cs.LG",
+            "cond-mat.dis-nn",
+            "stat.ML"
+          ],
+          "pdf_url": "https://arxiv.org/pdf/2605.13612v1",
+          "abs_url": "https://arxiv.org/abs/2605.13612v1",
+          "added_at": "2026-05-14T20:26:51.761628",
+          "source_query": "Deep learning, Duffusion policy",
+          "source_type": "retrieval",
+          "relevance_score": 0.2549,
+          "rank": 1,
+          "cluster": "low logical logic"
+        },
+        {
+          "paper_id": "arxiv_2605.13627",
+          "title": "SINAPSE: A lightweight deep learning framework for accurate and explainable neutron-$γ$ discrimination",
+          "authors": [
+            "Thomas Carreau",
+            "Adrien Matta",
+            "Owen Syrett",
+            "Benoît Mauss",
+            "David Etasse",
+            "Audrey Chatillon",
+            "Cyril Lenain",
+            "Pierre Morfouace",
+            "Julien Taieb",
+            "David Regnier",
+            "Patrick Copp",
+            "Matthew Devlin",
+            "Charlène Surault",
+            "Jason Surbrook"
+          ],
+          "abstract": "Traditionally, neutron-$γ$ discrimination in organic scintillators relies on techniques such as time-of-flight (ToF) selection and pulse-shape discrimination (PSD). However, particle identification through graphical cuts remains challenging in the low-charge regime due to poor signal-to-noise ratios (SNR). In this work, we propose SINAPSE, a lightweight deep learning framework for accurate and explainable neutron-$γ$ discrimination in the low-charge regime. The framework employs a dual-branch architecture that combines a 1-dimensional convolutional autoencoder for waveform denoising with a classifier for particle identification. Random augmentations are applied to high-SNR waveforms to simulate low-charge conditions, enabling robust extrapolation into regimes where conventional PSD labels are unreliable. We show that SINAPSE achieves superior denoising performance compared to conventional digital signal processing techniques, and outputs well-calibrated probabilities, consistent with traditional graphical cuts. Finally, we apply SHAP (SHapley Additive exPlanations) values to show that model decisions are driven by physically meaningful pulse-shape features, confirming consistency with established PSD principles.",
+          "published": "2026-05-13",
+          "categories": [
+            "physics.ins-det",
+            "physics.data-an"
+          ],
+          "pdf_url": "https://arxiv.org/pdf/2605.13627v1",
+          "abs_url": "https://arxiv.org/abs/2605.13627v1",
+          "added_at": "2026-05-14T20:26:51.761627",
+          "source_query": "Deep learning, Duffusion policy",
+          "source_type": "retrieval",
+          "relevance_score": 0.197,
+          "rank": 2,
+          "cluster": "low logical logic"
+        },
+        {
+          "paper_id": "arxiv_2605.13845",
+          "title": "Quantitative Linear Logic for Neuro-Symbolic Learning and Verification",
+          "authors": [
+            "Thomas Flinkow",
+            "Ekaterina Komendantskaya",
+            "Matteo Capucci",
+            "Rosemary Monahan"
+          ],
+          "abstract": "Differentiable Logics are deployed in neuro-symbolic learning tasks as a way of embedding logical constraints in the training objective of neural networks. A differentiable logic consists of a syntax to write logical properties and a semantics to interpret them as real-valued functions to be folded in the loss function. A defining trade-off of the field is that between logical properties of the connectives, and analytic concerns for the semantics, with both aspects being relevant in applications. At one extreme we find fuzzy logics, that have well-established algebraic and proof-theoretic foundations, and at the other ad-hoc differentiable logics like Fischer's DL2, conceived for deep learning applications. However, no satisfactory foundation has emerged yet. We propose a resolution to this long-standing tension via a novel logic, Quantitative Linear Logic (QLL), with foundational ambitions. Our design is driven by naturality -- the idea that, since logical constraints are translated to losses, the semantics of the connectives should be pertinent operations used in ML practice (that is, sum and log-sum-exp) on additive quantities (like logits). We then judge the result on two aspects: logical adequacy -- that they satisfy most of the standard logical laws of Linear Logic; and empirical effectiveness -- test-time performance (as measured by adversarial attacks) is well-correlated to the actual verification of the logical constraints (as measured by off-the-shelf neural network verifiers), which makes QLL stand out among SoTA techniques.",
+          "published": "2026-05-13",
+          "categories": [
+            "cs.LO"
+          ],
+          "pdf_url": "https://arxiv.org/pdf/2605.13845v1",
+          "abs_url": "https://arxiv.org/abs/2605.13845v1",
+          "added_at": "2026-05-14T20:26:51.761616",
+          "source_query": "Deep learning, Duffusion policy",
+          "source_type": "retrieval",
+          "relevance_score": 0.1683,
+          "rank": 3,
+          "cluster": "low logical logic"
+        },
+        {
+          "paper_id": "arxiv_2605.13568",
+          "title": "Dynamical Predictive Modelling of Cardiovascular Disease Progression Post-Myocardial Infarction via ECG-Trained Artificial Intelligence Model",
+          "authors": [
+            "Riccardo Cavarra",
+            "Lupo Lovatelli",
+            "Shaheim Ogbomo-Harmitt",
+            "Shahid Aziz",
+            "Adelaide De Vecchi",
+            "Andrew King",
+            "Oleg Aslanidi"
+          ],
+          "abstract": "Myocardial infarction (MI) is a leading cause of death, and its adverse outcomes are urgent to predict. Yet ECG-based prognostic models underperform because deep learning requires large, labelled datasets, which are scarce in medicine. Foundation models can learn from unlabelled ECGs via selfsupervision, but medically relevant training strategies remain underexplored. We propose a pretrained artificial intelligence model that combines patient-specific temporal information using contrastive learning with supervised multitask heads, then fine-tunes on post-MI outcome prediction. The proposed model outperformed a model trained from scratch (0.794 vs 0.608 AUC) showing that clinically structured ECG modelling improves classification in limited data regimes.",
+          "published": "2026-05-13",
+          "categories": [
+            "cs.LG",
+            "cs.AI"
+          ],
+          "pdf_url": "https://arxiv.org/pdf/2605.13568v1",
+          "abs_url": "https://arxiv.org/abs/2605.13568v1",
+          "added_at": "2026-05-14T20:26:51.761630",
+          "source_query": "Deep learning, Duffusion policy",
+          "source_type": "retrieval",
+          "relevance_score": 0.1308,
+          "rank": 4,
+          "cluster": "ecg intelligence model post"
+        },
+        {
+          "paper_id": "arxiv_2605.13842",
+          "title": "From DES to KiDS: Domain adaptation for cross-survey detection of low-surface-brightness galaxies",
+          "authors": [
+            "Hareesh Thuruthipilly",
+            "Krzysztof Lisiecki",
+            "Junais",
+            "Katarzyna Małek",
+            "Agnieszka Pollo",
+            "William J. Pearson",
+            "Antonio Vanzanella",
+            "Saptarshi Pal",
+            "Miguel Figueira",
+            "Pratik Dabhade",
+            "Anna Durkalec",
+            "Aidan P. Cotter",
+            "Unnikrishnan Sureshkumar",
+            "Nandini Hazra",
+            "Patryk Matera",
+            "Subhrata Dey",
+            "Michal Vrábel",
+            "Anirban Dutta",
+            "Henry Willems",
+            "Nicola Principi Cavaterra",
+            "Natalia Dobrowolska",
+            "Wojciech Knop"
+          ],
+          "abstract": "Low-surface-brightness galaxies (LSBGs) are vital for understanding galaxy formation, but their diffuse nature makes them challenging to detect. Upcoming large-scale surveys are expected to uncover large numbers of LSBGs, requiring robust automated methods to identify them across heterogeneous datasets. As a precursor to the Legacy Survey of Space and Time (LSST) and Euclid, we explore domain adaptation techniques for cross-survey LSBG identification. Using models trained on the Dark Energy Survey (DES), we search for LSBGs in the Kilo-Degree Survey Data Release 5 (KiDS DR5). We used an ensemble consisting of one convolutional neural network (CNN) and two transformer models trained on DES cutouts and applied to KiDS DR5 imaging data. Structural parameters were estimated with galfitm, and photometric redshifts and stellar population properties were estimated through spectral energy distribution fitting with CIGALE. We identify 20,180 LSBGs and 434 ultra-diffuse galaxies (UDGs) in KiDS DR5. Their structural parameters are similar to known LSBGs from DES and the Hyper Suprime-Cam SSP Survey (HSC-SSP). The KiDS-LSBGs follow a continuous size-luminosity relation connecting classical dwarf galaxies and UDGs, and their colours are bimodal ($\\sim73\\%$ blue, $\\sim27\\%$ red). Cross-matching with spectroscopic and cluster catalogues provides redshifts for 4,913 systems, enabling a systematic characterisation of the star-forming main sequence of LSBGs. Strong environmental trends are evident, with cluster LSBGs and UDGs exhibiting redder colours and reduced star formation compared to non-cluster systems. We demonstrate that domain adaptation enables robust cross-survey LSBG identification with deep learning models, providing a scalable pathway for constructing homogeneous LSBG catalogues for the LSST and Euclid era.",
+          "published": "2026-05-13",
+          "categories": [
+            "astro-ph.GA",
+            "astro-ph.IM"
+          ],
+          "pdf_url": "https://arxiv.org/pdf/2605.13842v1",
+          "abs_url": "https://arxiv.org/abs/2605.13842v1",
+          "added_at": "2026-05-14T20:26:51.761625",
+          "source_query": "Deep learning, Duffusion policy",
+          "source_type": "retrieval",
+          "relevance_score": 0.1102,
+          "rank": 5,
+          "cluster": "low logical logic"
+        }
+      ],
+      "briefing_content": "# Daily arXiv Research Briefing: Deep learning, Duffusion policy\n\n## Overview\nWe reviewed 5 ranked papers related to 'Deep learning, Duffusion policy'. The recent literature mainly covers low logical logic, ecg intelligence model post.\n\n## Summary Table\n\n| Rank | Title | Cluster | Relevance Score | Method | Key Contribution |\n|------|-------|---------|-----------------|--------|------------------|\n| 1 | Deep Learning as Neural Low-Degree Filtering: A Spectral Theory of Hierarchical Feature Learning | low logical logic | 0.2549 | benchmark | This work is mainly related to low logical logic and appears to contribute to the area of benchmark through the study presented in 'Deep Learning as Neural Low-Degree Filtering: A Spectral Theory of Hierarchical Feature Learning'. |\n| 2 | SINAPSE: A lightweight deep learning framework for accurate and explainable neutron-$γ$ discrimination | low logical logic | 0.197 | planning | This work is mainly related to low logical logic and appears to contribute to the area of planning through the study presented in 'SINAPSE: A lightweight deep learning framework for accurate and explainable neutron-$γ$ discrimination'. |\n| 3 | Quantitative Linear Logic for Neuro-Symbolic Learning and Verification | low logical logic | 0.1683 | low logical logic | This work is mainly related to low logical logic and appears to contribute to the area of low logical logic through the study presented in 'Quantitative Linear Logic for Neuro-Symbolic Learning and Verification'. |\n| 4 | Dynamical Predictive Modelling of Cardiovascular Disease Progression Post-Myocardial Infarction via ECG-Trained Artificial Intelligence Model | ecg intelligence model post | 0.1308 | benchmark | This work is mainly related to ecg intelligence model post and appears to contribute to the area of benchmark through the study presented in 'Dynamical Predictive Modelling of Cardiovascular Disease Progression Post-Myocardial Infarction via ECG-Trained Artificial Intelligence Model'. |\n| 5 | From DES to KiDS: Domain adaptation for cross-survey detection of low-surface-brightness galaxies | low logical logic | 0.1102 | benchmark | This work is mainly related to low logical logic and appears to contribute to the area of benchmark through the study presented in 'From DES to KiDS: Domain adaptation for cross-survey detection of low-surface-brightness galaxies'. |\n\n## Highlighted Papers\n\n### Most Relevant Paper\n**Deep Learning as Neural Low-Degree Filtering: A Spectral Theory of Hierarchical Feature Learning**\nUnderstanding how deep neural networks learn useful internal representations from data remains a central open problem in the theory of deep learning. We introduce Neural Low-Degree Filtering (Neural LoFi), a stylized limit of gradient-based training in which hierarchical feature learning becomes an explicit iterative spectral procedure.\n\n### Top 3 Recommended Papers\n1. **Deep Learning as Neural Low-Degree Filtering: A Spectral Theory of Hierarchical Feature Learning**\n   - This work is mainly related to low logical logic and appears to contribute to the area of benchmark through the study presented in 'Deep Learning as Neural Low-Degree Filtering: A Spectral Theory of Hierarchical Feature Learning'.\n2. **SINAPSE: A lightweight deep learning framework for accurate and explainable neutron-$γ$ discrimination**\n   - This work is mainly related to low logical logic and appears to contribute to the area of planning through the study presented in 'SINAPSE: A lightweight deep learning framework for accurate and explainable neutron-$γ$ discrimination'.\n3. **Quantitative Linear Logic for Neuro-Symbolic Learning and Verification**\n   - This work is mainly related to low logical logic and appears to contribute to the area of low logical logic through the study presented in 'Quantitative Linear Logic for Neuro-Symbolic Learning and Verification'.\n\n## Trend Summary\nRecent papers mainly focus on low logical logic and ecg intelligence model post.\n"
+    },
+    {
+      "task_id": "scheduled_20260514_222841",
+      "task_type": "full_pipeline",
+      "query": "Diffusion",
+      "days": 7,
+      "max_results": 3,
+      "schedule_time": "12:09",
+      "schedule_date": "2026-05-15",
+      "add_to_library": true,
+      "include_existing": false,
+      "use_llm": false,
+      "llm_model": "deepseek-v4-flash",
+      "llm_api_key": "",
+      "top_k": 10,
+      "min_clusters": 2,
+      "max_clusters": 4,
+      "status": "pending",
+      "created_at": "2026-05-14T22:28:41.044316",
       "is_recurring": true
     }
   ]

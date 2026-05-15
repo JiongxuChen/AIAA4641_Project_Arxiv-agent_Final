@@ -8,7 +8,7 @@
   "task_type": "full_pipeline",
   "schedule_time": ["09:00"],
   "add_to_library": true,
-  "include_existing": false,
+  "include_existing": true,
   "is_recurring": false,
   "use_llm": false,
   "llm_model": "deepseek-ai/DeepSeek-R1",
