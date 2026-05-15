@@ -1,0 +1,124 @@
+[
+  {
+    "paper_id": "arxiv_2605.13845",
+    "title": "Quantitative Linear Logic for Neuro-Symbolic Learning and Verification",
+    "authors": [
+      "Thomas Flinkow",
+      "Ekaterina Komendantskaya",
+      "Matteo Capucci",
+      "Rosemary Monahan"
+    ],
+    "abstract": "Differentiable Logics are deployed in neuro-symbolic learning tasks as a way of embedding logical constraints in the training objective of neural networks. A differentiable logic consists of a syntax to write logical properties and a semantics to interpret them as real-valued functions to be folded in the loss function. A defining trade-off of the field is that between logical properties of the connectives, and analytic concerns for the semantics, with both aspects being relevant in applications. At one extreme we find fuzzy logics, that have well-established algebraic and proof-theoretic foundations, and at the other ad-hoc differentiable logics like Fischer's DL2, conceived for deep learning applications. However, no satisfactory foundation has emerged yet. We propose a resolution to this long-standing tension via a novel logic, Quantitative Linear Logic (QLL), with foundational ambitions. Our design is driven by naturality -- the idea that, since logical constraints are translated to losses, the semantics of the connectives should be pertinent operations used in ML practice (that is, sum and log-sum-exp) on additive quantities (like logits). We then judge the result on two aspects: logical adequacy -- that they satisfy most of the standard logical laws of Linear Logic; and empirical effectiveness -- test-time performance (as measured by adversarial attacks) is well-correlated to the actual verification of the logical constraints (as measured by off-the-shelf neural network verifiers), which makes QLL stand out among SoTA techniques.",
+    "published": "2026-05-13",
+    "categories": [
+      "cs.LO"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.13845v1",
+    "abs_url": "https://arxiv.org/abs/2605.13845v1"
+  },
+  {
+    "paper_id": "arxiv_2605.13842",
+    "title": "From DES to KiDS: Domain adaptation for cross-survey detection of low-surface-brightness galaxies",
+    "authors": [
+      "Hareesh Thuruthipilly",
+      "Krzysztof Lisiecki",
+      "Junais",
+      "Katarzyna Małek",
+      "Agnieszka Pollo",
+      "William J. Pearson",
+      "Antonio Vanzanella",
+      "Saptarshi Pal",
+      "Miguel Figueira",
+      "Pratik Dabhade",
+      "Anna Durkalec",
+      "Aidan P. Cotter",
+      "Unnikrishnan Sureshkumar",
+      "Nandini Hazra",
+      "Patryk Matera",
+      "Subhrata Dey",
+      "Michal Vrábel",
+      "Anirban Dutta",
+      "Henry Willems",
+      "Nicola Principi Cavaterra",
+      "Natalia Dobrowolska",
+      "Wojciech Knop"
+    ],
+    "abstract": "Low-surface-brightness galaxies (LSBGs) are vital for understanding galaxy formation, but their diffuse nature makes them challenging to detect. Upcoming large-scale surveys are expected to uncover large numbers of LSBGs, requiring robust automated methods to identify them across heterogeneous datasets. As a precursor to the Legacy Survey of Space and Time (LSST) and Euclid, we explore domain adaptation techniques for cross-survey LSBG identification. Using models trained on the Dark Energy Survey (DES), we search for LSBGs in the Kilo-Degree Survey Data Release 5 (KiDS DR5). We used an ensemble consisting of one convolutional neural network (CNN) and two transformer models trained on DES cutouts and applied to KiDS DR5 imaging data. Structural parameters were estimated with galfitm, and photometric redshifts and stellar population properties were estimated through spectral energy distribution fitting with CIGALE. We identify 20,180 LSBGs and 434 ultra-diffuse galaxies (UDGs) in KiDS DR5. Their structural parameters are similar to known LSBGs from DES and the Hyper Suprime-Cam SSP Survey (HSC-SSP). The KiDS-LSBGs follow a continuous size-luminosity relation connecting classical dwarf galaxies and UDGs, and their colours are bimodal ($\\sim73\\%$ blue, $\\sim27\\%$ red). Cross-matching with spectroscopic and cluster catalogues provides redshifts for 4,913 systems, enabling a systematic characterisation of the star-forming main sequence of LSBGs. Strong environmental trends are evident, with cluster LSBGs and UDGs exhibiting redder colours and reduced star formation compared to non-cluster systems. We demonstrate that domain adaptation enables robust cross-survey LSBG identification with deep learning models, providing a scalable pathway for constructing homogeneous LSBG catalogues for the LSST and Euclid era.",
+    "published": "2026-05-13",
+    "categories": [
+      "astro-ph.GA",
+      "astro-ph.IM"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.13842v1",
+    "abs_url": "https://arxiv.org/abs/2605.13842v1"
+  },
+  {
+    "paper_id": "arxiv_2605.13627",
+    "title": "SINAPSE: A lightweight deep learning framework for accurate and explainable neutron-$γ$ discrimination",
+    "authors": [
+      "Thomas Carreau",
+      "Adrien Matta",
+      "Owen Syrett",
+      "Benoît Mauss",
+      "David Etasse",
+      "Audrey Chatillon",
+      "Cyril Lenain",
+      "Pierre Morfouace",
+      "Julien Taieb",
+      "David Regnier",
+      "Patrick Copp",
+      "Matthew Devlin",
+      "Charlène Surault",
+      "Jason Surbrook"
+    ],
+    "abstract": "Traditionally, neutron-$γ$ discrimination in organic scintillators relies on techniques such as time-of-flight (ToF) selection and pulse-shape discrimination (PSD). However, particle identification through graphical cuts remains challenging in the low-charge regime due to poor signal-to-noise ratios (SNR). In this work, we propose SINAPSE, a lightweight deep learning framework for accurate and explainable neutron-$γ$ discrimination in the low-charge regime. The framework employs a dual-branch architecture that combines a 1-dimensional convolutional autoencoder for waveform denoising with a classifier for particle identification. Random augmentations are applied to high-SNR waveforms to simulate low-charge conditions, enabling robust extrapolation into regimes where conventional PSD labels are unreliable. We show that SINAPSE achieves superior denoising performance compared to conventional digital signal processing techniques, and outputs well-calibrated probabilities, consistent with traditional graphical cuts. Finally, we apply SHAP (SHapley Additive exPlanations) values to show that model decisions are driven by physically meaningful pulse-shape features, confirming consistency with established PSD principles.",
+    "published": "2026-05-13",
+    "categories": [
+      "physics.ins-det",
+      "physics.data-an"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.13627v1",
+    "abs_url": "https://arxiv.org/abs/2605.13627v1"
+  },
+  {
+    "paper_id": "arxiv_2605.13612",
+    "title": "Deep Learning as Neural Low-Degree Filtering: A Spectral Theory of Hierarchical Feature Learning",
+    "authors": [
+      "Yatin Dandi",
+      "Matteo Vilucchio",
+      "Luca Arnaboldi",
+      "Hugo Tabanelli",
+      "Florent Krzakala"
+    ],
+    "abstract": "Understanding how deep neural networks learn useful internal representations from data remains a central open problem in the theory of deep learning. We introduce Neural Low-Degree Filtering (Neural LoFi), a stylized limit of gradient-based training in which hierarchical feature learning becomes an explicit iterative spectral procedure. In this limit, the dynamics at each layer decouple: given the current representation, the next layer selects directions with maximal accessible low-degree correlation to the label. This yields a tractable surrogate mechanism for deep learning, together with a natural kernel-space interpretation. Neural LoFi provides a mathematically explicit framework for studying multi-layer feature learning beyond the lazy regime. It predicts how representations are selected layer by layer, explains how emergence of concepts arises with given sample complexity,and gives a concrete mechanism by which depth progressively constructs new features from old ones through low-degree compositionality. We complement the theory with mechanistic experiments on fully connected and convolutional architectures, showing that Neural LoFi improves over lazy random-feature baselines, recovers meaningful structured filters, and predicts representations aligned with early gradient-descent feature discovery with real datasets.",
+    "published": "2026-05-13",
+    "categories": [
+      "cs.LG",
+      "cond-mat.dis-nn",
+      "stat.ML"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.13612v1",
+    "abs_url": "https://arxiv.org/abs/2605.13612v1"
+  },
+  {
+    "paper_id": "arxiv_2605.13568",
+    "title": "Dynamical Predictive Modelling of Cardiovascular Disease Progression Post-Myocardial Infarction via ECG-Trained Artificial Intelligence Model",
+    "authors": [
+      "Riccardo Cavarra",
+      "Lupo Lovatelli",
+      "Shaheim Ogbomo-Harmitt",
+      "Shahid Aziz",
+      "Adelaide De Vecchi",
+      "Andrew King",
+      "Oleg Aslanidi"
+    ],
+    "abstract": "Myocardial infarction (MI) is a leading cause of death, and its adverse outcomes are urgent to predict. Yet ECG-based prognostic models underperform because deep learning requires large, labelled datasets, which are scarce in medicine. Foundation models can learn from unlabelled ECGs via selfsupervision, but medically relevant training strategies remain underexplored. We propose a pretrained artificial intelligence model that combines patient-specific temporal information using contrastive learning with supervised multitask heads, then fine-tunes on post-MI outcome prediction. The proposed model outperformed a model trained from scratch (0.794 vs 0.608 AUC) showing that clinically structured ECG modelling improves classification in limited data regimes.",
+    "published": "2026-05-13",
+    "categories": [
+      "cs.LG",
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.13568v1",
+    "abs_url": "https://arxiv.org/abs/2605.13568v1"
+  }
+]

@@ -1,0 +1,147 @@
+[
+  {
+    "paper_id": "arxiv_2605.13821",
+    "title": "Harnessing Agentic Evolution",
+    "authors": [
+      "Jiayi Zhang",
+      "Yongfeng Gu",
+      "Jianhao Ruan",
+      "Maojia Song",
+      "Yiran Peng",
+      "Zhiguang Han",
+      "Jinyu Xiang",
+      "Zhitao Wang",
+      "Caiyin Yang",
+      "Yixi Ouyang",
+      "Bang Liu",
+      "Chenglin Wu",
+      "Yuyu Luo"
+    ],
+    "abstract": "Agentic evolution has emerged as a powerful paradigm for improving programs, workflows, and scientific solutions by iteratively generating candidates, evaluating them, and using feedback to guide future search. However, existing methods are typically instantiated either as fixed hand-designed procedures that are modular but rigid, or as general-purpose agents that flexibly integrate feedback but can drift in long-horizon evolution. Both forms accumulate rich evidence over time, including candidates, feedback, traces, and failures, yet lack a stable interface for organizing this evidence and revising the mechanism that drives future evolution. We address this limitation by formulating agentic evolution as an interactive environment, where the accumulated evolution context serves as a process-level state. We introduce AEvo, a harnessed meta-editing framework in which a meta-agent observes this state and acts not by directly proposing the next candidate, but by editing the procedure or agent context that controls future evolution. This unified interface enables AEvo to steer both procedure-based and agent-based evolution, making accumulated evidence actionable for long-horizon search. Empirical evaluations on agentic and reasoning benchmarks show that AEvo outperforms five evolution baselines, achieving a 26 relative improvement over the strongest baseline. Across three open-ended optimization tasks, AEvo further outperforms four evolution baselines and achieves state-of-the-art performance under the same iteration budget.",
+    "published": "2026-05-13",
+    "categories": [
+      "cs.AI",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.13821v1",
+    "abs_url": "https://arxiv.org/abs/2605.13821v1",
+    "added_at": "2026-05-14T20:26:17.664988",
+    "source_query": "Agent",
+    "source_type": "retrieval",
+    "relevance_score": 0.2541,
+    "rank": 1,
+    "cluster": "evolution context eva"
+  },
+  {
+    "paper_id": "arxiv_2605.13841",
+    "title": "EVA-Bench: A New End-to-end Framework for Evaluating Voice Agents",
+    "authors": [
+      "Tara Bogavelli",
+      "Gabrielle Gauthier Melançon",
+      "Katrina Stankiewicz",
+      "Oluwanifemi Bamgbose",
+      "Fanny Riols",
+      "Hoang H. Nguyen",
+      "Raghav Mehndiratta",
+      "Lindsay Devon Brin",
+      "Joseph Marinier",
+      "Hari Subramani",
+      "Anil Madamala",
+      "Sridhar Krishna Nemala",
+      "Srinivas Sunkara"
+    ],
+    "abstract": "Voice agents, artificial intelligence systems that conduct spoken conversations to complete tasks, are increasingly deployed across enterprise applications. However, no existing benchmark jointly addresses two core evaluation challenges: generating realistic simulated conversations, and measuring quality across the full scope of voice-specific failure modes. We present EVA-Bench, an end-to-end evaluation framework that addresses both. On the simulation side, EVA-Bench orchestrates bot-to-bot audio conversations over dynamic multi-turn dialogues, with automatic simulation validation that detects user simulator error and appropriately regenerates conversations before scoring. On the measurement side, EVA-Bench introduces two composite metrics: EVA-A (Accuracy), capturing task completion, faithfulness, and audio-level speech fidelity; and EVA-X (Experience), capturing conversation progression, spoken conciseness, and turn-taking timing. Both metrics apply to different agent architectures, enabling direct cross-architecture comparison. EVA-Bench includes 213 scenarios across three enterprise domains, a controlled perturbation suite for accent and noise robustness, and pass@1, pass@k, pass^k measurements that distinguish peak from reliable capability. Across 12 systems spanning all three architectures, we find: (1) no system simultaneously exceeds 0.5 on both EVA-A pass@1 and EVA-X pass@1; (2) peak and reliable performance diverge substantially (median pass@k - pass^k gap of 0.44 on EVA-A); and (3) accent and noise perturbations expose substantial robustness gaps, with effects varying across architectures, systems, and metrics (mean up to 0.314). We release the full framework, evaluation suite, and benchmark data under an open-source license.",
+    "published": "2026-05-13",
+    "categories": [
+      "cs.SD",
+      "cs.AI",
+      "cs.CL",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.13841v1",
+    "abs_url": "https://arxiv.org/abs/2605.13841v1",
+    "added_at": "2026-05-14T20:26:17.664981",
+    "source_query": "Agent",
+    "source_type": "retrieval",
+    "relevance_score": 0.214,
+    "rank": 2,
+    "cluster": "evolution context eva"
+  },
+  {
+    "paper_id": "arxiv_2605.13839",
+    "title": "Good Agentic Friends Do Not Just Give Verbal Advice: They Can Update Your Weights",
+    "authors": [
+      "Wenrui Bao",
+      "Huan Wang",
+      "Jian Wang",
+      "Zhangyang Wang",
+      "Kai Wang",
+      "Yuzhang Shang"
+    ],
+    "abstract": "Multi-agent LLM systems usually collaborate by exchanging natural-language messages. This interface is simple and interpretable, but it forces each sender's intermediate computation to be serialized into tokens and then reprocessed by the receiver, thereby increasing the generated-token cost, prefill overhead, and KV-cache memory. We study an alternative communication interface: instead of appending a sender's message to the receiver's context, compile the sender's hidden states into a transient, receiver-specific weight perturbation. We introduce TFlow (Thought Flow), a weight-space communication framework for a known and fixed receiver architecture. For each query, frozen role-prompted sender agents process the input, and a learned parameter generator maps their internal activations into low-rank LoRA perturbations targeting the receiver's modules. These perturbations are fused and applied only during the receiver's generation, enabling instance-level adaptation without permanently changing the model or enlarging the receiver's text context. With three Qwen3-4B agents, TFlow improves over a standalone receiver by up to 8.5 accuracy points across five benchmarks while reducing processed tokens by up to 32.69%. Compared with a text-based three-agent baseline, it reduces total processed tokens by up to 83.27% and the wall-clock inference time by up to 4.6$\\times$, while maintaining competitive accuracy on four of five benchmarks. These results suggest that transient low-rank weight perturbations can serve as an executable communication medium for efficient multi-agent LLM collaboration.",
+    "published": "2026-05-13",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.13839v1",
+    "abs_url": "https://arxiv.org/abs/2605.13839v1",
+    "added_at": "2026-05-14T20:26:17.664985",
+    "source_query": "Agent",
+    "source_type": "retrieval",
+    "relevance_score": 0.0539,
+    "rank": 3,
+    "cluster": "evolution context eva"
+  },
+  {
+    "paper_id": "arxiv_2605.13825",
+    "title": "History Anchors: How Prior Behavior Steers LLM Decisions Toward Unsafe Actions",
+    "authors": [
+      "Alberto G. Rodríguez Salgado"
+    ],
+    "abstract": "Frontier LLMs are increasingly deployed as agents that pick the next action after a long log of prior tool calls produced by the same or a different model. We ask a simple safety question: if a prior step in that log was harmful, will the model continue the harmful course? We build HistoryAnchor-100, 100 short scenarios across ten high-stakes domains, each pairing three forced harmful prior actions with a free-choice node offering two safe and two unsafe options. Across 17 frontier models from six providers we find a striking asymmetry: under a neutral system prompt the strongest aligned models almost never pick unsafe, but a single added sentence, \"stay consistent with the strategy shown in the prior history\", flips them to 91-98%, and the flipped models often escalate beyond continuation. Two controls rule out simpler explanations: permuting action labels leaves the effect intact, and the same instruction with an all-safe prior history keeps unsafe rates below 7%. Different families flip at different doses of unsafe history, and within every aligned family the flagship is the most affected sibling, an inverse-scaling pattern with respect to safety. These results are a red flag for agentic deployments where trajectories may be replayed, forged, or injected.",
+    "published": "2026-05-13",
+    "categories": [
+      "cs.AI",
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.13825v1",
+    "abs_url": "https://arxiv.org/abs/2605.13825v1",
+    "added_at": "2026-05-14T20:26:17.664987",
+    "source_query": "Agent",
+    "source_type": "retrieval",
+    "relevance_score": 0.0,
+    "rank": 4,
+    "cluster": "prior unsafe history"
+  },
+  {
+    "paper_id": "arxiv_2605.13831",
+    "title": "Training Long-Context Vision-Language Models Effectively with Generalization Beyond 128K Context",
+    "authors": [
+      "Zhaowei Wang",
+      "Lishu Luo",
+      "Haodong Duan",
+      "Weiwei Liu",
+      "Sijin Wu",
+      "Ji Luo",
+      "Shen Yan",
+      "Shuai Peng",
+      "Sihang Yuan",
+      "Chaoyi Huang",
+      "Yi Lin",
+      "Yangqiu Song"
+    ],
+    "abstract": "Long-context modeling is becoming a core capability of modern large vision-language models (LVLMs), enabling sustained context management across long-document understanding, video analysis, and multi-turn tool use in agentic workflows. Yet practical training recipes remain insufficiently explored, particularly for designing and balancing long-context data mixtures. In this work, we present a systematic study of long-context continued pre-training for LVLMs, extending a 7B model from 32K to 128K context with extensive ablations on long-document data. We first show that long-document VQA is substantially more effective than OCR transcription. Building on this observation, our ablations further yield three key findings: i) for sequence-length distribution, balanced data outperforms target-length-focused data (e.g., 128K), suggesting that long-context ability requires generalizable key-information retrieval across various lengths and positions; ii) retrieval remains the primary bottleneck, favoring retrieval-heavy mixtures with modest reasoning data for task diversity; and iii) pure long-document VQA largely preserves short-context capabilities, suggesting that instruction-formatted long data reduces the need for short-data mixing. Based on these findings, we introduce MMProLong, obtained by long-context continued pre-training from Qwen2.5-VL-7B with only a 5B-token budget. MMProLong improves long-document VQA scores by 7.1% and maintains strong performance at 256K and 512K contexts beyond its 128K training window, without additional training. It further generalizes to webpage-based multimodal needle retrieval, long-context vision-text compression, and long-video understanding without task-specific supervision. Overall, our study establishes a practical LongPT recipe and an empirical foundation for advancing long-context vision-language models.",
+    "published": "2026-05-13",
+    "categories": [
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.13831v1",
+    "abs_url": "https://arxiv.org/abs/2605.13831v1",
+    "added_at": "2026-05-14T20:26:17.664986",
+    "source_query": "Agent",
+    "source_type": "retrieval",
+    "relevance_score": 0.0,
+    "rank": 5,
+    "cluster": "evolution context eva"
+  }
+]
