@@ -56,18 +56,6 @@ Run the agent from CLI:
 python agent.py --run-now --query "LLM agents" --task-type full_pipeline
 ```
 
-Create scheduled tasks:
-
-```bash
-python agent.py --schedule
-```
-
-Run due scheduled tasks:
-
-```bash
-python agent.py --run-due
-```
-
 ## Configuration
 
 Default settings are stored in `agent_config.json`. The Web UI and CLI both read
