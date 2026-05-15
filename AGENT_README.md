@@ -253,17 +253,6 @@ Create a scheduled task for one query by overriding the query:
 python agent.py --schedule --query "LLM agents"
 ```
 
-Execute due scheduled tasks once:
-
-```bash
-python agent.py --run-due
-```
-
-Run the scheduler loop:
-
-```bash
-python agent.py --scheduler-loop
-```
 
 If no mode flag is provided, the CLI defaults to immediate execution of the
 configured queries. Therefore, this also runs the configured tasks:
@@ -611,17 +600,6 @@ python agent.py --schedule
 python agent.py --schedule --query "LLM agents"
 ```
 
-执行一次当前已经到时间的 scheduled task：
-
-```bash
-python agent.py --run-due
-```
-
-启动持续检查 scheduled task 的循环：
-
-```bash
-python agent.py --scheduler-loop
-```
 
 如果不传模式参数，CLI 默认会立即运行配置中的 queries，所以这个命令也会启动
 配置任务：
