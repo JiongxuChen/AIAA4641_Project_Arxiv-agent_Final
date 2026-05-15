@@ -108,23 +108,6 @@ Run retrieval only:
 python agent.py --run-now --query "Deep learning" --task-type retrieval
 ```
 
-Create scheduled tasks from configuration:
-
-```bash
-python agent.py --schedule
-```
-
-Run due scheduled tasks once:
-
-```bash
-python agent.py --run-due
-```
-
-Run the scheduler loop:
-
-```bash
-python agent.py --scheduler-loop
-```
 
 ## Agent and Skills
 
@@ -139,7 +122,7 @@ The skill modules provide individual capabilities:
 
 The agent layer decides which skills to call, in what order, with what
 parameters, and how to persist the results. For a detailed explanation of this
-layer, see `AGENT.md`.
+layer, see `AGENT_README.md`.
 
 ## Persistent Outputs
 
@@ -262,23 +245,6 @@ python agent.py --run-now --query "LLM agents" --task-type full_pipeline
 python agent.py --run-now --query "Deep learning" --task-type retrieval
 ```
 
-根据配置创建 scheduled tasks：
-
-```bash
-python agent.py --schedule
-```
-
-执行当前已到时间的 scheduled tasks：
-
-```bash
-python agent.py --run-due
-```
-
-启动调度循环：
-
-```bash
-python agent.py --scheduler-loop
-```
 
 ## Agent 和 Skills
 
@@ -292,7 +258,7 @@ Skill 模块提供单项能力：
 - Follow-up query 基于论文上下文回答问题。
 
 Agent 层决定调用哪些 skill、调用顺序、传入参数，以及如何持久化结果。关于
-agent 层的详细解释见 `AGENT.md`。
+agent 层的详细解释见 `AGENT_README.md`。
 
 ## 持久化输出
 
